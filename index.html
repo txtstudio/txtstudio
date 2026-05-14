@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TXT Studio | Telco & Digital Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            oren: '#F77F00',
+            biru: '#003566',
+            gelap: '#0A0A0F',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .scroll-smooth {
+        scroll-behavior: smooth;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gelap text-white overflow-x-hidden font-sans scroll-smooth">
+
+  <!-- Animated Background -->
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-biru/20 blur-3xl rounded-full"></div>
+    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-oren/20 blur-3xl rounded-full"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-gelap/60 border-b border-white/10 shadow-lg">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <h1 class="text-[28px] font-black tracking-widest uppercase text-shadow">
+        TXT <span class="text-oren">Studio</span>
+      </h1>
+      <div class="md:hidden">
+        <button class="text-white text-2xl"><i class="fa fa-bars"></i></button>
+      </div>
+      <div class="hidden md:flex gap-8 text-gray-200 font-medium">
+        <a href="#beranda" class="hover:text-oren transition py-2">Beranda</a>
+        <a href="#tentang" class="hover:text-oren transition py-2">Tentang Kami</a>
+        <a href="#perkhidmatan" class="hover:text-oren transition py-2">Perkhidmatan</a>
+        <a href="#jenama" class="hover:text-oren transition py-2">Semua Telco</a>
+        <a href="#ulasan" class="hover:text-oren transition py-2">Ulasan</a>
+        <a href="https://wa.me/601123456636?text=Salam,%20nak%20tanya%20perkara%20umum" target="_blank" class="bg-oren/20 hover:bg-oren/40 px-4 py-2 rounded-xl transition flex items-center gap-2">
+          <i class="fa fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="beranda" class="min-h-screen flex items-center justify-center px-6 pt-20">
+    <div class="max-w-7xl w-full grid md:grid-cols-2 gap-12 items-center">
+      <div class="space-y-8">
+        <div class="inline-flex items-center gap-3 bg-white/10 border border-white/20 rounded-full px-5 py-2 backdrop-blur-lg shadow-md">
+          <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+          <span class="text-sm text-gray-200 tracking-wider">PERKHIDMATAN TELCO BERLESEN & DIPERCAYAI</span>
+        </div>
+
+        <h1 class="text-[clamp(42px,6vw,72px)] font-black uppercase leading-[1.1] text-shadow">
+          Topup & Kad SIM <br> <span class="text-oren">Semua Rangkaian</span>
+        </h1>
+
+        <p class="text-lg text-gray-300 leading-relaxed">
+          Kami pembekal sah topup segera, pelan data & kad SIM untuk <b>13 jenama utama Malaysia</b>. Proses pantas 24 jam, masuk serta-merta, jaminan wang dikembalikan jika gagal. Beroperasi sejak 2018.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <a href="#jenama" class="bg-oren hover:bg-oren/90 px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl shadow-oren/20 transition-all duration-300 hover:scale-105 text-center">
+            🚀 Mula Topup Sekarang
+          </a>
+          <a href="#tentang" class="border border-white/20 hover:border-oren hover:bg-white/5 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 text-center">
+            ℹ️ Ketahui Lanjut
+          </a>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -inset-10 bg-oren/10 blur-3xl rounded-full -z-10"></div>
+        <div class="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[40px] p-8 shadow-2xl">
+          <div class="space-y-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-400 text-sm">Kadar Kejayaan</p>
+                <h3 class="text-4xl font-black text-green-400">99.98%</h3>
+              </div>
+              <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-biru to-oren flex items-center justify-center text-2xl">
+                <i class="fa fa-shield"></i>
+              </div>
+            </div>
+
+            <div class="space-y-4 pt-4">
+              <div>
+                <div class="flex justify-between text-sm mb-2">
+                  <span>Proses Pantas</span>
+                  <span>Segera</span>
+                </div>
+                <div class="h-3 bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full w-[99.98%] bg-oren rounded-full"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-2">
+                  <span>Semua Rangkaian</span>
+                  <span>13 Jenama</span>
+                </div>
+                <div class="h-3 bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full w-[100%] bg-biru rounded-full"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-2">
+                  <span>Sokongan</span>
+                  <span>24 Jam</span>
+                </div>
+                <div class="h-3 bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full w-[100%] bg-gradient-to-r from-oren to-biru rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tentang Kami -->
+  <section id="tentang" class="py-24 px-6 bg-white/5 backdrop-blur-xl border-y border-white/10">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="text-oren uppercase tracking-[0.4em] text-sm mb-3">Tentang Kami</p>
+      <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-6 text-shadow">Siapa Kami?</h2>
+      <p class="text-lg text-gray-300 leading-relaxed mb-8">
+        <b>TXT Studio</b> adalah syarikat perkhidmatan telekomunikasi sah yang beroperasi di Malaysia sejak tahun 2018. Kami adalah pengedar sah untuk semua jenama telco utama negara, menyediakan perkhidmatan topup segera, pelan data internet, kad SIM prabayar & pascabayar, serta penyelesaian perniagaan.
+      </p>
+      <p class="text-lg text-gray-300 leading-relaxed">
+        Misi kami: Memberikan perkhidmatan terpantas, paling selamat & harga berpatutan untuk semua rakyat Malaysia. Kami mempunyai lebih 50,000+ pelanggan berdaftar & sentiasa meningkatkan kualiti perkhidmatan setiap hari.
+      </p>
+    </div>
+  </section>
+
+  <!-- Perkhidmatan -->
+  <section id="perkhidmatan" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <p class="text-oren uppercase tracking-[0.4em] text-sm mb-3">Apa Kami Tawarkan</p>
+        <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-6 text-shadow">Perkhidmatan Utama</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <a href="#jenama" class="group bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl hover:scale-105 hover:border-oren transition-all duration-500 shadow-lg">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-biru to-oren mb-8 flex items-center justify-center text-2xl">
+            <i class="fa fa-mobile-phone"></i>
+          </div>
+          <h3 class="text-2xl font-black mb-4 text-white">Topup Segera</h3>
+          <p class="text-gray-300 leading-relaxed">Nilai RM5 hingga RM100 untuk semua rangkaian. Masuk serta-merta 24 jam, jaminan ganti jika gagal.</p>
+        </a>
+
+        <a href="#jenama" class="group bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl hover:scale-105 hover:border-oren transition-all duration-500 shadow-lg">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-biru to-oren mb-8 flex items-center justify-center text-2xl">
+            <i class="fa fa-wifi"></i>
+          </div>
+          <h3 class="text-2xl font-black mb-4 text-white">Pelan Data Internet</h3>
+          <p class="text-gray-300 leading-relaxed">Pakej internet harian, mingguan & bulanan. Dari 1GB hingga tanpa had, harga paling murah di pasaran.</p>
+        </a>
+
+        <a href="https://wa.me/601123456636?text=Salam,%20nak%20minta%20harga%20borong" target="_blank" class="group bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl hover:scale-105 hover:border-oren transition-all duration-500 shadow-lg">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-biru to-oren mb-8 flex items-center justify-center text-2xl">
+            <i class="fa fa-building"></i>
+          </div>
+          <h3 class="text-2xl font-black mb-4 text-white">Agen & Borong</h3>
+          <p class="text-gray-300 leading-relaxed">Harga khas untuk agen, kedai runcit & penjual semula. Pendaftaran percuma & sokongan penuh.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ SEMUA 13 TELCO LENGKAP -->
+  <section id="jenama" class="py-24 px-6 bg-gradient-to-b from-gelap to-biru/20 backdrop-blur-xl border-y border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <p class="text-oren uppercase tracking-[0.4em] text-sm mb-3">Pilih Jenama & Nilai</p>
+        <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-6 text-shadow">Senarai Topup Semua Rangkaian</h2>
+        <p class="text-gray-300 max-w-4xl mx-auto text-lg">Tekan logo, kemudian tekan jumlah yang anda mahu. Akan terus buka WhatsApp dengan mesej siap tulis.</p>
+      </div>
+
+      <div class="space-y-16">
+
+        <!-- BEONE -->
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-lg hover:border-oren transition">
+          <div class="flex justify-center mb-8">
+            <img src="images/beone.png" alt="Beone" class="h-20 object-contain">
+          </div>
+          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-4 text-center">
+            <a href="https://wa.me/601123456636?text=Salam,%20saya%20nak%20topup%20Beone%20RM5" target="_blank" class="bg-oren/20 hover:bg-oren px-3 py-2 rounded-xl font-bold transition shadow">RM5</a>
+            <a href="https://wa.me/601123456636?text=Salam,%20saya%20nak%20topup%20Beone%20RM10" target="_blank" class="bg-oren/20 hover:bg-oren px-3 py-2 rounded-xl font-bold transitionshadow">RM10</a>
+            <a href="https://wa.me/601123456636?text=Salam,%20saya%20nak%20topup%20Beone%20RM15" target="_blank" class="bg-oren/20 hover:bg-oren px-3 py-2 rounded-xl font-bold transition shadow">RM15</a>
+            <a href="https://wa.me/601123456636?text=Salam,%20saya%20nak%20topup%20Beone%20RM20" target="_blank" class="bg-oren/20 hover:bg-oren px-3 py-2 rounded-xl font-bold transition shadow">RM20</a>
+            <a href="https://wa.me/601123456636?text=Salam,%2
