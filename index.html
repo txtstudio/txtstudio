@@ -1,351 +1,115 @@
-<!DOCTYPE html>
-<html lang="ms">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TXT Studio | Telco & Digital Solutions</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            oren: '#F77F00',
-            biru: '#003566',
-            gelap: '#0A0A0F',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .content-auto {
-        content-visibility: auto;
-      }
-      .scroll-smooth {
-        scroll-behavior: smooth;
-      }
-      .text-shadow {
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      }
-    }
-  </style>
-</head>
-<body class="bg-gelap text-white overflow-x-hidden font-sans scroll-smooth">
-
-  <!-- Animated Background -->
-  <div class="fixed inset-0 -z-10 overflow-hidden">
-    <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-biru/20 blur-3xl rounded-full"></div>
-    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-oren/20 blur-3xl rounded-full"></div>
-
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-gelap/60 border-b border-white/10 shadow-lg">
-    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-      <h1 class="text-[28px] font-black tracking-widest uppercase text-shadow">
-        TXT <span class="text-oren">Studio</span>
-      </h1>
-      <div class="md:hidden">
-      <button id="menuBtn" class="text-white text-2xl transition-all duration-300"><i class="fa fa-bars"></i></button>
-             </div> <!-- Tutup bahagian butang -->
-
-      <!-- ✅ GANTI SEMUA YANG PADAM DENGAN KOD DI BAWAH NI -->
-      <div class="hidden md:flex gap-8 text-gray-200 font-medium">
-        <a href="#pengenalan" class="hover:text-oren transition py-2">Pengenalan</a>
-        <a href="#tentang kami" class="hover:text-oren transition py-2">Tentang Kami</a>
-        <a href="#data internet + sim kad" class="hover:text-oren transition py-2">Data Internet + Sim Kad</a>
-        <a href="#jenama" class="hover:text-oren transition py-2">Semua Telco</a>
-        <a href="#ulasan" class="hover:text-oren transition py-2">Ulasan</a>
-        <a href="https://wa.me/601123456636?text=Salam,%20nak%20tanya%20perkhidmatan" class="hover:text-oren transition py-2">
-          <i class="fa fa-whatsapp"></i> WhatsApp
-        </a>
-      </div>
-
-      <!-- Menu Skrin Kecil -->
-      <div id="mobileMenu" class="hidden absolute top-full left-0 right-0 bg-gelap/95 backdrop-blur-xl py-4 px-6 flex flex-col gap-3 border-t border-white/10">
-        <a href="#beranda" class="py-2 hover:text-oren transition">Beranda</a>
-        <a href="#tentang" class="py-2 hover:text-oren transition">Tentang Kami</a>
-        <a href="#perkhidmatan" class="py-2 hover:text-oren transition">Perkhidmatan</a>
-        <a href="#jenama" class="py-2 hover:text-oren transition">Semua Telco</a>
-        <a href="#ulasan" class="py-2 hover:text-oren transition">Ulasan</a>
-        <a href="https://wa.me/601123456636?text=Salam,%20nak%20tanya%20perkhidmatan" class="py-2 hover:text-oren transition">
-          <i class="fa fa-whatsapp"></i> WhatsApp
-        </a>
-      </div>
-      <!-- ✅ TAMAT -->
-
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="beranda" class="min-h-screen flex items-center justify-center px-6 pt-20">
-    <div class="max-w-7xl w-full grid md:grid-cols-2 gap-12 items-center">
-      <div class="space-y-8">
-        <div class="inline-flex items-center gap-3 bg-white/10 border border-white/20 rounded-full px-5 py-2 backdrop-blur-lg shadow-md">
-          <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-          <span class="text-sm text-gray-200 tracking-wider">PERKHIDMATAN TELCO BERLESEN & DIPERCAYAI</span>
-        </div>
-
-        <h1 class="text-[clamp(42px,6vw,72px)] font-black uppercase leading-[1.1] text-shadow">
-          Topup & Kad SIM <br> <span class="text-oren">Semua Rangkaian</span>
-        </h1>
-
-        <p class="text-lg text-gray-300 leading-relaxed">
-          Kami pembekal sah topup segera, pelan data & kad SIM untuk <b>13 jenama utama Malaysia</b>. Proses pantas 24 jam, masuk serta-merta, jaminan wang dikembalikan jika gagal. Beroperasi sejak 2018.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 pt-4">
-          <a href="#jenama" class="bg-oren hover:bg-oren/90 px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl shadow-oren/20 transition-all duration-300 hover:scale-105 text-center">
-            🚀 Mula Topup Sekarang
-          </a>
-          <a href="#tentang" class="border border-white/20 hover:border-oren hover:bg-white/5 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 text-center">
-            ℹ️ Ketahui Lanjut
-          </a>
-        </div>
-      </div>
-
-      <div class="relative">
-        <div class="absolute -inset-10 bg-oren/10 blur-3xl rounded-full -z-10"></div>
-        <div class="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[40px] p-8 shadow-2xl">
-          <div class="space-y-6">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-gray-400 text-sm">Kadar Kejayaan</p>
-                <h3 class="text-4xl font-black text-green-400">99.98%</h3>
-              </div>
-              <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-biru to-oren flex items-center justify-center text-2xl">
-                <i class="fa fa-shield"></i>
-              </div>
-            </div>
-
-            <div class="space-y-4 pt-4">
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span>Proses Pantas</span>
-                  <span>Segera</span>
-                </div>
-                <div class="h-3 bg-white/10 rounded-full overflow-hidden">
-                  <div class="h-full w-[99.98%] bg-oren rounded-full"></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span>Semua Rangkaian</span>
-                  <span>13 Jenama</span>
-                </div>
-                <div class="h-3 bg-white/10 rounded-full overflow-hidden">
-                  <div class="h-full w-[100%] bg-biru rounded-full"></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span>Sokongan</span>
-                  <span>24 Jam</span>
-                </div>
-                <div class="h-3 bg-white/10 rounded-full overflow-hidden">
-                  <div class="h-full w-[100%] bg-gradient-to-r from-oren to-biru rounded-full"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tentang Kami -->
-  <section id="tentang" class="py-24 px-6 bg-white/5 backdrop-blur-xl border-y border-white/10">
-    <div class="max-w-5xl mx-auto text-center">
-      <p class="text-oren uppercase tracking-[0.4em] text-sm mb-3">Tentang Kami</p>
-      <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-6 text-shadow">Siapa Kami?</h2>
-      <p class="text-lg text-gray-300 leading-relaxed mb-8">
-        <b>TXT Studio</b> adalah syarikat perkhidmatan telekomunikasi sah yang beroperasi di Malaysia sejak tahun 2018. Kami adalah pengedar sah untuk semua jenama telco utama negara, menyediakan perkhidmatan topup segera, pelan data internet, kad SIM prabayar & pascabayar, serta penyelesaian perniagaan.
-      </p>
-      <p class="text-lg text-gray-300 leading-relaxed">
-        Misi kami: Memberikan perkhidmatan terpantas, paling selamat & harga berpatutan untuk semua rakyat Malaysia. Kami mempunyai lebih 50,000+ pelanggan berdaftar & sentiasa meningkatkan kualiti perkhidmatan setiap hari.
-      </p>
-    </div>
-  </section>
-
-  <!-- Perkhidmatan -->
-  <section id="perkhidmatan" class="py-24 px-6">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-20">
-        <p class="text-oren uppercase tracking-[0.4em] text-sm mb-3">Apa Kami Tawarkan</p>
-        <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-6 text-shadow">Perkhidmatan Utama</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <a href="#jenama" class="group bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl hover:scale-105 hover:border-oren transition-all duration-500 shadow-lg">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-biru to-oren mb-8 flex items-center justify-center text-2xl">
-            <i class="fa fa-mobile-phone"></i>
-          </div>
-          <h3 class="text-2xl font-black mb-4 text-white">Topup Segera</h3>
-          <p class="text-gray-300 leading-relaxed">Nilai RM5 hingga RM100 untuk semua rangkaian. Masuk serta-merta 24 jam, jaminan ganti jika gagal.</p>
-        </a>
-
-        <a href="#jenama" class="group bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl hover:scale-105 hover:border-oren transition-all duration-500 shadow-lg">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-biru to-oren mb-8 flex items-center justify-center text-2xl">
-            <i class="fa fa-wifi"></i>
-          </div>
-          <h3 class="text-2xl font-black mb-4 text-white">Pelan Data Internet</h3>
-          <p class="text-gray-300 leading-relaxed">Pakej internet harian, mingguan & bulanan. Dari 1GB hingga tanpa had, harga paling murah di pasaran.</p>
-        </a>
-
-        <a href="https://wa.me/601123456636?text=Salam,%20nak%20minta%20harga%20borong" target="_blank" class="group bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl hover:scale-105 hover:border-oren transition-all duration-500 shadow-lg">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-biru to-oren mb-8 flex items-center justify-center text-2xl">
-            <i class="fa fa-building"></i>
-          </div>
-          <h3 class="text-2xl font-black mb-4 text-white">Agen & Borong</h3>
-          <p class="text-gray-300 leading-relaxed">Harga khas untuk agen, kedai runcit & penjual semula. Pendaftaran percuma & sokongan penuh.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-  <!-- SEKSYEN TRANSAKSI PINTAR (WARNA ASAL) -->
-  <section id="jenama" class="py-20 px-4 bg-[#0a0f1a]">
+  <!-- ============================================
+       SEKSYEN TRANSAKSI PINTAR (FULL COMPONENT)
+       ============================================ -->
+  <section id="jenama" class="py-24 px-6 bg-[#0a0f1a] border-y border-white/5 relative">
     <div class="max-w-4xl mx-auto">
       
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider">TRANSAKSI <span class="text-[#f77f00]">PINTAR</span></h2>
-        <p class="text-gray-400 mt-2">Sila isi maklumat transaksi anda di bawah</p>
+      <!-- Tajuk Seksyen -->
+      <div class="text-center mb-16">
+        <p class="text-[#f77f00] uppercase tracking-[0.5em] text-xs mb-3 font-semibold">Digital Portal</p>
+        <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-6 tracking-tight uppercase text-white">Transaksi <span class="text-[#f77f00]">Pintar</span></h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">Sila masukkan maklumat pendaftaran untuk pemprosesan pantas 24 jam menerusi rangkaian rasmi TXT Studio.</p>
       </div>
 
-      <!-- Kotak Borang -->
-      <div class="bg-[#111827] border border-gray-800 p-8 rounded-2xl shadow-2xl">
-        <form action="https://wa.me/601123456636" method="GET" class="space-y-6">
-          
-          <div class="text-left">
-            <label class="block text-xs font-bold text-gray-500 uppercase mb-2 ml-1">Nombor Telefon</label>
-            <input type="tel" name="text" placeholder="Contoh: 0112345678" class="w-full bg-[#0a0f1a] border border-gray-700 p-4 rounded-xl text-white outline-none focus:border-[#f77f00] transition-all">
+      <!-- Kotak Borang Premium -->
+      <div class="bg-[#111827] border border-white/10 p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden group">
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#f77f00]/10 blur-[100px] rounded-full group-hover:bg-[#f77f00]/20 transition-all duration-700"></div>
+        
+        <form action="https://wa.me/601123456636" method="GET" class="space-y-8 relative z-10">
+          <!-- Input No Tel -->
+          <div class="space-y-3">
+            <label class="text-xs uppercase tracking-[0.3em] text-gray-500 font-bold ml-2">Nombor Penerima</label>
+            <input type="tel" name="text" placeholder="Contoh: 01123456789" 
+              class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl text-2xl font-mono text-white focus:border-[#f77f00] focus:ring-1 focus:ring-[#f77f00] outline-none transition-all placeholder:text-gray-800 shadow-inner" required>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-            <div>
-              <label class="block text-xs font-bold text-gray-500 uppercase mb-2 ml-1">Rangkaian</label>
-              <select class="w-full bg-[#0a0f1a] border border-gray-700 p-4 rounded-xl text-white outline-none focus:border-[#f77f00] cursor-pointer">
-                <option>CELCOM</option><option>DIGI</option><option>MAXIS</option><option>UMOBILE</option>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Dropdown Telco -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase tracking-[0.3em] text-gray-500 font-bold ml-2 text-left block">Rangkaian Telco</label>
+              <select class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl outline-none focus:border-[#f77f00] text-white cursor-pointer font-bold tracking-wider appearance-none">
+                <option disabled selected>PILIH RANGKAIAN</option>
+                <option>CELCOM</option><option>DIGI</option><option>MAXIS / HOTLINK</option><option>UMOBILE</option>
                 <option>TUNETALK</option><option>ONEXOX</option><option>REDONE</option><option>YES 5G</option>
-                <option>UNIFI</option><option>BEONE</option><option>HALOTELCO</option><option>NJOI</option><option>EASTEL</option>
+                <option>UNIFI MOBILE</option><option>BEONE</option><option>HALOTELCO</option><option>NJOI</option><option>EASTEL</option>
               </select>
             </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-500 uppercase mb-2 ml-1">Nilai (RM)</label>
-              <select class="w-full bg-[#0a0f1a] border border-gray-700 p-4 rounded-xl text-[#f77f00] font-bold outline-none focus:border-[#f77f00] text-xl">
-                <option>5.00</option><option selected>10.00</option><option>30.00</option><option>50.00</option><option>100.00</option>
+
+            <!-- Dropdown Nilai -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase tracking-[0.3em] text-gray-500 font-bold ml-2 text-left block">Nilai Topup (RM)</label>
+              <select class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl outline-none focus:border-[#f77f00] text-[#f77f00] cursor-pointer text-2xl font-black appearance-none">
+                <option>5.00</option><option selected>10.00</option><option>15.00</option><option>20.00</option>
+                <option>30.00</option><option>50.00</option><option>100.00</option>
               </select>
             </div>
           </div>
 
-          <button type="submit" class="w-full bg-[#f77f00] text-white font-black py-5 rounded-xl uppercase tracking-widest hover:bg-orange-600 transition-all shadow-lg active:scale-95">
-            Sahkan & Bayar Sekarang
-          </button>
-          
+          <!-- Butang Submit -->
+          <div class="pt-6">
+            <button type="submit" class="w-full bg-[#f77f00] hover:bg-white text-black p-6 rounded-2xl font-black text-xl uppercase tracking-[0.2em] shadow-[0_10px_40px_rgba(247,127,0,0.3)] transition-all duration-500 transform hover:-translate-y-2 active:scale-95">
+              Sahkan & Bayar Sekarang
+            </button>
+          </div>
         </form>
       </div>
 
-      <!-- Logo Telco (13 Logo) -->
-      <div class="mt-16 grid grid-cols-4 md:grid-cols-7 gap-6 opacity-40">
-          <img src="images/celcom.png" class="h-6 mx-auto" alt="Celcom">
-          <img src="images/digi.png" class="h-6 mx-auto" alt="Digi">
-          <img src="images/hotlink.png" class="h-6 mx-auto" alt="Hotlink">
-          <img src="images/umobile.png" class="h-6 mx-auto" alt="Umobile">
-          <img src="images/tunetalk.png" class="h-6 mx-auto" alt="Tunetalk">
-          <img src="images/onexox.png" class="h-6 mx-auto" alt="Onexox">
-          <img src="images/redone.png" class="h-6 mx-auto" alt="Redone">
-          <img src="images/unifi.png" class="h-6 mx-auto" alt="Unifi">
-          <img src="images/yes.png" class="h-6 mx-auto" alt="Yes">
-          <img src="images/beone.png" class="h-6 mx-auto" alt="Beone">
-          <img src="images/halotelco.png" class="h-6 mx-auto" alt="Halotelco">
-          <img src="images/njoi.png" class="h-6 mx-auto" alt="Njoi">
-          <img src="images/eastel.png" class="h-6 mx-auto" alt="Eastel">
-        </div>  
+      <!-- Logo Cloud (13 Logo) -->
+      <div class="mt-20">
+        <p class="text-center text-[10px] uppercase tracking-[0.5em] text-gray-600 mb-10 font-bold">Official Strategic Partners</p>
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-y-10 gap-x-6 items-center opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-1000">
+          <img src="images/celcom.png" class="h-8 object-contain mx-auto" alt="Celcom">
+          <img src="images/digi.png" class="h-8 object-contain mx-auto" alt="Digi">
+          <img src="images/hotlink.png" class="h-8 object-contain mx-auto" alt="Hotlink">
+          <img src="images/umobile.png" class="h-8 object-contain mx-auto" alt="U Mobile">
+          <img src="images/tunetalk.png" class="h-8 object-contain mx-auto" alt="TuneTalk">
+          <img src="images/onexox.png" class="h-8 object-contain mx-auto" alt="OneXOX">
+          <img src="images/redone.png" class="h-8 object-contain mx-auto" alt="RedOne">
+          <img src="images/unifi.png" class="h-8 object-contain mx-auto" alt="Unifi">
+          <img src="images/yes.png" class="h-8 object-contain mx-auto" alt="Yes">
+          <img src="images/beone.png" class="h-8 object-contain mx-auto" alt="Beone">
+          <img src="images/halotelco.png" class="h-8 object-contain mx-auto" alt="HaloTelco">
+          <img src="images/njoi.png" class="h-8 object-contain mx-auto" alt="Njoi">
+          <img src="images/eastel.png" class="h-8 object-contain mx-auto" alt="Eastel">
+        </div>
       </div>
+    </div>
   </section>
-        
 
-  <!-- Ulasan Pelanggan -->
-  <section id="ulasan" class="py-24 px-6">
+  <!-- ============================================
+       SEKSYEN ULASAN PELANGGAN
+       ============================================ -->
+  <section id="ulasan" class="py-24 px-6 bg-[#0a0f1a]">
     <div class="max-w-5xl mx-auto text-center">
-      <p class="text-oren uppercase tracking-[0.4em] text-sm mb-3">Apa Kata Pelanggan</p>
-      <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-12 text-shadow">Ulasan & Maklumbalas</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-xl">
+      <p class="text-[#f77f00] uppercase tracking-[0.4em] text-sm mb-4 font-bold">Testimonials</p>
+      <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-12 text-white uppercase">KATA <span class="text-[#f77f00]">MEREKA</span></h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <!-- Review 1 -->
+        <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-500 group">
           <div class="text-yellow-400 text-xl mb-4">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
           </div>
-          <p class="text-gray-300 italic">"Proses sangat pantas, masuk dalam masa 1 minit sahaja. Sangat dipercayai!"</p>
-          <p class="mt-4 font-bold text-white">- Ahmad, KL</p>
+          <p class="text-gray-300 italic mb-6">"Proses sangat pantas, masuk tak sampai 1 minit. Website pun nampak pro!"</p>
+          <p class="font-bold text-white uppercase tracking-widest text-sm">- Ahmad, Kuala Lumpur</p>
         </div>
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-xl">
+        <!-- Review 2 -->
+        <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-500 group">
           <div class="text-yellow-400 text-xl mb-4">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
           </div>
-          <p class="text-gray-300 italic">"Harga paling murah berbanding kedai lain. Saya dah jadi agen sejak 2020."</p>
-          <p class="mt-4 font-bold text-white">- Siti, JB</p>
+          <p class="text-gray-300 italic mb-6">"Senang nak guna. Tak perlu nak chat WhatsApp lama-lama. Terus bayar terus masuk."</p>
+          <p class="font-bold text-white uppercase tracking-widest text-sm">- Sarah, Johor Bahru</p>
         </div>
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-xl">
+        <!-- Review 3 -->
+        <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-500 group">
           <div class="text-yellow-400 text-xl mb-4">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
           </div>
-          <p class="text-gray-300 italic">"Servis 24 jam, kalau ada masalah dijawab serta-merta. Terbaik!"</p>
-          <p class="mt-4 font-bold text-white">- Raj, Penang</p>
+          <p class="text-gray-300 italic mb-6">"Harga memang murah dari kedai. Trusted dealer. Sangat disyorkan!"</p>
+          <p class="font-bold text-white uppercase tracking-widest text-sm">- Firdaus, Penang</p>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Footer / Penutup Laman -->
-  <footer class="bg-gelap border-t border-white/10 py-12 px-6">
-    <div class="max-w-7xl mx-auto text-center">
-      <h2 class="text-2xl font-black uppercase mb-4 text-shadow">TXT <span class="text-oren">Studio</span></h2>
-      <p class="text-gray-400 mb-6">© 2018 - 2026 TXT Studio. Semua Hak Cipta Terpelihara.</p>
-      <div class="flex justify-center gap-4">
-        <a href="https://wa.me/601123456636?text=Salam,%20nak%20tanya%20perkara%20umum" target="_blank" class="text-gray-300 hover:text-oren text-2xl transition">
-          <i class="fa fa-whatsapp"></i>
-        </a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-const menuBtn = document.getElementById('menuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-const menuLinks = mobileMenu.querySelectorAll('a');
-
-menuBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden');
-});
-
-menuLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.add('hidden');
-  });
-});
-  </script>
   
-
-</body>
-</html>
-
-
-
-      
