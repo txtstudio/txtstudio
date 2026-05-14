@@ -53,20 +53,36 @@
       </h1>
       <div class="md:hidden">
       <button id="menuBtn" class="text-white text-2xl transition-all duration-300"><i class="fa fa-bars"></i></button>
-        
-      </div>
+             </div> <!-- Tutup bahagian butang -->
+
+      <!-- ✅ GANTI SEMUA YANG PADAM DENGAN KOD DI BAWAH NI -->
       <div class="hidden md:flex gap-8 text-gray-200 font-medium">
         <a href="#beranda" class="hover:text-oren transition py-2">Beranda</a>
         <a href="#tentang" class="hover:text-oren transition py-2">Tentang Kami</a>
         <a href="#perkhidmatan" class="hover:text-oren transition py-2">Perkhidmatan</a>
         <a href="#jenama" class="hover:text-oren transition py-2">Semua Telco</a>
         <a href="#ulasan" class="hover:text-oren transition py-2">Ulasan</a>
-        <a href="https://wa.me/601123456636?text=Salam,%20nak%20tanya%20perkara%20umum" target="_blank" class="bg-oren/20 hover:bg-oren/40 px-4 py-2 rounded-xl transition flex items-center gap-2">
+        <a href="https://wa.me/601123456636?text=Salam,%20nak%20tanya%20perkhidmatan" class="hover:text-oren transition py-2">
           <i class="fa fa-whatsapp"></i> WhatsApp
         </a>
       </div>
+
+      <!-- Menu Skrin Kecil -->
+      <div id="mobileMenu" class="hidden absolute top-full left-0 right-0 bg-gelap/95 backdrop-blur-xl py-4 px-6 flex flex-col gap-3 border-t border-white/10">
+        <a href="#beranda" class="py-2 hover:text-oren transition">Beranda</a>
+        <a href="#tentang" class="py-2 hover:text-oren transition">Tentang Kami</a>
+        <a href="#perkhidmatan" class="py-2 hover:text-oren transition">Perkhidmatan</a>
+        <a href="#jenama" class="py-2 hover:text-oren transition">Semua Telco</a>
+        <a href="#ulasan" class="py-2 hover:text-oren transition">Ulasan</a>
+        <a href="https://wa.me/601123456636?text=Salam,%20nak%20tanya%20perkhidmatan" class="py-2 hover:text-oren transition">
+          <i class="fa fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+      <!-- ✅ TAMAT -->
+
     </div>
   </nav>
+  
 
   <!-- Hero Section -->
   <section id="beranda" class="min-h-screen flex items-center justify-center px-6 pt-20">
@@ -434,8 +450,14 @@
     </div>
   </footer>
 
-  <!-- Panggil Fail Script (WAJIB ADA) -->
-  <script src="script.js"></script>
+  <script>
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('hidden');
+});
+  </script>
 
 </body>
 </html>
