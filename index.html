@@ -208,104 +208,56 @@
     </div>
   </section>
 
-  <!-- SEKSYEN TRANSAKSI PREMIUM (13 TELCO LENGKAP) -->
-  <section id="jenama" class="py-24 px-6 bg-gradient-to-b from-gelap to-biru/10 border-y border-white/5">
+  <!-- SEKSYEN TRANSAKSI PREMIUM -->
+  <section id="jenama" class="py-24 px-6 bg-gradient-to-b from-gelap to-biru/10 border-y border-white/5 relative">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-16">
         <p class="text-oren uppercase tracking-[0.5em] text-xs mb-3 font-semibold">Digital Portal</p>
-        <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-6 tracking-tight uppercase">Transaksi <span class="text-oren text-shadow">Pintar</span></h2>
+        <h2 class="text-[clamp(32px,4vw,48px)] font-black mb-6 tracking-tight uppercase text-white">Transaksi <span class="text-oren">Pintar</span></h2>
         <p class="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">Sila masukkan maklumat pendaftaran untuk pemprosesan pantas 24 jam menerusi rangkaian rasmi TXT Studio.</p>
       </div>
 
-      <!-- Kotak Borang Premium -->
-      <div class="bg-white/5 backdrop-blur-3xl border border-white/10 p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden group">
-        <div class="absolute -top-24 -right-24 w-64 h-64 bg-oren/10 blur-[100px] rounded-full group-hover:bg-oren/20 transition-all duration-700"></div>
-        
-        <form action="https://wa.me/601123456636" method="GET" class="space-y-8 relative z-10">
-          <!-- Input No Tel -->
+      <!-- Kotak Borang -->
+      <div class="bg-white/5 backdrop-blur-3xl border border-white/10 p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden">
+        <form action="https://wa.me/601123456636" method="GET" class="space-y-8 relative z-10 text-left">
           <div class="space-y-3">
             <label class="text-xs uppercase tracking-[0.3em] text-gray-500 font-bold ml-2">Nombor Penerima</label>
-            <input type="tel" name="text" placeholder="Contoh: 01123456789" 
-              class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl text-2xl font-mono text-white focus:border-oren focus:ring-1 focus:ring-oren outline-none transition-all placeholder:text-gray-800 shadow-inner" required>
+            <input type="tel" name="text" placeholder="Contoh: 01123456789" class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl text-2xl font-mono text-white focus:border-oren focus:ring-1 focus:ring-oren outline-none transition-all">
           </div>
-
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Dropdown Telco (13 Pilihan) -->
             <div class="space-y-3">
-              <label class="text-xs uppercase tracking-[0.3em] text-gray-500 font-bold ml-2">Rangkaian Telco (13 Jenama)</label>
-              <div class="relative">
-                <select class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl outline-none focus:border-oren text-white appearance-none cursor-pointer font-bold tracking-wider">
-                  <option disabled selected>PILIH RANGKAIAN</option>
-                  <option>CELCOM</option>
-                  <option>DIGI</option>
-                  <option>MAXIS / HOTLINK</option>
-                  <option>UMOBILE</option>
-                  <option>TUNETALK</option>
-                  <option>ONEXOX</option>
-                  <option>REDONE</option>
-                  <option>YES 5G</option>
-                  <option>UNIFI MOBILE</option>
-                  <option>BEONE</option>
-                  <option>HALOTELCO</option>
-                  <option>NJOI</option>
-                  <option>EASTEL</option>
-                </select>
-                <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
-                  <i class="fa fa-chevron-down"></i>
-                </div>
-              </div>
+              <label class="text-xs uppercase tracking-[0.3em] text-gray-500 font-bold ml-2">Rangkaian Telco</label>
+              <select class="w-full bg-gray-900 border border-white/10 p-5 rounded-2xl outline-none focus:border-oren text-white cursor-pointer font-bold">
+                <option disabled selected>PILIH RANGKAIAN</option>
+                <option>CELCOM</option><option>DIGI</option><option>MAXIS</option><option>UMOBILE</option>
+                <option>TUNETALK</option><option>ONEXOX</option><option>REDONE</option><option>YES 5G</option>
+                <option>UNIFI</option><option>BEONE</option><option>HALOTELCO</option><option>NJOI</option><option>EASTEL</option>
+              </select>
             </div>
-
-            <!-- Dropdown Nilai -->
             <div class="space-y-3">
-              <label class="text-xs uppercase tracking-[0.3em] text-gray-500 font-bold ml-2">Nilai Topup (RM)</label>
-              <div class="relative">
-                <select class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl outline-none focus:border-oren text-oren appearance-none cursor-pointer text-2xl font-black">
-                  <option>5.00</option>
-                  <option selected>10.00</option>
-                  <option>15.00</option>
-                  <option>20.00</option>
-                  <option>30.00</option>
-                  <option>50.00</option>
-                  <option>100.00</option>
-                </select>
-                <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-oren">
-                   <span class="font-bold text-sm">MYR</span>
-                </div>
-              </div>
+              <label class="text-xs uppercase tracking-[0.3em] text-gray-500 font-bold ml-2">Nilai (RM)</label>
+              <select class="w-full bg-gray-900 border border-white/10 p-5 rounded-2xl outline-none focus:border-oren text-oren font-black text-2xl">
+                <option>5.00</option><option selected>10.00</option><option>30.00</option><option>50.00</option><option>100.00</option>
+              </select>
             </div>
           </div>
-
-          <div class="pt-6">
-            <button type="submit" class="w-full bg-oren hover:bg-white text-black p-6 rounded-2xl font-black text-xl uppercase tracking-[0.2em] shadow-[0_10px_40px_rgba(247,127,0,0.3)] transition-all duration-500 transform hover:-translate-y-2 active:scale-95">
-              Sahkan & Bayar Sekarang
-            </button>
-          </div>
+          <button type="submit" class="w-full bg-oren hover:bg-white text-black p-6 rounded-2xl font-black text-xl uppercase tracking-widest transition-all">
+            Sahkan & Bayar Sekarang
+          </button>
         </form>
       </div>
 
-      <!-- LOGO CLOUD (13 LOGO) -->
+      <!-- Logo Cloud -->
       <div class="mt-20">
-        <p class="text-center text-[10px] uppercase tracking-[0.5em] text-gray-600 mb-10 font-bold">Official Strategic Partners</p>
-        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-y-10 gap-x-6 items-center opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-1000">
-          <img src="images/celcom.png" class="h-8 object-contain mx-auto" alt="Celcom">
-          <img src="images/digi.png" class="h-8 object-contain mx-auto" alt="Digi">
-          <img src="images/hotlink.png" class="h-8 object-contain mx-auto" alt="Hotlink">
-          <img src="images/umobile.png" class="h-8 object-contain mx-auto" alt="U Mobile">
-          <img src="images/tunetalk.png" class="h-8 object-contain mx-auto" alt="TuneTalk">
-          <img src="images/onexox.png" class="h-8 object-contain mx-auto" alt="OneXOX">
-          <img src="images/redone.png" class="h-8 object-contain mx-auto" alt="RedOne">
-          <img src="images/unifi.png" class="h-8 object-contain mx-auto" alt="Unifi">
-          <img src="images/yes.png" class="h-8 object-contain mx-auto" alt="Yes">
-          <img src="images/beone.png" class="h-8 object-contain mx-auto" alt="Beone">
-          <img src="images/halotelco.png" class="h-8 object-contain mx-auto" alt="HaloTelco">
-          <img src="images/njoi.png" class="h-8 object-contain mx-auto" alt="Njoi">
-          <img src="images/eastel.png" class="h-8 object-contain mx-auto" alt="Eastel">
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-6 items-center opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+          <img src="images/celcom.png" class="h-6 mx-auto"><img src="images/digi.png" class="h-6 mx-auto"><img src="images/hotlink.png" class="h-6 mx-auto">
+          <img src="images/umobile.png" class="h-6 mx-auto"><img src="images/tunetalk.png" class="h-6 mx-auto"><img src="images/onexox.png" class="h-6 mx-auto">
+          <img src="images/redone.png" class="h-6 mx-auto"><img src="images/unifi.png" class="h-6 mx-auto"><img src="images/yes.png" class="h-6 mx-auto">
+          <img src="images/beone.png" class="h-6 mx-auto"><img src="images/halotelco.png" class="h-6 mx-auto"><img src="images/njoi.png" class="h-6 mx-auto"><img src="images/eastel.png" class="h-6 mx-auto">
         </div>
       </div>
     </div>
   </section>
-
 
   <!-- Ulasan Pelanggan -->
   <section id="ulasan" class="py-24 px-6">
@@ -382,4 +334,4 @@ menuLinks.forEach(link => {
   
 
 </body>
-</html>
+</html>                                                             
