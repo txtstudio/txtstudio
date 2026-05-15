@@ -15,20 +15,23 @@
             background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px;
         }
-        .icon-box {
-            width: 60px; height: 60px; border-radius: 18px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; margin-bottom: 8px; cursor: pointer;
+        /* Style untuk Kotak Log */
+        #debugConsole {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            color: #00ff00; /* Warna Hijau Matrix */
+            margin: 20px;
+            height: 150px;
+            overflow-y: auto;
+            box-shadow: inset 0 0 10px #000;
         }
-        #topupModal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px); display: none; align-items: flex-end; z-index: 200;
-        }
-        .modal-sheet {
-            background: #121218; width: 100%; border-radius: 30px 30px 0 0;
-            padding: 30px 20px; border-t: 1px solid rgba(255,255,255,0.1);
-            transform: translateY(100%); transition: transform 0.3s ease-out;
-        }
+        .log-entry { margin-bottom: 5px; border-bottom: 1px solid #111; padding-bottom: 2px; }
+        .log-success { color: #00ff00; }
+        .log-info { color: #00ccff; }
         .nav-bottom {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: rgba(10, 10, 15, 0.95); border-top: 1px solid rgba(255,255,255,0.1);
@@ -36,7 +39,7 @@
         }
     </style>
 </head>
-<body class="pb-24">
+<body class="pb-32">
 
     <!-- Header -->
     <div class="p-6 flex justify-between items-center">
@@ -51,8 +54,7 @@
     <div class="px-6 mb-8">
         <div class="glow-card p-6 bg-gradient-to-br from-orange-600/20 to-transparent">
             <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Baki Modal (Live OTA)</p>
-            <!-- ID "balanceDisplay" digunakan untuk update baki dari API -->
-            <h1 id="balanceDisplay" class="text-4xl font-black mt-2 text-white italic tracking-tighter">Memuatkan...</h1>
+            <h1 id="balanceDisplay" class="text-4xl font-black mt-2 text-white italic tracking-tighter italic">RM 0.00</h1>
             <div class="flex gap-3 mt-6">
                 <button class="flex-1 bg-orange-500 text-black py-3 rounded-xl font-black text-xs uppercase">Tambah Modal</button>
                 <button class="flex-1 bg-white/10 py-3 rounded-xl font-black text-xs uppercase border border-white/5">Rekod</button>
@@ -60,22 +62,11 @@
         </div>
     </div>
 
-    <!-- Menu Grid -->
-    <div class="px-6 mb-8">
-        <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-4">Perkhidmatan Digital</h3>
-        <div class="grid grid-cols-3 gap-y-6">
-            <div class="flex flex-col items-center" onclick="openTopup()">
-                <div class="icon-box bg-blue-500/10 text-blue-400 border border-blue-500/20"><i class="fa fa-mobile"></i></div>
-                <span class="text-[11px] font-bold">TOPUP</span>
-            </div>
-            <div class="flex flex-col items-center" onclick="alert('Fungsi akan aktif selepas integrasi penuh.')">
-                <div class="icon-box bg-orange-500/10 text-orange-400 border border-orange-500/20"><i class="fa fa-file-text-o"></i></div>
-                <span class="text-[11px] font-bold">BIL</span>
-            </div>
-            <div class="flex flex-col items-center" onclick="alert('Fungsi akan aktif selepas integrasi penuh.')">
-                <div class="icon-box bg-purple-500/10 text-purple-400 border border-purple-500/20"><i class="fa fa-gamepad"></i></div>
-                <span class="text-[11px] font-bold">GAMES</span>
-            </div>
+    <!-- TEST LOGS SECTION (Ini yang OTA mahu tengok) -->
+    <div class="px-6">
+        <h3 class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-2">System Integration Logs</h3>
+        <div id="debugConsole">
+            <div class="log-entry log-info">[SYSTEM] Initializing API Connection...</div>
         </div>
     </div>
 
@@ -86,11 +77,23 @@
         <div class="flex flex-col items-center text-gray-600"><i class="fa fa-user-circle text-xl"></i><span class="text-[9px] mt-1 font-bold">PROFILE</span></div>
     </div>
 
-    <!-- Script Integrasi API OTA -->
     <script>
+        function addLog(message, type = 'info') {
+            const console = document.getElementById('debugConsole');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            const time = new Date().toLocaleTimeString();
+            entry.innerText = `[${time}] ${message}`;
+            console.appendChild(entry);
+            console.scrollTop = console.scrollHeight;
+        }
+
         async function checkOTABalance() {
             const apiKey = "e9eac7ac-ec92-4302-a1b4-4d3f39c3d086";
             const url = "https://staging-api.otamy.net/v1/topup/balance";
+
+            addLog("Sending GET Request to OTA Staging...", "info");
+            addLog(`Endpoint: ${url}`, "info");
 
             try {
                 const response = await fetch(url, {
@@ -100,24 +103,23 @@
                         'Content-Type': 'application/json'
                     }
                 });
+                
+                addLog(`Response Status: ${response.status} ${response.statusText}`, response.ok ? "success" : "error");
+
                 const data = await response.json();
+                
                 if (data.amount !== undefined) {
                     document.getElementById('balanceDisplay').innerText = "RM " + parseFloat(data.amount).toFixed(2);
-                } else {
-                    document.getElementById('balanceDisplay').innerText = "RM 0.00";
+                    addLog(`Integration Success! Data Received: { amount: ${data.amount} }`, "success");
+                    addLog("UI Updated with live balance.", "success");
                 }
             } catch (error) {
-                console.error("Gagal menarik baki OTA:", error);
-                document.getElementById('balanceDisplay').innerText = "API ERROR";
+                addLog(`Network Error: ${error.message}`, "error");
             }
         }
 
-        // Jalankan fungsi sebaik sahaja halaman dibuka
+        // Jalankan fungsi
         window.onload = checkOTABalance;
-
-        function openTopup() {
-            alert('Integrasi Staging OTA Aktif!');
-        }
     </script>
 </body>
 </html>
