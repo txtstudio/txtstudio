@@ -24,7 +24,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 40px;
             padding: 40px 20px;
-            width: 100%;
+            width: 90%;
             max-width: 400px;
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -114,6 +114,8 @@
             color: #333;
             font-size: 12px;
             letter-spacing: 2px;
+            text-align: center;
+            width: 100%;
         }
     </style>
 </head>
@@ -134,7 +136,7 @@
         </button>
 
         <div class="footer-link">
-            Forget Server Key? <a href="https://wa.me/601123456636">Click Here</a>
+            Forget Server Key? <a href="https://api.whatsapp.com/send?phone=601123456636&text=Bos%20saya%20lupa%20Server%20Key%20TXT%20Studio" target="_blank">Click Here</a>
         </div>
     </div>
 
@@ -145,11 +147,11 @@
             let key = prompt("Sila masukkan Server Key (Ejen Sah Sahaja):");
             if (key === "txtstudio") {
                 alert("Tahniah! Akses Ejen VIP diaktifkan. Harga komisyen tinggi akan dipaparkan.");
-                // Nanti kita akan arahkan ke page dashboard harga murah
-                window.location.href = "index.html?mode=vip";
+                // Mod VIP diaktifkan
+                window.location.href = "home.html?mode=vip";
             } else if (key != null) {
-                alert("Key salah. Anda akan masuk sebagai pelanggan biasa.");
-                window.location.href = "index.html?mode=normal";
+                alert("Key salah atau kosong. Anda akan masuk sebagai pelanggan biasa.");
+                window.location.href = "home.html?mode=normal";
             }
         }
     </script>
