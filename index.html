@@ -31,22 +31,18 @@
         }
 
         .logo-container {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .logo-icon {
-            background: linear-gradient(135deg, #F77F00, #FFB703);
-            width: 80px;
-            height: 80px;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 40px;
-            color: #000;
-            font-weight: 900;
-            box-shadow: 0 0 30px rgba(247, 127, 0, 0.3);
+        .logo-img {
+            width: 150px; /* Saiz yang cantik untuk logo bulat anda */
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px rgba(247, 127, 0, 0.3));
         }
 
         .brand-name {
@@ -97,7 +93,7 @@
         }
 
         .footer-link {
-            margin-top: 30px;
+            margin-top: 25px;
             color: #888;
             font-size: 14px;
         }
@@ -112,7 +108,7 @@
             position: absolute;
             bottom: 20px;
             color: #333;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 2px;
             text-align: center;
             width: 100%;
@@ -123,7 +119,8 @@
 
     <div class="glass-card">
         <div class="logo-container">
-            <div class="logo-icon">T</div>
+            <!-- Menampilkan logo txtstudio.png anda -->
+            <img src="txtstudio.png" alt="TXT Studio Logo" class="logo-img">
             <div class="brand-name">TXT <span>STUDIO</span></div>
         </div>
 
@@ -147,7 +144,6 @@
             let key = prompt("Sila masukkan Server Key (Ejen Sah Sahaja):");
             if (key === "txtstudio") {
                 alert("Tahniah! Akses Ejen VIP diaktifkan. Harga komisyen tinggi akan dipaparkan.");
-                // Mod VIP diaktifkan
                 window.location.href = "home.html?mode=vip";
             } else if (key != null) {
                 alert("Key salah atau kosong. Anda akan masuk sebagai pelanggan biasa.");
