@@ -38,12 +38,14 @@
         }
 
         .logo-img {
-            width: 150px; 
-            height: 150px;
+            width: 130px; /* Saiz optimum untuk nampak HD dan seimbang */
+            height: 130px;
             object-fit: contain;
             margin-bottom: 15px;
-            /* Kesan cahaya neon oren di belakang logo */
-            filter: drop-shadow(0 0 15px rgba(247, 127, 0, 0.4));
+            /* Kesan glow neon yang lebih halus */
+            filter: drop-shadow(0 0 20px rgba(247, 127, 0, 0.5));
+            /* Teknik untuk pastikan gambar kekal tajam */
+            image-rendering: -webkit-optimize-contrast;
         }
 
         .brand-name {
@@ -120,7 +122,6 @@
 
     <div class="glass-card">
         <div class="logo-container">
-            <!-- MENGHALAKAN KE FOLDER IMAGES -->
             <img src="images/txtstudio.png" alt="TXT Studio Logo" class="logo-img">
             <div class="brand-name">TXT <span>STUDIO</span></div>
         </div>
