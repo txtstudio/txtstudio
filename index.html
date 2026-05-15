@@ -2,7 +2,7 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TXT Studio | Portal Akses</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -10,165 +10,110 @@
         body {
             background-color: #0A0A0F;
             font-family: 'Inter', sans-serif;
-            height: 100vh;
+            margin: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0;
-            overflow: hidden;
+            min-height: 100vh;
+            color: white;
             position: relative;
         }
 
-        /* Kesan LED Bergerak ala IIMMPACT */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(247, 127, 0, 0.12) 0%, transparent 70%);
-            top: -100px;
-            left: -100px;
-            border-radius: 50%;
-            filter: blur(80px);
-            animation: moveLED 12s infinite alternate;
-            z-index: -1;
+        /* LED Glow Background */
+        .led-bg {
+            position: fixed; inset: 0; z-index: -1; overflow: hidden;
+        }
+        .led-bg::before {
+            content: ""; position: absolute; width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(247, 127, 0, 0.1) 0%, transparent 70%);
+            top: 10%; left: -50px; filter: blur(60px); animation: move 10s infinite alternate;
         }
 
-        body::after {
-            content: "";
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 53, 102, 0.15) 0%, transparent 70%);
-            bottom: -150px;
-            right: -150px;
-            border-radius: 50%;
-            filter: blur(90px);
-            animation: moveLED 18s infinite alternate-reverse;
-            z-index: -1;
-        }
+        @keyframes move { 0% { transform: translate(0,0); } 100% { transform: translate(50px, 50px); } }
 
-        @keyframes moveLED {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(150px, 150px) scale(1.2); }
-        }
-        
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 40px 20px;
+            border-radius: 35px;
+            padding: 40px 25px;
             width: 90%;
-            max-width: 400px;
+            max-width: 380px;
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            margin: 20px 0;
         }
-
-        .logo-img {
-            width: 130px; 
-            height: 130px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 20px rgba(247, 127, 0, 0.5));
-            image-rendering: -webkit-optimize-contrast;
-        }
-
-        .brand-name {
-            font-size: 24px; font-weight: 900; color: white; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px;
-        }
-
-        .brand-name span { color: #F77F00; }
 
         .btn-action {
-            display: block; width: 100%; padding: 18px; margin-bottom: 15px; border-radius: 15px;
-            font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; cursor: pointer; border: none;
+            display: block; width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 15px;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: none;
         }
 
-        .btn-login { background: linear-gradient(to right, #003566, #001d3d); color: #fff; }
+        .btn-login { background: linear-gradient(to right, #003566, #001d3d); color: white; }
         .btn-server { background: linear-gradient(to right, #F77F00, #d66d00); color: #000; }
 
-        /* Modal Styles */
+        /* Modal Popup */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-            display: none; align-items: center; justify-content: center; z-index: 100;
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; z-index: 100;
+            padding: 20px;
         }
-
         .modal-content {
-            background: #121218; border: 1px solid #333; border-radius: 30px;
-            padding: 30px; width: 85%; max-width: 350px; text-align: center;
+            background: #121218; border: 1px solid #333; border-radius: 25px;
+            padding: 30px; width: 100%; max-width: 340px; text-align: center;
         }
-
         .google-btn {
-            background: white; color: #000; display: flex; align-items: center; justify-content: center;
-            gap: 10px; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 20px;
+            background: white; color: black; display: flex; align-items: center; justify-content: center;
+            gap: 12px; padding: 14px; border-radius: 12px; font-weight: 700; margin-top: 20px; cursor: pointer;
         }
-
-        .version-text { position: absolute; bottom: 20px; color: #333; font-size: 11px; text-align: center; width: 100%; }
     </style>
 </head>
 <body>
 
+    <div class="led-bg"></div>
+
     <div class="glass-card">
-        <img src="images/txtstudio.png" alt="Logo" class="logo-img" style="margin: 0 auto 15px auto;">
-        <div class="brand-name">TXT <span>STUDIO</span></div>
+        <img src="images/txtstudio.png" alt="Logo" style="width: 120px; margin: 0 auto 20px auto; filter: drop-shadow(0 0 15px rgba(247, 127, 0, 0.4));">
+        <h2 style="font-size: 22px; font-weight: 900; letter-spacing: 3px; margin-bottom: 30px;">TXT <span style="color: #F77F00;">STUDIO</span></h2>
 
-        <!-- Butang Login Sekarang Membuka Modal -->
-        <button onclick="openLoginModal()" class="btn-action btn-login">
-            Proceed to Login
-        </button>
+        <button onclick="openModal()" class="btn-action btn-login">Proceed to Login</button>
+        <button onclick="promptKey()" class="btn-action btn-server">Enter Server Key</button>
 
-        <button onclick="promptServerKey()" class="btn-action btn-server">
-            Enter Server Key
-        </button>
-
-        <div style="color: #888; font-size: 14px; margin-top: 20px;">
+        <p style="font-size: 13px; color: #666; margin-top: 20px;">
             Forget Server Key? <a href="https://wa.me/601123456636" style="color: #F77F00;">Click Here</a>
-        </div>
+        </p>
     </div>
 
-    <!-- Login Modal (Email Selection) -->
-    <div id="loginModal" class="modal-overlay" onclick="closeLoginModal()">
+    <!-- Modal Login -->
+    <div id="loginModal" class="modal-overlay" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <h3 style="color: white; font-weight: 800; margin-bottom: 10px;">SIGN IN</h3>
-            <p style="color: #888; font-size: 13px;">Sila pilih akaun email anda untuk masuk ke TXT Studio</p>
+            <h3 style="font-weight: 800; margin-bottom: 10px;">SIGN IN</h3>
+            <p style="font-size: 12px; color: #888; line-height: 1.5;">Pilih akaun Google anda untuk menyambung ke dashboard TXT Studio.</p>
             
-            <div class="google-btn" onclick="startGoogleLogin()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20">
+            <div class="google-btn" onclick="simulasiLogin()">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18">
                 Continue with Google
             </div>
 
-            <div onclick="closeLoginModal()" style="color: #555; margin-top: 20px; font-size: 12px; cursor: pointer;">BATAL</div>
+            <button onclick="closeModal()" style="margin-top: 25px; color: #555; font-size: 11px; font-weight: 700; text-transform: uppercase;">Batal</button>
         </div>
     </div>
 
-    <div class="version-text">V 1.0.369 - TXT STUDIO OFFICIAL</div>
-
     <script>
-        function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'flex';
+        function openModal() { document.getElementById('loginModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('loginModal').style.display = 'none'; }
+        
+        function simulasiLogin() {
+            alert("Menyambung ke Google Play Services... Sila pilih email anda.");
+            window.location.href = "home.html";
         }
 
-        function closeLoginModal() {
-            document.getElementById('loginModal').style.display = 'none';
-        }
-
-        function startGoogleLogin() {
-            // Ini simulasi paparan pilihan email browser
-            alert("Sistem sedang menghubungkan ke Google Account... Sila pilih email anda pada tetingkap yang muncul.");
-            // Nanti kita akan sambung ke Firebase di sini
-            window.location.href = "auth.html"; 
-        }
-
-        function promptServerKey() {
-            let key = prompt("Sila masukkan Server Key (Ejen Sah Sahaja):");
+        function promptKey() {
+            let key = prompt("Sila masukkan Server Key (Ejen Sah):");
             if (key === "txtstudio") {
-                alert("Tahniah! Akses Ejen VIP diaktifkan.");
-                window.location.href = "home.html?mode=vip";
+                window.location.href = "home.html";
             } else if (key != null) {
-                alert("Key salah. Masuk sebagai pelanggan biasa.");
-                window.location.href = "home.html?mode=normal";
+                alert("Key tidak sah.");
             }
         }
     </script>
