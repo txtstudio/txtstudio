@@ -16,11 +16,46 @@
             justify-content: center;
             margin: 0;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Kesan LED Bergerak ala IIMMPACT (Latar Belakang) */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(247, 127, 0, 0.12) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: moveLED 12s infinite alternate;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 53, 102, 0.15) 0%, transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            border-radius: 50%;
+            filter: blur(90px);
+            animation: moveLED 18s infinite alternate-reverse;
+            z-index: -1;
+        }
+
+        @keyframes moveLED {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(150px, 150px) scale(1.2); }
         }
         
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 40px;
             padding: 40px 20px;
@@ -28,6 +63,7 @@
             max-width: 400px;
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            z-index: 10;
         }
 
         .logo-container {
@@ -38,13 +74,11 @@
         }
 
         .logo-img {
-            width: 130px; /* Saiz optimum untuk nampak HD dan seimbang */
+            width: 130px; 
             height: 130px;
             object-fit: contain;
             margin-bottom: 15px;
-            /* Kesan glow neon yang lebih halus */
             filter: drop-shadow(0 0 20px rgba(247, 127, 0, 0.5));
-            /* Teknik untuk pastikan gambar kekal tajam */
             image-rendering: -webkit-optimize-contrast;
         }
 
@@ -122,6 +156,7 @@
 
     <div class="glass-card">
         <div class="logo-container">
+            <!-- Logo HD dari folder images -->
             <img src="images/txtstudio.png" alt="TXT Studio Logo" class="logo-img">
             <div class="brand-name">TXT <span>STUDIO</span></div>
         </div>
