@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TXT Studio | Portal Akses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0A0A0F;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-container {
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #F77F00, #FFB703);
+            width: 80px;
+            height: 80px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+            color: #000;
+            font-weight: 900;
+            box-shadow: 0 0 30px rgba(247, 127, 0, 0.3);
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .brand-name span {
+            color: #F77F00;
+        }
+
+        .btn-action {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-login {
+            background: linear-gradient(to right, #003566, #001d3d);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-server {
+            background: linear-gradient(to right, #F77F00, #d66d00);
+            color: #000;
+        }
+
+        .btn-server:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(247, 127, 0, 0.2);
+        }
+
+        .footer-link {
+            margin-top: 30px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .footer-link a {
+            color: #F77F00;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .version-text {
+            position: absolute;
+            bottom: 20px;
+            color: #333;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-card">
+        <div class="logo-container">
+            <div class="logo-icon">T</div>
+            <div class="brand-name">TXT <span>STUDIO</span></div>
+        </div>
+
+        <button onclick="location.href='#login'" class="btn-action btn-login">
+            Proceed to Login
+        </button>
+
+        <button onclick="promptServerKey()" class="btn-action btn-server">
+            Enter Server Key
+        </button>
+
+        <div class="footer-link">
+            Forget Server Key? <a href="https://wa.me/601123456636">Click Here</a>
+        </div>
+    </div>
+
+    <div class="version-text">V 1.0.369 - TXT STUDIO OFFICIAL</div>
+
+    <script>
+        function promptServerKey() {
+            let key = prompt("Sila masukkan Server Key (Ejen Sah Sahaja):");
+            if (key === "txtstudio") {
+                alert("Tahniah! Akses Ejen VIP diaktifkan. Harga komisyen tinggi akan dipaparkan.");
+                // Nanti kita akan arahkan ke page dashboard harga murah
+                window.location.href = "index.html?mode=vip";
+            } else if (key != null) {
+                alert("Key salah. Anda akan masuk sebagai pelanggan biasa.");
+                window.location.href = "index.html?mode=normal";
+            }
+        }
+    </script>
+
+</body>
+</html>
