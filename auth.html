@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | TXT Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0A0A0F; font-family: 'Inter', sans-serif; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .login-card { background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 30px; width: 90%; max-width: 380px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        input { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; width: 100%; padding: 15px; border-radius: 12px; margin-bottom: 20px; outline: none; }
+        input:focus { border-color: #F77F00; }
+        .btn-submit { background: #F77F00; color: black; font-weight: 800; width: 100%; padding: 15px; border-radius: 12px; text-transform: uppercase; cursor: pointer; border: none; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #888; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2 class="text-2xl font-bold mb-6 text-center">LOGIN <span class="text-[#F77F00]">STUDIO</span></h2>
+        
+        <form onsubmit="handleLogin(event)">
+            <label class="block mb-2 text-sm text-gray-400">No. Telefon / Emel</label>
+            <input type="text" id="username" placeholder="Contoh: 01123456636" required>
+            
+            <label class="block mb-2 text-sm text-gray-400">Kata Laluan</label>
+            <input type="password" id="password" placeholder="********" required>
+            
+            <button type="submit" class="btn-submit">Sign In</button>
+        </form>
+
+        <a href="index.html" class="back-link">← Kembali ke Halaman Utama</a>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            alert("Sistem Login akan diaktifkan sepenuhnya selepas API OTA.my diluluskan. Terima kasih kerana menunggu!");
+            // Nanti kita akan sambungkan ke Database/API di sini
+        }
+    </script>
+
+</body>
+</html>
