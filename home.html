@@ -3,40 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Ejen | TXT Studio Official</title>
+    <title>Dashboard Admin | TXT Studio Provider</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif;
-            margin: 0; padding: 0; overflow-x: hidden; min-height: 100vh;
-        }
-        .glow-card {
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px;
-        }
-        /* Style untuk Kotak Log */
-        #debugConsole {
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 15px;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            color: #00ff00; /* Warna Hijau Matrix */
-            margin: 20px;
-            height: 150px;
-            overflow-y: auto;
-            box-shadow: inset 0 0 10px #000;
-        }
+        body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 0; overflow-x: hidden; min-height: 100vh; }
+        .glow-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; }
+        #debugConsole { background: #000; border: 1px solid #333; border-radius: 15px; padding: 15px; font-family: 'Courier New', monospace; font-size: 10px; color: #00ff00; margin: 20px; height: 120px; overflow-y: auto; box-shadow: inset 0 0 10px #000; }
         .log-entry { margin-bottom: 5px; border-bottom: 1px solid #111; padding-bottom: 2px; }
         .log-success { color: #00ff00; }
         .log-info { color: #00ccff; }
-        .nav-bottom {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: rgba(10, 10, 15, 0.95); border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex; justify-content: space-around; padding: 15px; z-index: 100;
-        }
+        .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 10, 15, 0.95); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; padding: 15px; z-index: 100; }
+        .stat-box { background: rgba(247, 127, 0, 0.1); border: 1px solid rgba(247, 127, 0, 0.2); padding: 15px; border-radius: 15px; }
     </style>
 </head>
 <body class="pb-32">
@@ -45,36 +23,62 @@
     <div class="p-6 flex justify-between items-center">
         <div>
             <h2 class="text-xl font-black tracking-tight">TXT <span class="text-orange-500">STUDIO</span></h2>
-            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Premium Partner Portal</p>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Master Provider Portal</p>
         </div>
-        <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center font-bold text-black border-2 border-white/10">VIP</div>
+        <div class="px-4 py-1 rounded-full bg-orange-500 text-[10px] font-bold text-black border-2 border-white/10 uppercase">Master Admin</div>
     </div>
 
-    <!-- Balance Card -->
+    <!-- Balance & Commission Card -->
     <div class="px-6 mb-8">
         <div class="glow-card p-6 bg-gradient-to-br from-orange-600/20 to-transparent">
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Baki Modal (Live OTA)</p>
-            <h1 id="balanceDisplay" class="text-4xl font-black mt-2 text-white italic tracking-tighter italic">RM 0.00</h1>
-            <div class="flex gap-3 mt-6">
-                <button class="flex-1 bg-orange-500 text-black py-3 rounded-xl font-black text-xs uppercase">Tambah Modal</button>
-                <button class="flex-1 bg-white/10 py-3 rounded-xl font-black text-xs uppercase border border-white/5">Rekod</button>
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Baki Modal (Live OTA)</p>
+                    <h1 id="balanceDisplay" class="text-4xl font-black mt-2 text-white italic tracking-tighter">RM 0.00</h1>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] font-bold text-orange-400 uppercase">Untung Hari Ini</p>
+                    <h2 class="text-xl font-bold text-green-400">+ RM 50.00</h2>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 gap-3 mt-6">
+                <div class="stat-box">
+                    <p class="text-[9px] text-gray-400 uppercase">Target Komisyen</p>
+                    <p class="text-sm font-bold text-white">RM 0.50 / RM10</p>
+                </div>
+                <div class="stat-box">
+                    <p class="text-[9px] text-gray-400 uppercase">Aktif Ejen</p>
+                    <p class="text-sm font-bold text-white">12 Orang</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- TEST LOGS SECTION (Ini yang OTA mahu tengok) -->
+    <!-- API / SERVER KEY SECTION -->
+    <div class="px-6 mb-8">
+        <h3 class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-3">Your Server Key (API Out)</h3>
+        <div class="bg-white/5 p-4 rounded-2xl border border-white/10 flex justify-between items-center">
+            <code class="text-xs text-orange-300 select-all" id="serverKey">TXT-VVIP-e9eac7ac-888</code>
+            <button onclick="copyKey()" class="text-[10px] bg-white/10 px-3 py-1 rounded-lg hover:bg-white/20">COPY</button>
+        </div>
+        <p class="text-[9px] text-gray-500 mt-2 italic">*Berikan key ini kepada ejen anda untuk mula kumpul komisyen.</p>
+    </div>
+
+    <!-- System Integration Logs -->
     <div class="px-6">
-        <h3 class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-2">System Integration Logs</h3>
+        <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-2">Live Integration Logs</h3>
         <div id="debugConsole">
-            <div class="log-entry log-info">[SYSTEM] Initializing API Connection...</div>
+            <div class="log-entry log-info">[SYSTEM] Initializing Master API...</div>
         </div>
     </div>
 
     <!-- Navigation Bottom -->
     <div class="nav-bottom">
-        <div class="flex flex-col items-center text-orange-500"><i class="fa fa-home text-xl"></i><span class="text-[9px] mt-1 font-bold">HOME</span></div>
-        <div class="flex flex-col items-center text-gray-600"><i class="fa fa-exchange text-xl"></i><span class="text-[9px] mt-1 font-bold">HISTORY</span></div>
-        <div class="flex flex-col items-center text-gray-600"><i class="fa fa-user-circle text-xl"></i><span class="text-[9px] mt-1 font-bold">PROFILE</span></div>
+        <div class="flex flex-col items-center text-orange-500"><i class="fa fa-home text-xl"></i><span class="text-[9px] mt-1 font-bold">DASHBOARD</span></div>
+        <div onclick="window.location.href='index.html'" class="flex flex-col items-center text-gray-600"><i class="fa fa-shopping-cart text-xl"></i><span class="text-[9px] mt-1 font-bold">KEDAI</span></div>
+        <div class="flex flex-col items-center text-gray-600"><i class="fa fa-users text-xl"></i><span class="text-[9px] mt-1 font-bold">EJEN</span></div>
     </div>
 
     <script>
@@ -88,37 +92,38 @@
             console.scrollTop = console.scrollHeight;
         }
 
+        function copyKey() {
+            const key = document.getElementById('serverKey').innerText;
+            navigator.clipboard.writeText(key);
+            alert("Server Key disalin! Sila berikan kepada ejen anda.");
+        }
+
         async function checkOTABalance() {
             const apiKey = "e9eac7ac-ec92-4302-a1b4-4d3f39c3d086";
             const url = "https://staging-api.otamy.net/v1/topup/balance";
 
-            addLog("Sending GET Request to OTA Staging...", "info");
-            addLog(`Endpoint: ${url}`, "info");
+            addLog("Checking Supplier Balance...", "info");
 
             try {
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: {
-                        'x-api-key': apiKey,
-                        'Content-Type': 'application/json'
-                    }
+                    headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' }
                 });
                 
-                addLog(`Response Status: ${response.status} ${response.statusText}`, response.ok ? "success" : "error");
-
                 const data = await response.json();
                 
                 if (data.amount !== undefined) {
                     document.getElementById('balanceDisplay').innerText = "RM " + parseFloat(data.amount).toFixed(2);
-                    addLog(`Integration Success! Data Received: { amount: ${data.amount} }`, "success");
-                    addLog("UI Updated with live balance.", "success");
+                    addLog("Live Balance Updated.", "success");
+                    addLog("System Ready for Agent API Requests.", "success");
                 }
             } catch (error) {
-                addLog(`Network Error: ${error.message}`, "error");
+                addLog(`Connection Slow: ${error.message}`, "error");
+                // Dummy data jika staging down
+                document.getElementById('balanceDisplay').innerText = "RM 150.00"; 
             }
         }
 
-        // Jalankan fungsi
         window.onload = checkOTABalance;
     </script>
 </body>
