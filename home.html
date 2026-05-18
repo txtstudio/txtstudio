@@ -3,128 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin | TXT Studio Provider</title>
+    <title>Dashboard Admin | TXT Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 0; overflow-x: hidden; min-height: 100vh; }
+        body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 100px; }
         .glow-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; }
-        #debugConsole { background: #000; border: 1px solid #333; border-radius: 15px; padding: 15px; font-family: 'Courier New', monospace; font-size: 10px; color: #00ff00; margin: 20px; height: 120px; overflow-y: auto; box-shadow: inset 0 0 10px #000; }
-        .log-entry { margin-bottom: 5px; border-bottom: 1px solid #111; padding-bottom: 2px; }
-        .log-success { color: #00ff00; }
-        .log-info { color: #00ccff; }
-        .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 10, 15, 0.95); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; padding: 15px; z-index: 100; }
-        .stat-box { background: rgba(247, 127, 0, 0.1); border: 1px solid rgba(247, 127, 0, 0.2); padding: 15px; border-radius: 15px; }
+        .product-card { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; cursor: pointer; }
+        .product-card:hover { background: rgba(247, 127, 0, 0.1); border-color: #F77F00; transform: translateY(-5px); }
+        .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #0A0A0F; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; padding: 15px; z-index: 100; }
+        .hidden-tab { display: none; }
     </style>
 </head>
-<body class="pb-32">
+<body>
 
     <!-- Header -->
     <div class="p-6 flex justify-between items-center">
         <div>
-            <h2 class="text-xl font-black tracking-tight">TXT <span class="text-orange-500">STUDIO</span></h2>
-            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Master Provider Portal</p>
+            <h2 class="text-xl font-black text-[#F77F00]">TXT STUDIO</h2>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest text-white/50">Provider Portal</p>
         </div>
-        <div class="px-4 py-1 rounded-full bg-orange-500 text-[10px] font-bold text-black border-2 border-white/10 uppercase">Master Admin</div>
+        <div class="px-4 py-1 rounded-full bg-orange-500 text-[10px] font-bold text-black uppercase">Master Admin</div>
     </div>
 
-    <!-- Balance & Commission Card -->
-    <div class="px-6 mb-8">
-        <div class="glow-card p-6 bg-gradient-to-br from-orange-600/20 to-transparent">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Baki Modal (Live OTA)</p>
-                    <h1 id="balanceDisplay" class="text-4xl font-black mt-2 text-white italic tracking-tighter">RM 0.00</h1>
-                </div>
-                <div class="text-right">
-                    <p class="text-[10px] font-bold text-orange-400 uppercase">Untung Hari Ini</p>
-                    <h2 class="text-xl font-bold text-green-400">+ RM 50.00</h2>
-                </div>
+    <!-- TAB 1: DASHBOARD (STATISTIK) -->
+    <div id="dashboardTab" class="px-6">
+        <div class="glow-card p-6 bg-gradient-to-br from-orange-600/20 to-transparent mb-6 text-center">
+            <p class="text-xs font-bold text-gray-400 uppercase">Baki Modal Live</p>
+            <h1 class="text-4xl font-black mt-2 text-white italic">RM 17,562.57</h1>
+            <p class="text-green-400 text-xs mt-2 font-bold">+ RM 50.00 UNTUNG HARI INI</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="glow-card p-4 text-center">
+                <p class="text-[9px] text-gray-500 uppercase">Target Komisyen</p>
+                <p class="text-xs font-bold text-orange-500">RM 0.50 / RM10</p>
             </div>
-            
-            <!-- Quick Stats -->
-            <div class="grid grid-cols-2 gap-3 mt-6">
-                <div class="stat-box">
-                    <p class="text-[9px] text-gray-400 uppercase">Target Komisyen</p>
-                    <p class="text-sm font-bold text-white">RM 0.50 / RM10</p>
-                </div>
-                <div class="stat-box">
-                    <p class="text-[9px] text-gray-400 uppercase">Aktif Ejen</p>
-                    <p class="text-sm font-bold text-white">12 Orang</p>
-                </div>
+            <div class="glow-card p-4 text-center">
+                <p class="text-[9px] text-gray-500 uppercase">Aktif Ejen</p>
+                <p class="text-xs font-bold">12 Orang</p>
             </div>
         </div>
     </div>
 
-    <!-- API / SERVER KEY SECTION -->
-    <div class="px-6 mb-8">
-        <h3 class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-3">Your Server Key (API Out)</h3>
-        <div class="bg-white/5 p-4 rounded-2xl border border-white/10 flex justify-between items-center">
-            <code class="text-xs text-orange-300 select-all" id="serverKey">TXT-VVIP-e9eac7ac-888</code>
-            <button onclick="copyKey()" class="text-[10px] bg-white/10 px-3 py-1 rounded-lg hover:bg-white/20">COPY</button>
-        </div>
-        <p class="text-[9px] text-gray-500 mt-2 italic">*Berikan key ini kepada ejen anda untuk mula kumpul komisyen.</p>
-    </div>
+    <!-- TAB 2: KEDAI (PRODUK TELCO, BIL, GAME) -->
+    <div id="kedaiTab" class="hidden-tab px-6">
+        <h3 class="text-sm font-bold mb-4 text-orange-500 uppercase tracking-widest"><i class="fa fa-shopping-bag mr-2"></i> Menu Jualan</h3>
+        
+        <!-- Grid Produk -->
+        <div class="grid grid-cols-3 gap-4">
+            <!-- Topup Telco -->
+            <div onclick="prosesProduk('Celcom')" class="product-card">
+                <i class="fa fa-mobile text-2xl mb-2 text-blue-400"></i>
+                <p class="text-[10px] font-bold uppercase">Celcom</p>
+            </div>
+            <div onclick="prosesProduk('Digi')" class="product-card">
+                <i class="fa fa-mobile text-2xl mb-2 text-yellow-400"></i>
+                <p class="text-[10px] font-bold uppercase">Digi</p>
+            </div>
+            <div onclick="prosesProduk('Maxis')" class="product-card">
+                <i class="fa fa-mobile text-2xl mb-2 text-green-500"></i>
+                <p class="text-[10px] font-bold uppercase">Maxis</p>
+            </div>
 
-    <!-- System Integration Logs -->
-    <div class="px-6">
-        <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-2">Live Integration Logs</h3>
-        <div id="debugConsole">
-            <div class="log-entry log-info">[SYSTEM] Initializing Master API...</div>
+            <!-- Bil & Utiliti -->
+            <div onclick="prosesProduk('Bil TNB')" class="product-card">
+                <i class="fa fa-lightbulb-o text-2xl mb-2 text-orange-500"></i>
+                <p class="text-[10px] font-bold uppercase">Bil TNB</p>
+            </div>
+            <div onclick="prosesProduk('Bil Air')" class="product-card">
+                <i class="fa fa-tint text-2xl mb-2 text-blue-300"></i>
+                <p class="text-[10px] font-bold uppercase">Bil Air</p>
+            </div>
+            <div onclick="prosesProduk('Unifi')" class="product-card">
+                <i class="fa fa-globe text-2xl mb-2 text-red-500"></i>
+                <p class="text-[10px] font-bold uppercase">Unifi</p>
+            </div>
+
+            <!-- Game Credits -->
+            <div onclick="prosesProduk('Mobile Legends')" class="product-card">
+                <i class="fa fa-gamepad text-2xl mb-2 text-purple-400"></i>
+                <p class="text-[10px] font-bold uppercase">MLBB</p>
+            </div>
+            <div onclick="prosesProduk('Free Fire')" class="product-card">
+                <i class="fa fa-gamepad text-2xl mb-2 text-orange-600"></i>
+                <p class="text-[10px] font-bold uppercase">Free Fire</p>
+            </div>
+            <div onclick="prosesProduk('PUBG')" class="product-card">
+                <i class="fa fa-gamepad text-2xl mb-2 text-green-300"></i>
+                <p class="text-[10px] font-bold uppercase">PUBG</p>
+            </div>
         </div>
     </div>
 
     <!-- Navigation Bottom -->
     <div class="nav-bottom">
-        <div class="flex flex-col items-center text-orange-500"><i class="fa fa-home text-xl"></i><span class="text-[9px] mt-1 font-bold">DASHBOARD</span></div>
-        <div onclick="window.location.href='index.html'" class="flex flex-col items-center text-gray-600"><i class="fa fa-shopping-cart text-xl"></i><span class="text-[9px] mt-1 font-bold">KEDAI</span></div>
-        <div class="flex flex-col items-center text-gray-600"><i class="fa fa-users text-xl"></i><span class="text-[9px] mt-1 font-bold">EJEN</span></div>
+        <div onclick="showTab('dashboard')" id="nav-dashboard" class="flex flex-col items-center text-orange-500 cursor-pointer">
+            <i class="fa fa-home text-xl"></i>
+            <span class="text-[9px] mt-1 font-bold">DASHBOARD</span>
+        </div>
+        <div onclick="showTab('kedai')" id="nav-kedai" class="flex flex-col items-center text-gray-600 cursor-pointer">
+            <i class="fa fa-shopping-cart text-xl"></i>
+            <span class="text-[9px] mt-1 font-bold">KEDAI</span>
+        </div>
+        <div class="flex flex-col items-center text-gray-600">
+            <i class="fa fa-users text-xl"></i>
+            <span class="text-[9px] mt-1 font-bold">EJEN</span>
+        </div>
     </div>
 
     <script>
-        function addLog(message, type = 'info') {
-            const console = document.getElementById('debugConsole');
-            const entry = document.createElement('div');
-            entry.className = `log-entry log-${type}`;
-            const time = new Date().toLocaleTimeString();
-            entry.innerText = `[${time}] ${message}`;
-            console.appendChild(entry);
-            console.scrollTop = console.scrollHeight;
-        }
-
-        function copyKey() {
-            const key = document.getElementById('serverKey').innerText;
-            navigator.clipboard.writeText(key);
-            alert("Server Key disalin! Sila berikan kepada ejen anda.");
-        }
-
-        async function checkOTABalance() {
-            const apiKey = "e9eac7ac-ec92-4302-a1b4-4d3f39c3d086";
-            const url = "https://staging-api.otamy.net/v1/topup/balance";
-
-            addLog("Checking Supplier Balance...", "info");
-
-            try {
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' }
-                });
-                
-                const data = await response.json();
-                
-                if (data.amount !== undefined) {
-                    document.getElementById('balanceDisplay').innerText = "RM " + parseFloat(data.amount).toFixed(2);
-                    addLog("Live Balance Updated.", "success");
-                    addLog("System Ready for Agent API Requests.", "success");
-                }
-            } catch (error) {
-                addLog(`Connection Slow: ${error.message}`, "error");
-                // Dummy data jika staging down
-                document.getElementById('balanceDisplay').innerText = "RM 150.00"; 
+        function showTab(tabName) {
+            if(tabName === 'dashboard') {
+                document.getElementById('dashboardTab').style.display = 'block';
+                document.getElementById('kedaiTab').style.display = 'none';
+                document.getElementById('nav-dashboard').classList.add('text-orange-500');
+                document.getElementById('nav-kedai').classList.remove('text-orange-500');
+            } else {
+                document.getElementById('dashboardTab').style.display = 'none';
+                document.getElementById('kedaiTab').style.display = 'block';
+                document.getElementById('nav-dashboard').classList.remove('text-orange-500');
+                document.getElementById('nav-kedai').classList.add('text-orange-500');
             }
         }
 
-        window.onload = checkOTABalance;
+        function prosesProduk(nama) {
+            let no = prompt(`Masukkan No Akaun / No Telefon untuk ${nama}:`);
+            if(no) {
+                let amount = prompt(`Masukkan Jumlah RM (Contoh: 10):`);
+                if(amount) {
+                    alert(`Pesanan ${nama} RM${amount} sedang diproses secara manual.`);
+                    window.open(`https://wa.me/601123456636?text=ORDER+BARU%0AProduk:+${nama}%0ANo:+${no}%0AJumlah:+RM${amount}`, '_blank');
+                }
+            }
+        }
     </script>
 </body>
 </html>
