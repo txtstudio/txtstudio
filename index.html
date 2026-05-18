@@ -7,96 +7,78 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0A0A0F; font-family: 'Inter', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; color: white; position: relative; }
-        .led-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
-        .led-bg::before { content: ""; position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(247, 127, 0, 0.1) 0%, transparent 70%); top: 10%; left: -50px; filter: blur(60px); animation: move 10s infinite alternate; }
-        @keyframes move { 0% { transform: translate(0,0); } 100% { transform: translate(50px, 50px); } }
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 35px; padding: 40px 25px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); margin: 20px 0; }
-        .btn-action { display: block; width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: none; cursor: pointer; }
+        body { background-color: #0A0A0F; font-family: 'Inter', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; color: white; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 35px; padding: 40px 25px; width: 90%; max-width: 400px; text-align: center; }
+        .btn-action { display: block; width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 15px; font-weight: 800; text-transform: uppercase; transition: 0.3s; cursor: pointer; border: none; }
         .btn-login { background: linear-gradient(to right, #003566, #001d3d); color: white; }
         .btn-server { background: linear-gradient(to right, #F77F00, #d66d00); color: #000; }
-        .buy-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: left; }
-        input, select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; width: 100%; padding: 12px; border-radius: 12px; margin-bottom: 15px; outline: none; font-size: 14px; }
-        input:focus { border-color: #F77F00; }
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
-        .modal-content { background: #121218; border: 1px solid #333; border-radius: 25px; padding: 30px; width: 100%; max-width: 340px; text-align: center; }
+        input, select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; width: 100%; padding: 12px; border-radius: 12px; margin-bottom: 15px; outline: none; }
+        .hidden-section { display: none; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <div class="led-bg"></div>
-
     <div class="glass-card">
-        <h2 style="font-size: 24px; font-weight: 900; letter-spacing: 3px; margin-bottom: 10px;">TXT <span style="color: #F77F00;">STUDIO</span></h2>
-        <p style="font-size: 10px; color: #888; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px;">Automated Topup Provider</p>
+        <h2 class="text-2xl font-black tracking-widest mb-2">TXT <span class="text-[#F77F00]">STUDIO</span></h2>
+        <p class="text-[10px] text-gray-500 uppercase mb-8">Premium Topup Provider</p>
 
-        <!-- Menu Utama -->
-        <button onclick="openModal()" class="btn-action btn-login">Admin / Agent Login</button>
-        <button onclick="promptKey()" class="btn-action btn-server">Enter Server Key</button>
+        <!-- Bahagian Login/Server Key -->
+        <button onclick="window.location.href='auth.html'" class="btn-action btn-login text-xs">Admin / Agent Login</button>
+        <button onclick="checkServerKey()" class="btn-action btn-server text-xs">Enter Server Key</button>
 
-        <!-- Bahagian Beli Terus (Untuk Pelanggan) -->
-        <div class="buy-section">
-            <h3 style="font-size: 14px; font-weight: 800; color: #F77F00; margin-bottom: 15px; text-align: center;">BELI TOPUP (RM10 = RM10)</h3>
+        <div class="border-t border-white/10 my-6 pt-6">
+            <h3 class="text-orange-500 font-bold text-sm mb-4">BELI TOPUP PANTAS</h3>
             
-            <label style="font-size: 11px; color: #666; margin-left: 5px;">No. Telefon Pelanggan</label>
-            <input type="number" id="phone" placeholder="Contoh: 0112345678">
+            <!-- Langkah 1: Masukkan No Tel -->
+            <label class="block text-[10px] text-gray-500 text-left ml-2 mb-1 uppercase font-bold">No. Telefon Pelanggan</label>
+            <input type="number" id="phone" placeholder="Contoh: 0112345678" oninput="validatePhone()">
 
-            <label style="font-size: 11px; color: #666; margin-left: 5px;">Pilih Nilai (Komisyen Tinggi)</label>
-            <select id="amount">
-                <option value="5">RM 5.00 (Bayar RM5.00)</option>
-                <option value="10">RM 10.00 (Bayar RM10.00)</option>
-                <option value="30">RM 30.00 (Bayar RM30.00)</option>
-                <option value="50">RM 50.00 (Bayar RM50.00)</option>
-            </select>
+            <!-- Langkah 2: Muncul bila No Tel diisi -->
+            <div id="topupSelection" class="hidden-section">
+                <label class="block text-[10px] text-gray-500 text-left ml-2 mb-1 uppercase font-bold text-orange-400">Pilih Nilai Topup</label>
+                <select id="amount">
+                    <option value="5">RM 5.00 (Bayar RM5.00)</option>
+                    <option value="10" selected>RM 10.00 (Bayar RM10.00)</option>
+                    <option value="30">RM 30.00 (Bayar RM30.00)</option>
+                    <option value="50">RM 50.00 (Bayar RM50.00)</option>
+                </select>
 
-            <button onclick="beliSekarang()" class="btn-action" style="background: white; color: black; margin-top: 5px;">Beli Sekarang</button>
+                <button onclick="prosesBeli()" class="btn-action bg-white text-black mt-2">Beli Sekarang</button>
+            </div>
         </div>
 
-        <p style="font-size: 12px; color: #555; margin-top: 20px;">
-            Perlukan Server Key? <a href="https://wa.me/601123456636" style="color: #F77F00; font-weight: bold;">WhatsApp Kami</a>
-        </p>
-    </div>
-
-    <!-- Modal Login -->
-    <div id="loginModal" class="modal-overlay" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <h3 style="font-weight: 800; margin-bottom: 10px;">SIGN IN</h3>
-            <p style="font-size: 12px; color: #888; margin-bottom: 20px;">Gunakan akaun berdaftar untuk akses dashboard.</p>
-            <button onclick="simulasiLogin()" class="btn-action btn-login" style="padding: 12px; font-size: 12px;">Continue to Dashboard</button>
-            <button onclick="closeModal()" style="margin-top: 15px; color: #555; font-size: 11px; font-weight: 700;">BATAL</button>
-        </div>
+        <p class="text-[11px] text-gray-600 mt-4">Perlukan bantuan? <a href="https://wa.me/601123456636" class="text-orange-500 font-bold">WhatsApp Admin</a></p>
     </div>
 
     <script>
-        function openModal() { document.getElementById('loginModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('loginModal').style.display = 'none'; }
-        
-        function simulasiLogin() {
-            window.location.href = "auth.html";
+        // Fungsi untuk tunjukkan pilihan topup hanya jika no tel diisi (min 10 digit)
+        function validatePhone() {
+            const phone = document.getElementById('phone').value;
+            const selection = document.getElementById('topupSelection');
+            if (phone.length >= 10) {
+                selection.style.display = 'block';
+            } else {
+                selection.style.display = 'none';
+            }
         }
 
-        function promptKey() {
+        // Fungsi Login Server Key
+        function checkServerKey() {
             let key = prompt("Sila masukkan Server Key (Ejen Sah):");
             if (key === "txtstudio" || key === "TXT-VVIP-888") {
                 window.location.href = "home.html";
             } else if (key != null) {
-                alert("Key tidak sah.");
+                alert("Key tidak sah!");
             }
         }
 
-        function beliSekarang() {
+        // Fungsi Beli ke WhatsApp
+        function prosesBeli() {
             const phone = document.getElementById('phone').value;
             const amount = document.getElementById('amount').value;
-
-            if (phone.length < 10) {
-                alert("Sila masukkan no telefon yang betul!");
-                return;
-            }
-
             const msg = `*ORDER BARU TXT STUDIO*%0A%0ANo Tel: ${phone}%0ANilai: RM${amount}%0ABayaran: RM${amount}%0A%0A_Sila lampirkan resit selepas transfer._`;
-            const adminWA = "601123456636"; // Gantikan dengan no anda
-            
-            window.open(`https://wa.me/${adminWA}?text=${msg}`, '_blank');
+            window.open(`https://wa.me/601123456636?text=${msg}`, '_blank');
         }
     </script>
 </body>
