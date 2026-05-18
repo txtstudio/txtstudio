@@ -9,119 +9,119 @@
     <style>
         body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 120px; }
         .glow-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; }
-        
-        /* Kategori OTA Style - Dark Version */
         .category-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 20px 10px; text-align: center; transition: 0.3s; cursor: pointer; }
-        .category-card:active { transform: scale(0.95); background: rgba(247, 127, 0, 0.1); }
         .category-icon { width: 50px; height: 50px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; border-radius: 15px; font-size: 22px; background: rgba(247, 127, 0, 0.1); color: #F77F00; }
         
-        /* Modal List Telco - Dark Version */
-        .modal-telco { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); display: none; align-items: flex-end; z-index: 1000; }
+        /* Modal Style */
+        .modal-full { position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); display: none; align-items: flex-end; z-index: 1000; }
         .modal-content { background: #121218; width: 100%; border-radius: 35px 35px 0 0; padding: 30px; max-height: 85vh; overflow-y: auto; border-top: 2px solid #F77F00; animation: slideUp 0.3s ease-out; }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         
-        .telco-item { display: flex; flex-direction: column; align-items: center; padding: 12px; border-radius: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
-        .telco-item img { width: 55px; height: 55px; border-radius: 12px; margin-bottom: 10px; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .telco-item span { font-size: 10px; font-weight: 800; color: #ddd; text-align: center; }
+        .item-box { display: flex; flex-direction: column; align-items: center; padding: 12px; border-radius: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+        .item-box img { width: 55px; height: 55px; border-radius: 12px; margin-bottom: 10px; }
 
-        .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 10, 15, 0.98); border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 18px; z-index: 100; }
+        .comm-row { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #0A0A0F; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 18px; z-index: 100; }
+        .active-tab { display: block; }
+        .hidden-tab { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- Header / Baki -->
-    <div class="p-6 mb-4">
-        <div class="flex justify-between items-center mb-8">
+    <!-- Header -->
+    <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
             <div class="flex items-center gap-3">
-                <img src="images/txtstudio.png" class="w-10 h-10 rounded-full border border-[#F77F00]/30 shadow-[0_0_15px_rgba(247,127,0,0.2)]">
-                <div>
-                    <h2 class="text-sm font-black tracking-tighter">TXT <span class="text-[#F77F00]">STUDIO</span></h2>
-                    <p class="text-[9px] text-gray-500 uppercase tracking-widest font-bold">Master Admin</p>
-                </div>
+                <img src="images/txtstudio.png" class="w-10 h-10 rounded-full border border-orange-500/30">
+                <h2 class="text-sm font-black tracking-tighter">TXT <span class="text-[#F77F00]">STUDIO</span></h2>
             </div>
-            <div class="bg-orange-500 text-black px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter">RM 17,562.57</div>
-        </div>
-
-        <div class="glow-card p-6 bg-gradient-to-br from-orange-600/10 to-transparent border-[#F77F00]/20">
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em] mb-1">Untung Hari Ini</p>
-            <h1 class="text-3xl font-black text-green-400 italic tracking-tighter">+ RM 50.00</h1>
-            <div class="mt-4 flex gap-2">
-                <span class="bg-white/5 text-[9px] px-3 py-1 rounded-lg text-gray-400 font-bold">12 Ejen Aktif</span>
-                <span class="bg-white/5 text-[9px] px-3 py-1 rounded-lg text-gray-400 font-bold">RM 0.50/RM10</span>
-            </div>
+            <div class="bg-orange-500 text-black px-4 py-1 rounded-full text-[9px] font-black italic">RM 17,562.57</div>
         </div>
     </div>
 
-    <!-- Main Categories Grid -->
-    <div class="px-6 grid grid-cols-3 gap-3 mb-10">
-        <div onclick="openTelco()" class="category-card">
-            <div class="category-icon"><i class="fa fa-mobile"></i></div>
-            <span class="text-[9px] font-black uppercase tracking-widest text-gray-300">Topup</span>
+    <!-- TAB 1: HOME -->
+    <div id="tab-home" class="active-tab px-6">
+        <div class="glow-card p-6 mb-8 text-center border-orange-500/20">
+            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Profit Today</p>
+            <h1 class="text-3xl font-black text-green-400 italic">+ RM 50.00</h1>
         </div>
-        <div class="category-card">
-            <div class="category-icon" style="color: #00ccff; background: rgba(0,204,255,0.05);"><i class="fa fa-globe"></i></div>
-            <span class="text-[9px] font-black uppercase tracking-widest text-gray-300">Data</span>
-        </div>
-        <div class="category-card">
-            <div class="category-icon" style="color: #ffcc00; background: rgba(255,204,0,0.05);"><i class="fa fa-barcode"></i></div>
-            <span class="text-[9px] font-black uppercase tracking-widest text-gray-300">Pin</span>
-        </div>
-        <div class="category-card">
-            <div class="category-icon" style="color: #ff4d4d; background: rgba(255,77,77,0.05);"><i class="fa fa-file-text-o"></i></div>
-            <span class="text-[9px] font-black uppercase tracking-widest text-gray-300">Bill</span>
-        </div>
-        <div class="category-card">
-            <div class="category-icon" style="color: #33ff99; background: rgba(51,255,153,0.05);"><i class="fa fa-plug"></i></div>
-            <span class="text-[9px] font-black uppercase tracking-widest text-gray-300">Utility</span>
-        </div>
-        <div class="category-card">
-            <div class="category-icon" style="color: #cc66ff; background: rgba(204,102,255,0.05);"><i class="fa fa-gamepad"></i></div>
-            <span class="text-[9px] font-black uppercase tracking-widest text-gray-300">Game</span>
+
+        <div class="grid grid-cols-3 gap-3 mb-10">
+            <div onclick="openModal('topup')" class="category-card"><div class="category-icon"><i class="fa fa-mobile"></i></div><span class="text-[9px] font-bold uppercase">Topup</span></div>
+            <div onclick="openModal('bill')" class="category-card"><div class="category-icon" style="color:#ff4d4d"><i class="fa fa-file-text-o"></i></div><span class="text-[9px] font-bold uppercase">Bill</span></div>
+            <div onclick="openModal('game')" class="category-card"><div class="category-icon" style="color:#cc66ff"><i class="fa fa-gamepad"></i></div><span class="text-[9px] font-bold uppercase">Game</span></div>
         </div>
     </div>
 
-    <!-- Modal Senarai 13 Telco (Dark Style) -->
-    <div id="telcoModal" class="modal-telco" onclick="closeTelco()">
+    <!-- TAB 2: COMMISSION LIST -->
+    <div id="tab-comm" class="hidden-tab px-6">
+        <h3 class="text-orange-500 font-black text-sm mb-4 tracking-widest uppercase">My Commission List</h3>
+        <div class="glow-card overflow-hidden">
+            <!-- Contoh Komisyen (Anda boleh edit nilai % di sini untuk lebih tinggi dari OTA) -->
+            <div class="comm-row"><div><p class="font-bold text-xs">CELCOM</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">5.00 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs">DIGI</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">4.50 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs">MAXIS / HOTLINK</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">4.00 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs">MOBILE LEGENDS</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">8.00 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs">ONEXOX</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">6.00 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs">TNB BILL</p><p class="text-[8px] text-gray-500">FIXED AMOUNT</p></div><p class="text-green-400 font-bold text-sm">RM 0.80</p></div>
+        </div>
+    </div>
+
+    <!-- Modals untuk Topup / Bill / Game -->
+    <div id="productModal" class="modal-full" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-8">
-                <h3 class="font-black text-sm tracking-widest text-[#F77F00]">PILIH OPERATOR</h3>
-                <button onclick="closeTelco()" class="text-gray-500 text-xl"><i class="fa fa-times"></i></button>
-            </div>
-            
-            <div class="grid grid-cols-3 gap-4 pb-10">
-                <div onclick="proses('BeONE')" class="telco-item"><img src="images/beone.png"><span>BeONE</span></div>
-                <div onclick="proses('Celcom')" class="telco-item"><img src="images/celcom.png"><span>Celcom</span></div>
-                <div onclick="proses('Digi')" class="telco-item"><img src="images/digi.png"><span>Digi</span></div>
-                <div onclick="proses('Eastel')" class="telco-item"><img src="images/eastel.png"><span>Eastel</span></div>
-                <div onclick="proses('HaloTelco')" class="telco-item"><img src="images/halotelco.png"><span>HaloTelco</span></div>
-                <div onclick="proses('Hotlink')" class="telco-item"><img src="images/hotlink.png"><span>Hotlink</span></div>
-                <div onclick="proses('Njoi')" class="telco-item"><img src="images/njoi.png"><span>Njoi</span></div>
-                <div onclick="proses('ONEXOX')" class="telco-item"><img src="images/onexox.png"><span>ONEXOX</span></div>
-                <div onclick="proses('RedONE')" class="telco-item"><img src="images/redone.png"><span>RedONE</span></div>
-                <div onclick="proses('TuneTalk')" class="telco-item"><img src="images/tunetalk.png"><span>TuneTalk</span></div>
-                <div onclick="proses('UMobile')" class="telco-item"><img src="images/umobile.png"><span>UMobile</span></div>
-                <div onclick="proses('Unifi')" class="telco-item"><img src="images/unifi.png"><span>Unifi</span></div>
-                <div onclick="proses('Yes')" class="telco-item"><img src="images/yes.png"><span>Yes</span></div>
-            </div>
+            <h3 id="modalTitle" class="font-black text-sm text-[#F77F00] mb-6 tracking-widest uppercase">PILIH PRODUK</h3>
+            <div id="productGrid" class="grid grid-cols-3 gap-4"></div>
         </div>
     </div>
 
     <!-- Nav Bawah -->
     <div class="nav-bottom">
-        <div class="flex flex-col items-center text-[#F77F00]"><i class="fa fa-home text-xl"></i><span class="text-[9px] mt-1 font-black uppercase">Home</span></div>
-        <div class="flex flex-col items-center text-gray-600"><i class="fa fa-exchange text-xl"></i><span class="text-[9px] mt-1 font-black uppercase">History</span></div>
-        <div class="flex flex-col items-center text-gray-600"><i class="fa fa-user-circle-o text-xl"></i><span class="text-[9px] mt-1 font-black uppercase">Profile</span></div>
+        <div onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-[#F77F00]"><i class="fa fa-home text-xl"></i><span class="text-[9px] mt-1 font-bold">HOME</span></div>
+        <div onclick="switchTab('comm')" id="nav-comm" class="flex flex-col items-center text-gray-600"><i class="fa fa-list-alt text-xl"></i><span class="text-[9px] mt-1 font-bold">COMMISSION</span></div>
+        <div class="flex flex-col items-center text-gray-600"><i class="fa fa-history text-xl"></i><span class="text-[9px] mt-1 font-bold">HISTORY</span></div>
     </div>
 
     <script>
-        function openTelco() { document.getElementById('telcoModal').style.display = 'flex'; }
-        function closeTelco() { document.getElementById('telcoModal').style.display = 'none'; }
+        const products = {
+            topup: [
+                {n:'BeONE', i:'beone.png'}, {n:'Celcom', i:'celcom.png'}, {n:'Digi', i:'digi.png'},
+                {n:'Hotlink', i:'hotlink.png'}, {n:'UMobile', i:'umobile.png'}, {n:'TuneTalk', i:'tunetalk.png'},
+                {n:'ONEXOX', i:'onexox.png'}, {n:'RedONE', i:'redone.png'}, {n:'Yes', i:'yes.png'}
+            ],
+            bill: [
+                {n:'TNB', i:'unifi.png'}, {n:'Air', i:'unifi.png'}, {n:'Unifi', i:'unifi.png'}, {n:'Njoi', i:'njoi.png'}
+            ],
+            game: [
+                {n:'MLBB', i:'txtstudio.png'}, {n:'PUBG', i:'txtstudio.png'}, {n:'Free Fire', i:'txtstudio.png'}
+            ]
+        };
+
+        function openModal(type) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            document.getElementById('modalTitle').innerText = 'PILIH ' + type;
+            products[type].forEach(p => {
+                grid.innerHTML += `<div onclick="proses('${p.n}')" class="item-box"><img src="images/${p.i}"><span>${p.n}</span></div>`;
+            });
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('productModal').style.display = 'none'; }
+
+        function switchTab(t) {
+            document.getElementById('tab-home').className = (t==='home') ? 'active-tab px-6' : 'hidden-tab';
+            document.getElementById('tab-comm').className = (t==='comm') ? 'active-tab px-6' : 'hidden-tab';
+            document.getElementById('nav-home').classList.toggle('text-[#F77F00]', t==='home');
+            document.getElementById('nav-comm').classList.toggle('text-[#F77F00]', t==='comm');
+        }
+
         function proses(nama) {
-            let phone = prompt(`Masukkan No Telefon untuk ${nama}:`);
+            let phone = prompt(`Masukkan No Telefon/Akaun untuk ${nama}:`);
             if(phone) {
-                let amount = prompt(`Masukkan Jumlah RM (Modal RM10=RM9.50):`);
+                let amount = prompt(`Jumlah RM:`);
                 if(amount) {
-                    window.open(`https://wa.me/601123456636?text=ORDER+TOPUP%0AProduk:+${nama}%0ANo:+${phone}%0AJumlah:+RM${amount}`, '_blank');
+                    window.open(`https://wa.me/601123456636?text=ORDER+${nama}%0ANo:+${phone}%0AAmt:+RM${amount}`, '_blank');
                 }
             }
         }
