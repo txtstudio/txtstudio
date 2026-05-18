@@ -2,17 +2,17 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dashboard Admin | TXT Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 100px; }
+        body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 120px; }
         .glow-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; }
         .product-card { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; cursor: pointer; }
         .product-card:hover { background: rgba(247, 127, 0, 0.1); border-color: #F77F00; transform: translateY(-5px); }
         .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #0A0A0F; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; padding: 15px; z-index: 100; }
-        .hidden-tab { display: none; }
+        #debugConsole { background: #000; border: 1px solid #333; border-radius: 15px; padding: 15px; font-family: 'Courier New', monospace; font-size: 10px; color: #00ff00; height: 100px; overflow-y: auto; box-shadow: inset 0 0 10px #000; }
     </style>
 </head>
 <body>
@@ -21,118 +21,124 @@
     <div class="p-6 flex justify-between items-center">
         <div>
             <h2 class="text-xl font-black text-[#F77F00]">TXT STUDIO</h2>
-            <p class="text-[10px] text-gray-500 uppercase tracking-widest text-white/50">Provider Portal</p>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Master Provider Portal</p>
         </div>
         <div class="px-4 py-1 rounded-full bg-orange-500 text-[10px] font-bold text-black uppercase">Master Admin</div>
     </div>
 
-    <!-- TAB 1: DASHBOARD (STATISTIK) -->
-    <div id="dashboardTab" class="px-6">
-        <div class="glow-card p-6 bg-gradient-to-br from-orange-600/20 to-transparent mb-6 text-center">
-            <p class="text-xs font-bold text-gray-400 uppercase">Baki Modal Live</p>
-            <h1 class="text-4xl font-black mt-2 text-white italic">RM 17,562.57</h1>
-            <p class="text-green-400 text-xs mt-2 font-bold">+ RM 50.00 UNTUNG HARI INI</p>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4 mb-8">
-            <div class="glow-card p-4 text-center">
-                <p class="text-[9px] text-gray-500 uppercase">Target Komisyen</p>
-                <p class="text-xs font-bold text-orange-500">RM 0.50 / RM10</p>
-            </div>
-            <div class="glow-card p-4 text-center">
-                <p class="text-[9px] text-gray-500 uppercase">Aktif Ejen</p>
-                <p class="text-xs font-bold">12 Orang</p>
+    <!-- 1. BAHAGIAN BAKI & UNTUNG -->
+    <div class="px-6 mb-6">
+        <div class="glow-card p-6 bg-gradient-to-br from-orange-600/20 to-transparent text-center">
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Baki Modal Live (OTA)</p>
+            <h1 class="text-4xl font-black mt-2 text-white italic tracking-tighter">RM 17,562.57</h1>
+            <div class="mt-4 flex justify-center gap-4">
+                <div class="bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
+                    <p class="text-[10px] font-bold text-green-400">+ RM 50.00 UNTUNG HARI INI</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- TAB 2: KEDAI (PRODUK TELCO, BIL, GAME) -->
-    <div id="kedaiTab" class="hidden-tab px-6">
-        <h3 class="text-sm font-bold mb-4 text-orange-500 uppercase tracking-widest"><i class="fa fa-shopping-bag mr-2"></i> Menu Jualan</h3>
-        
-        <!-- Grid Produk -->
-        <div class="grid grid-cols-3 gap-4">
-            <!-- Topup Telco -->
+    <!-- 2. QUICK STATS -->
+    <div class="px-6 grid grid-cols-2 gap-4 mb-8">
+        <div class="glow-card p-4 text-center">
+            <p class="text-[9px] text-gray-500 uppercase mb-1">Target Komisyen</p>
+            <p class="text-xs font-bold text-orange-500 tracking-tighter">RM 0.50 / RM10</p>
+        </div>
+        <div class="glow-card p-4 text-center">
+            <p class="text-[9px] text-gray-500 uppercase mb-1">Aktif Ejen</p>
+            <p class="text-xs font-bold text-white">12 Orang</p>
+        </div>
+    </div>
+
+    <!-- 3. MENU PRODUK (TELCO, BIL, GAME) -->
+    <div class="px-6 mb-10">
+        <h3 class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-4">Inventory & Services</h3>
+        <div class="grid grid-cols-3 gap-3">
+            <!-- Telco -->
             <div onclick="prosesProduk('Celcom')" class="product-card">
                 <i class="fa fa-mobile text-2xl mb-2 text-blue-400"></i>
-                <p class="text-[10px] font-bold uppercase">Celcom</p>
+                <p class="text-[9px] font-bold uppercase">Celcom</p>
             </div>
             <div onclick="prosesProduk('Digi')" class="product-card">
                 <i class="fa fa-mobile text-2xl mb-2 text-yellow-400"></i>
-                <p class="text-[10px] font-bold uppercase">Digi</p>
+                <p class="text-[9px] font-bold uppercase">Digi</p>
             </div>
             <div onclick="prosesProduk('Maxis')" class="product-card">
                 <i class="fa fa-mobile text-2xl mb-2 text-green-500"></i>
-                <p class="text-[10px] font-bold uppercase">Maxis</p>
+                <p class="text-[9px] font-bold uppercase">Maxis</p>
             </div>
-
-            <!-- Bil & Utiliti -->
+            <!-- Bil -->
             <div onclick="prosesProduk('Bil TNB')" class="product-card">
-                <i class="fa fa-lightbulb-o text-2xl mb-2 text-orange-500"></i>
-                <p class="text-[10px] font-bold uppercase">Bil TNB</p>
+                <i class="fa fa-lightbulb-o text-2xl mb-2 text-orange-400"></i>
+                <p class="text-[9px] font-bold uppercase">TNB</p>
             </div>
             <div onclick="prosesProduk('Bil Air')" class="product-card">
                 <i class="fa fa-tint text-2xl mb-2 text-blue-300"></i>
-                <p class="text-[10px] font-bold uppercase">Bil Air</p>
+                <p class="text-[9px] font-bold uppercase">Air</p>
             </div>
             <div onclick="prosesProduk('Unifi')" class="product-card">
                 <i class="fa fa-globe text-2xl mb-2 text-red-500"></i>
-                <p class="text-[10px] font-bold uppercase">Unifi</p>
+                <p class="text-[9px] font-bold uppercase">Unifi</p>
             </div>
-
-            <!-- Game Credits -->
-            <div onclick="prosesProduk('Mobile Legends')" class="product-card">
+            <!-- Game -->
+            <div onclick="prosesProduk('MLBB')" class="product-card">
                 <i class="fa fa-gamepad text-2xl mb-2 text-purple-400"></i>
-                <p class="text-[10px] font-bold uppercase">MLBB</p>
+                <p class="text-[9px] font-bold uppercase">MLBB</p>
             </div>
             <div onclick="prosesProduk('Free Fire')" class="product-card">
                 <i class="fa fa-gamepad text-2xl mb-2 text-orange-600"></i>
-                <p class="text-[10px] font-bold uppercase">Free Fire</p>
+                <p class="text-[9px] font-bold uppercase">FF</p>
             </div>
             <div onclick="prosesProduk('PUBG')" class="product-card">
                 <i class="fa fa-gamepad text-2xl mb-2 text-green-300"></i>
-                <p class="text-[10px] font-bold uppercase">PUBG</p>
+                <p class="text-[9px] font-bold uppercase">PUBG</p>
             </div>
+        </div>
+    </div>
+
+    <!-- 4. SERVER KEY SECTION -->
+    <div class="px-6 mb-10">
+        <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-3">API Server Key (Out)</h3>
+        <div class="bg-white/5 p-4 rounded-2xl border border-white/10 flex justify-between items-center">
+            <code class="text-[10px] text-orange-300 font-bold">TXT-VVIP-e9eac7ac-888</code>
+            <button onclick="alert('Key Disalin!')" class="text-[9px] bg-orange-500 text-black px-3 py-1 rounded-lg font-bold">COPY</button>
+        </div>
+    </div>
+
+    <!-- 5. LIVE LOGS -->
+    <div class="px-6">
+        <h3 class="text-[10px] font-bold text-gray-700 uppercase tracking-[0.3em] mb-2">System Integration Logs</h3>
+        <div id="debugConsole">
+            <div class="log-entry">[12:25:22] System Ready...</div>
+            <div class="log-entry">[12:25:22] API Master Connected to OTA...</div>
+            <div class="log-entry">[12:25:23] Balance RM17,562.57 Synced.</div>
         </div>
     </div>
 
     <!-- Navigation Bottom -->
     <div class="nav-bottom">
-        <div onclick="showTab('dashboard')" id="nav-dashboard" class="flex flex-col items-center text-orange-500 cursor-pointer">
+        <div class="flex flex-col items-center text-orange-500">
             <i class="fa fa-home text-xl"></i>
-            <span class="text-[9px] mt-1 font-bold">DASHBOARD</span>
+            <span class="text-[9px] mt-1 font-bold tracking-widest">DASHBOARD</span>
         </div>
-        <div onclick="showTab('kedai')" id="nav-kedai" class="flex flex-col items-center text-gray-600 cursor-pointer">
+        <div onclick="alert('Anda sedang berada di dashboard Master.')" class="flex flex-col items-center text-gray-600">
             <i class="fa fa-shopping-cart text-xl"></i>
-            <span class="text-[9px] mt-1 font-bold">KEDAI</span>
+            <span class="text-[9px] mt-1 font-bold tracking-widest">KEDAI</span>
         </div>
         <div class="flex flex-col items-center text-gray-600">
             <i class="fa fa-users text-xl"></i>
-            <span class="text-[9px] mt-1 font-bold">EJEN</span>
+            <span class="text-[9px] mt-1 font-bold tracking-widest">EJEN</span>
         </div>
     </div>
 
     <script>
-        function showTab(tabName) {
-            if(tabName === 'dashboard') {
-                document.getElementById('dashboardTab').style.display = 'block';
-                document.getElementById('kedaiTab').style.display = 'none';
-                document.getElementById('nav-dashboard').classList.add('text-orange-500');
-                document.getElementById('nav-kedai').classList.remove('text-orange-500');
-            } else {
-                document.getElementById('dashboardTab').style.display = 'none';
-                document.getElementById('kedaiTab').style.display = 'block';
-                document.getElementById('nav-dashboard').classList.remove('text-orange-500');
-                document.getElementById('nav-kedai').classList.add('text-orange-500');
-            }
-        }
-
         function prosesProduk(nama) {
             let no = prompt(`Masukkan No Akaun / No Telefon untuk ${nama}:`);
             if(no) {
-                let amount = prompt(`Masukkan Jumlah RM (Contoh: 10):`);
+                let amount = prompt(`Masukkan Jumlah RM (Modal RM10=RM9.50):`);
                 if(amount) {
-                    alert(`Pesanan ${nama} RM${amount} sedang diproses secara manual.`);
+                    alert(`Pesanan ${nama} berjaya dihantar kepada Admin.`);
                     window.open(`https://wa.me/601123456636?text=ORDER+BARU%0AProduk:+${nama}%0ANo:+${no}%0AJumlah:+RM${amount}`, '_blank');
                 }
             }
