@@ -3,40 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | TXT Studio</title>
+    <title>Login Admin | TXT Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         body { background-color: #0A0A0F; font-family: 'Inter', sans-serif; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .login-card { background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 30px; width: 90%; max-width: 380px; border: 1px solid rgba(255, 255, 255, 0.1); }
-        input { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; width: 100%; padding: 15px; border-radius: 12px; margin-bottom: 20px; outline: none; }
-        input:focus { border-color: #F77F00; }
-        .btn-submit { background: #F77F00; color: black; font-weight: 800; width: 100%; padding: 15px; border-radius: 12px; text-transform: uppercase; cursor: pointer; border: none; }
-        .back-link { display: block; text-align: center; margin-top: 20px; color: #888; text-decoration: none; font-size: 14px; }
+        .login-card { background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 30px; width: 90%; max-width: 380px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        input { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; width: 100%; padding: 15px; border-radius: 12px; margin-bottom: 20px; outline: none; transition: 0.3s; }
+        input:focus { border-color: #F77F00; background: rgba(255, 255, 255, 0.15); }
+        .btn-submit { background: #F77F00; color: black; font-weight: 800; width: 100%; padding: 15px; border-radius: 12px; text-transform: uppercase; cursor: pointer; border: none; transition: 0.3s; }
+        .btn-submit:hover { background: #ff9d3f; transform: scale(1.02); }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #888; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .back-link:hover { color: #F77F00; }
+        .badge-admin { background: rgba(247, 127, 0, 0.2); color: #F77F00; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 10px; display: inline-block; }
     </style>
 </head>
 <body>
 
     <div class="login-card">
-        <h2 class="text-2xl font-bold mb-6 text-center">LOGIN <span class="text-[#F77F00]">STUDIO</span></h2>
+        <div class="text-center">
+            <span class="badge-admin">SISTEM PROVIDER</span>
+            <h2 class="text-2xl font-bold mb-6">LOGIN <span class="text-[#F77F00]">ADMIN</span></h2>
+        </div>
         
-        <form onsubmit="handleLogin(event)">
-            <label class="block mb-2 text-sm text-gray-400">No. Telefon / Emel</label>
-            <input type="text" id="username" placeholder="Contoh: 01123456636" required>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <label class="block mb-2 text-sm text-gray-400">ID Admin / Emel</label>
+            <input type="text" id="username" placeholder="Masukkan ID anda" required>
             
             <label class="block mb-2 text-sm text-gray-400">Kata Laluan</label>
             <input type="password" id="password" placeholder="********" required>
             
-            <button type="submit" class="btn-submit">Sign In</button>
+            <button type="submit" class="btn-submit">Masuk Dashboard</button>
         </form>
 
-        <a href="index.html" class="back-link">← Kembali ke Halaman Utama</a>
+        <div id="apiSection" class="hidden mt-6 p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl text-center">
+            <p class="text-xs text-orange-400 mb-2">SERVER KEY ANDA (UNTUK EJEN):</p>
+            <code class="text-sm font-bold text-white bg-black/50 p-2 rounded block mb-2">TXT-STUDIO-VVIP-888</code>
+            <p class="text-[10px] text-gray-500 italic">Berikan key ini kepada ejen untuk integrasi</p>
+        </div>
+
+        <a href="index.html" class="back-link">← Kembali ke Kedai</a>
     </div>
 
     <script>
         function handleLogin(event) {
             event.preventDefault();
-            alert("Sistem Login akan diaktifkan sepenuhnya selepas API OTA.my diluluskan. Terima kasih kerana menunggu!");
-            // Nanti kita akan sambungkan ke Database/API di sini
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            // Simulasi kelulusan sistem sementara menunggu API OTA
+            if(user === "admin" && pass === "admin123") {
+                alert("Login Berjaya! Anda kini boleh menguruskan Server Key.");
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('apiSection').classList.remove('hidden');
+            } else {
+                alert("Sistem sedang dikemaskini. Sila guna ID: admin & Pass: admin123 untuk tujuan testing.");
+            }
         }
     </script>
 
