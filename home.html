@@ -44,9 +44,10 @@
             <h1 class="text-3xl font-black text-green-400 italic">+ RM 50.00</h1>
         </div>
         <div class="grid grid-cols-3 gap-3 mb-10">
-            <div onclick="openModal('topup telco')" class="category-card"><div class="category-icon"><i class="fa fa-mobile"></i></div><span class="text-[9px] font-bold uppercase">Topup Telco</span></div>
-            <div onclick="openModal('topup bil')" class="category-card"><div class="category-icon" style="color:#ff4d4d"><i class="fa fa-file-text-o"></i></div><span class="text-[9px] font-bold uppercase">Topup Bil</span></div>
-            <div onclick="openModal('topup game')" class="category-card"><div class="category-icon" style="color:#cc66ff"><i class="fa fa-gamepad"></i></div><span class="text-[9px] font-bold uppercase">Topup Game</span></div>
+            <!-- PENTING: ID Kategori mesti sama dengan script di bawah -->
+            <div onclick="openModal('topup')" class="category-card"><div class="category-icon"><i class="fa fa-mobile"></i></div><span class="text-[9px] font-bold uppercase">Topup Telco</span></div>
+            <div onclick="openModal('bill')" class="category-card"><div class="category-icon" style="color:#ff4d4d"><i class="fa fa-file-text-o"></i></div><span class="text-[9px] font-bold uppercase">Topup Bil</span></div>
+            <div onclick="openModal('game')" class="category-card"><div class="category-icon" style="color:#cc66ff"><i class="fa fa-gamepad"></i></div><span class="text-[9px] font-bold uppercase">Topup Game</span></div>
         </div>
     </div>
 
@@ -124,7 +125,14 @@
 
         function openModal(type) {
             const grid = document.getElementById('productGrid'); grid.innerHTML = '';
-            document.getElementById('modalTitle').innerText = 'PILIH ' + type.toUpperCase();
+            // Baiki tajuk modal mengikut kategori
+            let displayTitle = type;
+            if(type === 'topup') displayTitle = 'TOPUP TELCO';
+            if(type === 'bill') displayTitle = 'TOPUP BIL';
+            if(type === 'game') displayTitle = 'TOPUP GAME';
+            
+            document.getElementById('modalTitle').innerText = 'PILIH ' + displayTitle;
+            
             products[type].forEach(p => {
                 grid.innerHTML += `<div onclick="proses('${p.n}')" class="item-box"><img src="images/${p.i}"><span>${p.n}</span></div>`;
             });
