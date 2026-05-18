@@ -3,143 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dashboard Admin | TXT Studio</title>
+    <title>Dashboard | TXT Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 120px; }
-        .glow-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; }
-        .product-card { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; cursor: pointer; }
-        .product-card:hover { background: rgba(247, 127, 0, 0.1); border-color: #F77F00; transform: translateY(-5px); }
-        .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #0A0A0F; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; padding: 15px; z-index: 100; }
-        #debugConsole { background: #000; border: 1px solid #333; border-radius: 15px; padding: 15px; font-family: 'Courier New', monospace; font-size: 10px; color: #00ff00; height: 100px; overflow-y: auto; box-shadow: inset 0 0 10px #000; }
+        body { background-color: #F3F4F6; color: #333; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 100px; }
+        .header-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; border-radius: 0 0 30px 30px; }
+        .category-card { background: white; border-radius: 20px; padding: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; }
+        .category-card:active { transform: scale(0.95); }
+        .category-icon { width: 45px; height: 45px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 20px; }
+        
+        /* Modal Style untuk Telco List */
+        .modal-telco { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: flex-end; z-index: 1000; }
+        .modal-content { background: white; width: 100%; border-radius: 30px 30px 0 0; padding: 25px; max-height: 80vh; overflow-y: auto; animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        
+        .telco-item { display: flex; flex-direction: column; align-items: center; padding: 10px; border-radius: 15px; border: 1px solid #eee; }
+        .telco-item img { width: 50px; height: 50px; border-radius: 10px; margin-bottom: 8px; object-fit: cover; }
+        .telco-item span { font-size: 10px; font-weight: bold; text-transform: uppercase; text-align: center; }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="p-6 flex justify-between items-center">
-        <div>
-            <h2 class="text-xl font-black text-[#F77F00]">TXT STUDIO</h2>
-            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Master Provider Portal</p>
-        </div>
-        <div class="px-4 py-1 rounded-full bg-orange-500 text-[10px] font-bold text-black uppercase">Master Admin</div>
-    </div>
-
-    <!-- 1. BAHAGIAN BAKI & UNTUNG -->
-    <div class="px-6 mb-6">
-        <div class="glow-card p-6 bg-gradient-to-br from-orange-600/20 to-transparent text-center">
-            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Baki Modal Live (OTA)</p>
-            <h1 class="text-4xl font-black mt-2 text-white italic tracking-tighter">RM 17,562.57</h1>
-            <div class="mt-4 flex justify-center gap-4">
-                <div class="bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
-                    <p class="text-[10px] font-bold text-green-400">+ RM 50.00 UNTUNG HARI INI</p>
+    <!-- Header / Baki (OTA Style) -->
+    <div class="header-gradient p-6 mb-6">
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center gap-3">
+                <img src="images/txtstudio.png" class="w-10 h-10 rounded-full border-2 border-orange-500">
+                <div>
+                    <h2 class="text-sm font-bold">terorXteror studio</h2>
+                    <p class="text-[10px] text-gray-400">01123456636</p>
                 </div>
             </div>
+            <button class="bg-white/10 px-3 py-1 rounded-lg text-[10px] font-bold">+ Bank In</button>
+        </div>
+        <p class="text-xs text-gray-400 uppercase tracking-widest">Baki Modal</p>
+        <h1 class="text-3xl font-black">RM 17,562.57</h1>
+    </div>
+
+    <!-- Main Categories Grid -->
+    <div class="px-6 grid grid-cols-3 gap-4 mb-8">
+        <!-- Button TOPUP -->
+        <div onclick="openTelco()" class="category-card">
+            <div class="category-icon bg-blue-100 text-blue-600"><i class="fa fa-mobile"></i></div>
+            <span class="text-[10px] font-bold uppercase">TOPUP</span>
+        </div>
+        <div class="category-card">
+            <div class="category-icon bg-purple-100 text-purple-600"><i class="fa fa-globe"></i></div>
+            <span class="text-[10px] font-bold uppercase">DATA</span>
+        </div>
+        <div class="category-card">
+            <div class="category-icon bg-orange-100 text-orange-600"><i class="fa fa-barcode"></i></div>
+            <span class="text-[10px] font-bold uppercase">PIN</span>
+        </div>
+        <div class="category-card">
+            <div class="category-icon bg-red-100 text-red-600"><i class="fa fa-file-text-o"></i></div>
+            <span class="text-[10px] font-bold uppercase">PHONE BILL</span>
+        </div>
+        <div class="category-card">
+            <div class="category-icon bg-green-100 text-green-600"><i class="fa fa-plug"></i></div>
+            <span class="text-[10px] font-bold uppercase">UTILITY</span>
+        </div>
+        <div class="category-card">
+            <div class="category-icon bg-yellow-100 text-yellow-600"><i class="fa fa-gamepad"></i></div>
+            <span class="text-[10px] font-bold uppercase">GAME</span>
         </div>
     </div>
 
-    <!-- 2. QUICK STATS -->
-    <div class="px-6 grid grid-cols-2 gap-4 mb-8">
-        <div class="glow-card p-4 text-center">
-            <p class="text-[9px] text-gray-500 uppercase mb-1">Target Komisyen</p>
-            <p class="text-xs font-bold text-orange-500 tracking-tighter">RM 0.50 / RM10</p>
-        </div>
-        <div class="glow-card p-4 text-center">
-            <p class="text-[9px] text-gray-500 uppercase mb-1">Aktif Ejen</p>
-            <p class="text-xs font-bold text-white">12 Orang</p>
-        </div>
-    </div>
-
-    <!-- 3. MENU PRODUK (TELCO, BIL, GAME) -->
-    <div class="px-6 mb-10">
-        <h3 class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mb-4">Inventory & Services</h3>
-        <div class="grid grid-cols-3 gap-3">
-            <!-- Telco -->
-            <div onclick="prosesProduk('Celcom')" class="product-card">
-                <i class="fa fa-mobile text-2xl mb-2 text-blue-400"></i>
-                <p class="text-[9px] font-bold uppercase">Celcom</p>
+    <!-- Modal Senarai 13 Telco (Hanya muncul bila klik TOPUP) -->
+    <div id="telcoModal" class="modal-telco" onclick="closeTelco()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-gray-800">PILIH TELCO</h3>
+                <button onclick="closeTelco()" class="text-gray-400"><i class="fa fa-times"></i></button>
             </div>
-            <div onclick="prosesProduk('Digi')" class="product-card">
-                <i class="fa fa-mobile text-2xl mb-2 text-yellow-400"></i>
-                <p class="text-[9px] font-bold uppercase">Digi</p>
-            </div>
-            <div onclick="prosesProduk('Maxis')" class="product-card">
-                <i class="fa fa-mobile text-2xl mb-2 text-green-500"></i>
-                <p class="text-[9px] font-bold uppercase">Maxis</p>
-            </div>
-            <!-- Bil -->
-            <div onclick="prosesProduk('Bil TNB')" class="product-card">
-                <i class="fa fa-lightbulb-o text-2xl mb-2 text-orange-400"></i>
-                <p class="text-[9px] font-bold uppercase">TNB</p>
-            </div>
-            <div onclick="prosesProduk('Bil Air')" class="product-card">
-                <i class="fa fa-tint text-2xl mb-2 text-blue-300"></i>
-                <p class="text-[9px] font-bold uppercase">Air</p>
-            </div>
-            <div onclick="prosesProduk('Unifi')" class="product-card">
-                <i class="fa fa-globe text-2xl mb-2 text-red-500"></i>
-                <p class="text-[9px] font-bold uppercase">Unifi</p>
-            </div>
-            <!-- Game -->
-            <div onclick="prosesProduk('MLBB')" class="product-card">
-                <i class="fa fa-gamepad text-2xl mb-2 text-purple-400"></i>
-                <p class="text-[9px] font-bold uppercase">MLBB</p>
-            </div>
-            <div onclick="prosesProduk('Free Fire')" class="product-card">
-                <i class="fa fa-gamepad text-2xl mb-2 text-orange-600"></i>
-                <p class="text-[9px] font-bold uppercase">FF</p>
-            </div>
-            <div onclick="prosesProduk('PUBG')" class="product-card">
-                <i class="fa fa-gamepad text-2xl mb-2 text-green-300"></i>
-                <p class="text-[9px] font-bold uppercase">PUBG</p>
+            
+            <div class="grid grid-cols-4 gap-3">
+                <!-- Kita guna nama fail imej dari folder images anda -->
+                <div onclick="proses('BeONE')" class="telco-item"><img src="images/beone.png"><span>BeONE</span></div>
+                <div onclick="proses('Celcom')" class="telco-item"><img src="images/celcom.png"><span>Celcom</span></div>
+                <div onclick="proses('Digi')" class="telco-item"><img src="images/digi.png"><span>Digi</span></div>
+                <div onclick="proses('Eastel')" class="telco-item"><img src="images/eastel.png"><span>Eastel</span></div>
+                <div onclick="proses('HaloTelco')" class="telco-item"><img src="images/halotelco.png"><span>HaloTelco</span></div>
+                <div onclick="proses('Hotlink')" class="telco-item"><img src="images/hotlink.png"><span>Hotlink</span></div>
+                <div onclick="proses('Njoi')" class="telco-item"><img src="images/njoi.png"><span>Njoi</span></div>
+                <div onclick="proses('ONEXOX')" class="telco-item"><img src="images/onexox.png"><span>ONEXOX</span></div>
+                <div onclick="proses('RedONE')" class="telco-item"><img src="images/redone.png"><span>RedONE</span></div>
+                <div onclick="proses('TuneTalk')" class="telco-item"><img src="images/tunetalk.png"><span>TuneTalk</span></div>
+                <div onclick="proses('UMobile')" class="telco-item"><img src="images/umobile.png"><span>UMobile</span></div>
+                <div onclick="proses('Unifi')" class="telco-item"><img src="images/unifi.png"><span>Unifi</span></div>
+                <div onclick="proses('Yes')" class="telco-item"><img src="images/yes.png"><span>Yes</span></div>
             </div>
         </div>
     </div>
 
-    <!-- 4. SERVER KEY SECTION -->
-    <div class="px-6 mb-10">
-        <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-3">API Server Key (Out)</h3>
-        <div class="bg-white/5 p-4 rounded-2xl border border-white/10 flex justify-between items-center">
-            <code class="text-[10px] text-orange-300 font-bold">TXT-VVIP-e9eac7ac-888</code>
-            <button onclick="alert('Key Disalin!')" class="text-[9px] bg-orange-500 text-black px-3 py-1 rounded-lg font-bold">COPY</button>
-        </div>
-    </div>
-
-    <!-- 5. LIVE LOGS -->
-    <div class="px-6">
-        <h3 class="text-[10px] font-bold text-gray-700 uppercase tracking-[0.3em] mb-2">System Integration Logs</h3>
-        <div id="debugConsole">
-            <div class="log-entry">[12:25:22] System Ready...</div>
-            <div class="log-entry">[12:25:22] API Master Connected to OTA...</div>
-            <div class="log-entry">[12:25:23] Balance RM17,562.57 Synced.</div>
-        </div>
-    </div>
-
-    <!-- Navigation Bottom -->
+    <!-- Nav Bawah -->
     <div class="nav-bottom">
-        <div class="flex flex-col items-center text-orange-500">
-            <i class="fa fa-home text-xl"></i>
-            <span class="text-[9px] mt-1 font-bold tracking-widest">DASHBOARD</span>
-        </div>
-        <div onclick="alert('Anda sedang berada di dashboard Master.')" class="flex flex-col items-center text-gray-600">
-            <i class="fa fa-shopping-cart text-xl"></i>
-            <span class="text-[9px] mt-1 font-bold tracking-widest">KEDAI</span>
-        </div>
-        <div class="flex flex-col items-center text-gray-600">
-            <i class="fa fa-users text-xl"></i>
-            <span class="text-[9px] mt-1 font-bold tracking-widest">EJEN</span>
-        </div>
+        <div class="flex flex-col items-center text-blue-600"><i class="fa fa-home text-xl"></i><span class="text-[9px] mt-1 font-bold">Home</span></div>
+        <div class="flex flex-col items-center text-gray-400"><i class="fa fa-history text-xl"></i><span class="text-[9px] mt-1 font-bold">History</span></div>
+        <div class="flex flex-col items-center text-gray-400"><i class="fa fa-user-o text-xl"></i><span class="text-[9px] mt-1 font-bold">Profile</span></div>
     </div>
 
     <script>
-        function prosesProduk(nama) {
-            let no = prompt(`Masukkan No Akaun / No Telefon untuk ${nama}:`);
-            if(no) {
-                let amount = prompt(`Masukkan Jumlah RM (Modal RM10=RM9.50):`);
+        function openTelco() { document.getElementById('telcoModal').style.display = 'flex'; }
+        function closeTelco() { document.getElementById('telcoModal').style.display = 'none'; }
+        
+        function proses(nama) {
+            let phone = prompt(`Masukkan No Telefon untuk ${nama}:`);
+            if(phone) {
+                let amount = prompt(`Masukkan Jumlah Topup (RM):`);
                 if(amount) {
-                    alert(`Pesanan ${nama} berjaya dihantar kepada Admin.`);
-                    window.open(`https://wa.me/601123456636?text=ORDER+BARU%0AProduk:+${nama}%0ANo:+${no}%0AJumlah:+RM${amount}`, '_blank');
+                    window.open(`https://wa.me/601123456636?text=ORDER+TOPUP%0AProduk:+${nama}%0ANo:+${phone}%0AJumlah:+RM${amount}`, '_blank');
                 }
             }
         }
