@@ -18,7 +18,8 @@
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         
         .item-box { display: flex; flex-direction: column; align-items: center; padding: 12px; border-radius: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
-        .item-box img { width: 55px; height: 55px; border-radius: 12px; margin-bottom: 10px; }
+        .item-box img { width: 55px; height: 55px; border-radius: 12px; margin-bottom: 10px; object-fit: cover; }
+        .item-box span { font-size: 10px; font-weight: bold; text-align: center; }
 
         .comm-row { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #0A0A0F; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 18px; z-index: 100; }
@@ -42,7 +43,7 @@
     <!-- TAB 1: HOME -->
     <div id="tab-home" class="active-tab px-6">
         <div class="glow-card p-6 mb-8 text-center border-orange-500/20">
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Profit Today</p>
+            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Untung Bersih (Estimasi)</p>
             <h1 class="text-3xl font-black text-green-400 italic">+ RM 50.00</h1>
         </div>
 
@@ -53,25 +54,27 @@
         </div>
     </div>
 
-    <!-- TAB 2: COMMISSION LIST -->
+    <!-- TAB 2: COMMISSION LIST (LENGKAP) -->
     <div id="tab-comm" class="hidden-tab px-6">
-        <h3 class="text-orange-500 font-black text-sm mb-4 tracking-widest uppercase">My Commission List</h3>
-        <div class="glow-card overflow-hidden">
-            <!-- Contoh Komisyen (Anda boleh edit nilai % di sini untuk lebih tinggi dari OTA) -->
-            <div class="comm-row"><div><p class="font-bold text-xs">CELCOM</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">5.00 %</p></div>
-            <div class="comm-row"><div><p class="font-bold text-xs">DIGI</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">4.50 %</p></div>
-            <div class="comm-row"><div><p class="font-bold text-xs">MAXIS / HOTLINK</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">4.00 %</p></div>
-            <div class="comm-row"><div><p class="font-bold text-xs">MOBILE LEGENDS</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">8.00 %</p></div>
-            <div class="comm-row"><div><p class="font-bold text-xs">ONEXOX</p><p class="text-[8px] text-gray-500">PERCENTAGE</p></div><p class="text-green-400 font-bold text-sm">6.00 %</p></div>
-            <div class="comm-row"><div><p class="font-bold text-xs">TNB BILL</p><p class="text-[8px] text-gray-500">FIXED AMOUNT</p></div><p class="text-green-400 font-bold text-sm">RM 0.80</p></div>
+        <h3 class="text-orange-500 font-black text-sm mb-4 tracking-widest uppercase text-center">Commission List (High Margin)</h3>
+        <div class="glow-card overflow-hidden mb-10">
+            <div class="comm-row"><div><p class="font-bold text-xs text-blue-400">CELCOM / YODOO</p><p class="text-[8px] text-gray-500 uppercase">Percentage</p></div><p class="text-green-400 font-bold text-sm">5.50 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs text-yellow-400">DIGI PREPAID</p><p class="text-[8px] text-gray-500 uppercase">Percentage</p></div><p class="text-green-400 font-bold text-sm">4.80 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs text-red-500">MAXIS / HOTLINK</p><p class="text-[8px] text-gray-500 uppercase">Percentage</p></div><p class="text-green-400 font-bold text-sm">4.20 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs text-orange-500">UMOBILE</p><p class="text-[8px] text-gray-500 uppercase">Percentage</p></div><p class="text-green-400 font-bold text-sm">7.00 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs text-green-500">ONEXOX</p><p class="text-[8px] text-gray-500 uppercase">Percentage</p></div><p class="text-green-400 font-bold text-sm">6.50 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs">TUNETALK / HALO</p><p class="text-[8px] text-gray-500 uppercase">Percentage</p></div><p class="text-green-400 font-bold text-sm">6.00 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs text-purple-400">MOBILE LEGENDS</p><p class="text-[8px] text-gray-500 uppercase">Percentage</p></div><p class="text-green-400 font-bold text-sm">10.00 %</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs">UTILITY BILL (TNB/AIR)</p><p class="text-[8px] text-gray-500 uppercase">Fixed Amount</p></div><p class="text-green-400 font-bold text-sm">RM 1.00</p></div>
+            <div class="comm-row"><div><p class="font-bold text-xs">UNIFI / NJOI</p><p class="text-[8px] text-gray-500 uppercase">Percentage</p></div><p class="text-green-400 font-bold text-sm">4.00 %</p></div>
         </div>
     </div>
 
-    <!-- Modals untuk Topup / Bill / Game -->
+    <!-- Modals -->
     <div id="productModal" class="modal-full" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <h3 id="modalTitle" class="font-black text-sm text-[#F77F00] mb-6 tracking-widest uppercase">PILIH PRODUK</h3>
-            <div id="productGrid" class="grid grid-cols-3 gap-4"></div>
+            <h3 id="modalTitle" class="font-black text-sm text-[#F77F00] mb-8 tracking-widest uppercase">PILIH PRODUK</h3>
+            <div id="productGrid" class="grid grid-cols-3 gap-4 pb-10"></div>
         </div>
     </div>
 
@@ -86,11 +89,12 @@
         const products = {
             topup: [
                 {n:'BeONE', i:'beone.png'}, {n:'Celcom', i:'celcom.png'}, {n:'Digi', i:'digi.png'},
-                {n:'Hotlink', i:'hotlink.png'}, {n:'UMobile', i:'umobile.png'}, {n:'TuneTalk', i:'tunetalk.png'},
-                {n:'ONEXOX', i:'onexox.png'}, {n:'RedONE', i:'redone.png'}, {n:'Yes', i:'yes.png'}
+                {n:'Eastel', i:'eastel.png'}, {n:'HaloTelco', i:'halotelco.png'}, {n:'Hotlink', i:'hotlink.png'},
+                {n:'UMobile', i:'umobile.png'}, {n:'TuneTalk', i:'tunetalk.png'}, {n:'ONEXOX', i:'onexox.png'},
+                {n:'RedONE', i:'redone.png'}, {n:'UniFi Mob', i:'unifi.png'}, {n:'Yes', i:'yes.png'}, {n:'Njoi', i:'njoi.png'}
             ],
             bill: [
-                {n:'TNB', i:'unifi.png'}, {n:'Air', i:'unifi.png'}, {n:'Unifi', i:'unifi.png'}, {n:'Njoi', i:'njoi.png'}
+                {n:'TNB', i:'txtstudio.png'}, {n:'Air', i:'txtstudio.png'}, {n:'Unifi Bil', i:'unifi.png'}, {n:'Njoi Bil', i:'njoi.png'}
             ],
             game: [
                 {n:'MLBB', i:'txtstudio.png'}, {n:'PUBG', i:'txtstudio.png'}, {n:'Free Fire', i:'txtstudio.png'}
