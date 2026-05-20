@@ -1,5 +1,6 @@
-// ✅ TXT STUDIO - SCRIPT UTAMA (AUTO PAYMENT VERSION)
+// ✅ TXT STUDIO - SCRIPT UTAMA (FULL AUTO-PAYMENT VERSION)
 // DIBINA UNTUK INTEGRASI TOYYIBPAY & VERCEL SERVERLESS
+// STATUS: SIAP UNTUK DEPLOYMENT
 
 // 1. FUNGSI MENU MOBILE (NAVBAR)
 const menuBtn = document.getElementById('menuBtn');
@@ -42,13 +43,12 @@ function validateServerKey(inputKey) {
   return false;
 }
 
-// ✅ 4. INTEGRASI TOYYIBPAY AUTOMATIK (GANTI WHATSAPP)
+// ✅ 4. INTEGRASI TOYYIBPAY AUTOMATIK (SISTEM AUTO-GATEWAY)
 async function hantarPesanan(phone, telco, amount) {
   console.log("Memulakan proses pembayaran ToyyibPay...");
   
-  // Tunjukkan loading kepada user (opsional)
-  const originalText = "Sila Tunggu...";
-  alert("Anda akan dibawa ke halaman pembayaran bank. Sila tunggu sebentar...");
+  // Beri maklum balas kepada pengguna
+  alert("Anda akan dibawa ke portal pembayaran bank (FPX). Sila tunggu sebentar...");
 
   try {
     const response = await fetch('/api/create-bill', {
@@ -63,18 +63,18 @@ async function hantarPesanan(phone, telco, amount) {
 
     const data = await response.json();
     
-    // Jika ToyyibPay berjaya jana BillCode
+    // Jika ToyyibPay berjaya menjana kod bil
     if (data[0] && data[0].BillCode) {
-      // Bawa pelanggan terus ke portal pembayaran bank (FPX)
+      // Bawa pelanggan terus ke portal pembayaran ToyyibPay
       window.location.href = `https://toyyibpay.com/${data[0].BillCode}`;
     } else {
-      // Jika error (contoh: akaun ToyyibPay belum aktif)
-      alert("Maaf, sistem pembayaran sedang diselenggara (Akaun Belum Aktif). Sila hubungi Admin.");
+      // Jika error (Contoh: Akaun belum disahkan/Active)
+      alert("Maaf, sistem pembayaran sedang diselenggara. Sila cuba sebentar lagi atau hubungi Admin.");
       console.error("ToyyibPay Response:", data);
     }
   } catch (error) {
     console.error("Network Error:", error);
-    alert("Gagal menyambung ke server pembayaran. Sila cuba lagi.");
+    alert("Gagal menyambung ke server pembayaran. Sila pastikan internet anda stabil.");
   }
 }
 
@@ -90,18 +90,20 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// 6. NOTIFIKASI AUTO (SIMULASI)
+// 6. NOTIFIKASI LIVE JUALAN (SIMULASI SOCIAL PROOF)
 function showFakeNotification() {
-  const names = ["Ali", "Siti", "Chong", "Ramasamy", "Wan", "Bala"];
-  const amounts = [5, 10, 30, 50];
+  const names = ["Ali", "Siti", "Chong", "Ramasamy", "Wan", "Bala", "Ridzwan"];
+  const amounts = [5, 10, 30, 50, 100];
   
   setInterval(() => {
     const randomName = names[Math.floor(Math.random() * names.length)];
     const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-    console.log(`[LIVE] ${randomName} baru saja beli Topup RM${randomAmount}`);
+    console.log(`[LIVE] ${randomName} baru saja membeli Topup RM${randomAmount}`);
   }, 60000);
 }
 
-// Jalankan fungsi
+// Jalankan fungsi asas
 showFakeNotification();
 document.documentElement.style.scrollBehavior = 'smooth';
+
+// Kod Dikemaskini pada: 2026-05-20 21:35
