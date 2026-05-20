@@ -1,5 +1,6 @@
 // ✅ TXT STUDIO - SCRIPT UTAMA (MANUAL PAYMENT & AUTO-RECHARGE VERSION)
 // STATUS: 100% KOMISYEN MILIK ANDA (TANPA TOYYIBPAY)
+// NOMBOR ADMIN: 601123456636
 
 // 1. FUNGSI MENU MOBILE (NAVBAR)
 const menuBtn = document.getElementById('menuBtn');
@@ -58,17 +59,17 @@ function hantarPesanan(phone, telco, amount) {
     return;
   }
 
-  // Redirect ke checkout.html dengan membawa data pesanan
+  // Redirect ke checkout.html dengan membawa data pesanan (Phone, Telco, Amount)
   window.location.href = `checkout.html?phone=${phone}&telco=${telco}&amount=${amount}`;
 }
 
-// 4. PAPAR BAKI REAL DARI OTA MY (JIKA ADA API)
+// 4. PAPAR BAKI REAL DARI OTA MY
 async function refreshOtaBalance() {
   try {
     const res = await fetch('/api/get-balance');
     const data = await res.json();
     
-    // Cari elemen baki 17,562.57 dan tukar jadi real
+    // Cari elemen baki RM 17,562.57 dan tukar jadi real
     const allDivs = document.querySelectorAll('div, span, p, h3');
     allDivs.forEach(el => {
       if (el.innerText.includes('17,562.57')) {
@@ -98,4 +99,4 @@ if (window.location.pathname.includes('home.html')) {
 }
 
 document.documentElement.style.scrollBehavior = 'smooth';
-console.log("TXT Studio Script Ready - Mode: Manual Checkout");
+console.log("TXT Studio Script Ready - Mode: Manual Checkout (No ToyyibPay)");
