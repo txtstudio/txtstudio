@@ -1,7 +1,7 @@
-// TXT STUDIO - SCRIPT UTAMA (MASTER PROVIDER VERSION)
-// DIBINA UNTUK PENGURUSAN KOMISYEN TINGGI & SERVER KEY
+// ✅ TXT STUDIO - SCRIPT UTAMA (AUTO PAYMENT VERSION)
+// DIBINA UNTUK INTEGRASI TOYYIBPAY & VERCEL SERVERLESS
 
-// ✅ 1. FUNGSI MENU MOBILE (NAVBAR)
+// 1. FUNGSI MENU MOBILE (NAVBAR)
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 
@@ -17,10 +17,9 @@ if (menuBtn && mobileMenu) {
   });
 }
 
-// ✅ 2. LOGIK KOMISYEN & HARGA (RM10 = RM10)
-// Nota: Walaupun pelanggan bayar RM10, sistem rekod untung RM0.50 (berdasarkan modal RM9.50)
+// 2. LOGIK KOMISYEN & HARGA
 const settingHarga = {
-  modal_base: 0.95, // Anggapan modal anda 95% (Untung 5%)
+  modal_base: 0.95, 
   target_komisyen: 0.50
 };
 
@@ -31,8 +30,7 @@ function kiraUntung(jumlah) {
   return untung;
 }
 
-// ✅ 3. SISTEM SERVER KEY (API PROVIDER)
-// Ini adalah senarai key sah yang boleh digunakan oleh ejen anda
+// 3. SISTEM SERVER KEY (API PROVIDER)
 const authorizedKeys = ["txtstudio", "TXT-VVIP-888", "PRO-SERVER-99"];
 
 function validateServerKey(inputKey) {
@@ -44,24 +42,43 @@ function validateServerKey(inputKey) {
   return false;
 }
 
-// ✅ 4. INTEGRASI WHATSAPP PANTAS (MANUAL PROCESS)
-function hantarPesanan(phone, telco, amount) {
-  const adminWhatsApp = "601123456636"; // No anda
-  const untungKasar = kiraUntung(amount);
+// ✅ 4. INTEGRASI TOYYIBPAY AUTOMATIK (GANTI WHATSAPP)
+async function hantarPesanan(phone, telco, amount) {
+  console.log("Memulakan proses pembayaran ToyyibPay...");
   
-  const text = `*ORDER BARU TXT STUDIO*%0A` +
-               `-----------------------%0A` +
-               `*Telco:* ${telco}%0A` +
-               `*No Tel:* ${phone}%0A` +
-               `*Nilai:* RM${amount}%0A` +
-               `*Bayaran:* RM${amount}.00%0A` +
-               `-----------------------%0A` +
-               `_Sila proses segera di aplikasi SRS._`;
+  // Tunjukkan loading kepada user (opsional)
+  const originalText = "Sila Tunggu...";
+  alert("Anda akan dibawa ke halaman pembayaran bank. Sila tunggu sebentar...");
 
-  window.open(`https://wa.me/${adminWhatsApp}?text=${text}`, '_blank');
+  try {
+    const response = await fetch('/api/create-bill', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: amount,
+        phone: phone,
+        billName: telco
+      })
+    });
+
+    const data = await response.json();
+    
+    // Jika ToyyibPay berjaya jana BillCode
+    if (data[0] && data[0].BillCode) {
+      // Bawa pelanggan terus ke portal pembayaran bank (FPX)
+      window.location.href = `https://toyyibpay.com/${data[0].BillCode}`;
+    } else {
+      // Jika error (contoh: akaun ToyyibPay belum aktif)
+      alert("Maaf, sistem pembayaran sedang diselenggara (Akaun Belum Aktif). Sila hubungi Admin.");
+      console.error("ToyyibPay Response:", data);
+    }
+  } catch (error) {
+    console.error("Network Error:", error);
+    alert("Gagal menyambung ke server pembayaran. Sila cuba lagi.");
+  }
 }
 
-// ✅ 5. EFEK NAVBAR BILA SCROLL
+// 5. EFEK NAVBAR BILA SCROLL
 window.addEventListener('scroll', () => {
   const navbar = document.querySelector('nav');
   if (navbar) {
@@ -73,8 +90,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// ✅ 6. NOTIFIKASI AUTO (SIMULASI)
-// Menunjukkan website anda "aktif" dengan jualan (Social Proof)
+// 6. NOTIFIKASI AUTO (SIMULASI)
 function showFakeNotification() {
   const names = ["Ali", "Siti", "Chong", "Ramasamy", "Wan", "Bala"];
   const amounts = [5, 10, 30, 50];
@@ -82,9 +98,8 @@ function showFakeNotification() {
   setInterval(() => {
     const randomName = names[Math.floor(Math.random() * names.length)];
     const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-    // Anda boleh tambah kod UI untuk pop-up kecil di sini nanti
     console.log(`[LIVE] ${randomName} baru saja beli Topup RM${randomAmount}`);
-  }, 60000); // Setiap 1 minit
+  }, 60000);
 }
 
 // Jalankan fungsi
