@@ -3,117 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - TXT STUDIO</title>
+    <title>Admin Panel - TXT STUDIO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .glass { background: rgba(31, 41, 55, 0.7); backdrop-filter: blur(10px); }
+    </style>
 </head>
-<body class="bg-gray-900 text-white p-4">
+<body class="bg-black text-white p-4 min-h-screen flex flex-col items-center justify-center">
 
-    <div class="max-w-4xl mx-auto">
-        <div class="flex justify-between items-center mb-8 bg-gray-800 p-4 rounded-xl border-l-4 border-orange-500">
+    <!-- 1. LOGIN OVERLAY (Hanya Admin Boleh Lepas) -->
+    <div id="loginSection" class="w-full max-w-sm glass p-8 rounded-3xl border border-gray-700 shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-orange-500/50">
+                <i class="fa-solid fa-lock text-2xl"></i>
+            </div>
+            <h1 class="text-xl font-bold uppercase tracking-widest text-orange-500">Admin Access</h1>
+            <p class="text-gray-400 text-xs">Sila masukkan kata laluan rahsia</p>
+        </div>
+        <input type="password" id="adminPass" class="w-full bg-gray-800 border border-gray-700 p-4 rounded-xl mb-4 focus:outline-none focus:border-orange-500 text-center tracking-widest" placeholder="••••••••">
+        <button onclick="checkAdminPass()" class="w-full bg-orange-600 hover:bg-orange-700 py-4 rounded-xl font-bold shadow-lg transition duration-300">
+            MASUK PANEL
+        </button>
+    </div>
+
+    <!-- 2. MAIN ADMIN PANEL (Hidden by Default) -->
+    <div id="mainDashboard" class="hidden w-full max-w-4xl">
+        <div class="flex justify-between items-center mb-6 bg-gray-800/50 p-5 rounded-2xl border border-gray-700">
             <div>
-                <h1 class="text-xl font-bold uppercase">Admin Panel</h1>
-                <p class="text-xs text-gray-400">Uruskan pesanan pelanggan secara manual</p>
+                <h1 class="text-lg font-bold text-orange-500"><i class="fa-solid fa-shield-halved mr-2"></i>TXT STUDIO ADMIN</h1>
+                <p class="text-[10px] text-gray-500 uppercase tracking-tighter">Verified System Mode</p>
             </div>
-            <div class="text-right">
-                <p class="text-xs">Status Server</p>
-                <span class="text-green-500 font-bold text-xs uppercase">● Online</span>
+            <button onclick="logoutAdmin()" class="bg-red-500/20 text-red-500 px-4 py-2 rounded-lg text-xs font-bold hover:bg-red-500 hover:text-white transition">
+                LOGOUT
+            </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-gray-800 p-4 rounded-2xl border border-gray-700">
+                <p class="text-gray-400 text-[10px] uppercase">Modal OTA MY</p>
+                <p class="text-xl font-bold text-green-400" id="adminBalance">RM --.--</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-2xl border border-gray-700">
+                <p class="text-gray-400 text-[10px] uppercase">Status API</p>
+                <p class="text-xl font-bold text-blue-400">ACTIVE</p>
             </div>
         </div>
 
-        <!-- Kad Kawalan Cepat -->
-        <div class="grid grid-cols-2 gap-4 mb-8">
-            <div class="bg-gray-800 p-4 rounded-xl text-center border border-gray-700">
-                <p class="text-gray-400 text-xs">Akaun Modal</p>
-                <p class="text-lg font-bold text-orange-500" id="adminBalance">RM 0.00</p>
-            </div>
-            <div class="bg-gray-800 p-4 rounded-xl text-center border border-gray-700">
-                <p class="text-gray-400 text-xs">Sistem API</p>
-                <p class="text-lg font-bold text-green-500">OTA MY</p>
-            </div>
-        </div>
-
-        <!-- Bahagian Input Proses Manual -->
-        <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 mb-8">
-            <h2 class="text-sm font-bold mb-4 uppercase text-gray-400">Borang Proses Topup (Selepas Terima Resit)</h2>
+        <div class="bg-gray-800 p-6 rounded-3xl border border-gray-700">
+            <h2 class="text-xs font-bold mb-4 text-gray-300 uppercase italic">Proses Topup Manual</h2>
             <div class="space-y-4">
-                <input type="text" id="custPhone" placeholder="No. Telefon Pelanggan" class="w-full bg-gray-700 border border-gray-600 p-3 rounded-lg focus:outline-none focus:border-orange-500">
+                <div class="relative">
+                    <i class="fa-solid fa-phone absolute left-4 top-4 text-gray-500"></i>
+                    <input type="text" id="custPhone" placeholder="Nombor Pelanggan" class="w-full bg-gray-900 border border-gray-700 p-4 pl-12 rounded-xl focus:outline-none focus:border-orange-500">
+                </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <select id="custTelco" class="bg-gray-700 border border-gray-600 p-3 rounded-lg">
+                    <select id="custTelco" class="bg-gray-900 border border-gray-700 p-4 rounded-xl focus:outline-none">
                         <option value="CELCOM">CELCOM</option>
                         <option value="DIGI">DIGI</option>
                         <option value="MAXIS">MAXIS</option>
                         <option value="UMOBILE">UMOBILE</option>
                         <option value="TUNETALK">TUNETALK</option>
+                        <option value="HOTLINK">HOTLINK</option>
                     </select>
-                    <input type="number" id="custAmount" placeholder="Jumlah (RM)" class="bg-gray-700 border border-gray-600 p-3 rounded-lg">
+                    <input type="number" id="custAmount" placeholder="Jumlah RM" class="bg-gray-900 border border-gray-700 p-4 rounded-xl focus:outline-none focus:border-orange-500">
                 </div>
-                <button onclick="prosesTopupSekarang()" id="btnProses" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-lg transition duration-300">
-                    <i class="fa-solid fa-bolt mr-2"></i> HANTAR TOPUP SEKARANG
+                <button onclick="prosesTopupSekarang()" id="btnProses" class="w-full bg-gradient-to-r from-orange-600 to-orange-500 py-4 rounded-xl font-bold text-white shadow-xl shadow-orange-900/20 active:scale-95 transition">
+                    HANTAR TOPUP <i class="fa-solid fa-paper-plane ml-2"></i>
                 </button>
             </div>
         </div>
-
-        <p class="text-center text-xs text-gray-600">TXT Studio Management v1.0</p>
     </div>
 
     <script>
-        // Fungsi tarik baki OTA MY secara real
+        const SECRET_PASS = "Rockerz6636"; // KATA LALUAN ANDA
+
+        function checkAdminPass() {
+            const input = document.getElementById('adminPass').value;
+            if (input === SECRET_PASS) {
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('mainDashboard').classList.remove('hidden');
+                localStorage.setItem('admin_logged', 'true');
+                getBalance();
+            } else {
+                alert("Kata laluan salah!");
+            }
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem('admin_logged');
+            location.reload();
+        }
+
         async function getBalance() {
             try {
                 const res = await fetch('/api/get-balance');
                 const data = await res.json();
                 document.getElementById('adminBalance').innerText = `RM ${parseFloat(data.balance).toFixed(2)}`;
-            } catch (e) {
-                document.getElementById('adminBalance').innerText = "OFFLINE";
-            }
+            } catch (e) { document.getElementById('adminBalance').innerText = "ERROR"; }
         }
 
-        // Fungsi hantar arahan topup ke API OTA MY
         async function prosesTopupSekarang() {
             const phone = document.getElementById('custPhone').value;
             const telco = document.getElementById('custTelco').value;
             const amount = document.getElementById('custAmount').value;
             const btn = document.getElementById('btnProses');
 
-            if (!phone || !amount) {
-                alert("Sila isi maklumat pelanggan!");
-                return;
-            }
+            if (!phone || !amount) { alert("Isi semua maklumat!"); return; }
 
-            const confirmMsg = `PENGESAHAN:\nHantar RM${amount} ke ${phone} (${telco})?\nPastikan DUIT SUDAH MASUK ke bank anda.`;
-            
-            if (confirm(confirmMsg)) {
+            if (confirm(`Hantar RM${amount} ke ${phone}?`)) {
                 btn.disabled = true;
-                btn.innerText = "Memproses...";
-                
+                btn.innerText = "SEDANG DIPROSES...";
                 try {
                     const response = await fetch('/api/recharge', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ phone, telco, amount })
                     });
-                    
                     const data = await response.json();
-                    
                     if (data.status === "SUCCESS") {
-                        alert("BERJAYA! Topup sedang dihantar ke pelanggan.");
+                        alert("BERJAYA!");
                         document.getElementById('custPhone').value = "";
                         getBalance();
-                    } else {
-                        alert("GAGAL: " + data.message);
-                    }
-                } catch (error) {
-                    alert("Ralat Sistem! Sila semak baki OTA MY manual.");
-                } finally {
-                    btn.disabled = false;
-                    btn.innerText = "HANTAR TOPUP SEKARANG";
-                }
+                    } else { alert("GAGAL: " + data.message); }
+                } catch (error) { alert("Sistem Ralat!"); }
+                finally { btn.disabled = false; btn.innerText = "HANTAR TOPUP"; }
             }
         }
 
-        // Jalankan bila page dibuka
-        getBalance();
+        // Check baki jika dah memang login
+        if (localStorage.getItem('admin_logged') === 'true') {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('mainDashboard').classList.remove('hidden');
+            getBalance();
+        }
     </script>
 </body>
 </html>
