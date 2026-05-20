@@ -5,32 +5,29 @@ export default async function handler(req, res) {
 
   const userId = process.env.OTAMY_USER_ID;
   const password = process.env.OTAMY_PASSWORD;
-
   const { phone, telco, amount } = req.body;
 
-  // Format telco ke huruf kecil/besar mengikut keperluan OTA MY
-  // Sesetengah API memerlukan kod produk (cth: C5 untuk Celcom RM5)
-  const productCode = telco.toUpperCase(); 
-
-  // URL API OTA MY yang dikemas kini (Gunakan HTTPS)
-  const url = `https://otamy.net/api/recharge?uid=${userId}&pwd=${password}&phone=${phone}&amount=${amount}&type=${productCode}&format=json`;
+  // Sesuaikan link API mengikut server OTA MY yang sebenar
+  // Kita cuba format yang paling umum untuk server 6890 / Otamy
+  const url = `https://otamy.net/api/recharge.php?uid=${userId}&pwd=${password}&msisdn=${phone}&amount=${amount}&type=${telco}&format=json`;
 
   try {
     const response = await fetch(url);
-    const text = await response.text(); // Ambil dalam bentuk text dulu untuk elak error JSON tadi
+    const text = await response.text();
     
     try {
       const data = JSON.parse(text);
-      if (data.status === 'SUCCESS' || data.code === '00') {
-        return res.status(200).json({ status: 'SUCCESS', message: 'Berjaya!' });
+      // OTA MY biasanya guna kod '1' atau 'SUCCESS' untuk berjaya
+      if (data.status === 'SUCCESS' || data.code === '1' || data.code === '00') {
+        return res.status(200).json({ status: 'SUCCESS', message: 'Pesanan Diterima' });
       } else {
-        return res.status(200).json({ status: 'FAILED', message: data.message || 'Gagal dari OTA MY' });
+        return res.status(200).json({ status: 'FAILED', message: data.message || 'Gagal' });
       }
     } catch (e) {
-      // Jika server OTA MY balas dalam bentuk bukan JSON (mungkin ralat akaun/maintenance)
-      return res.status(200).json({ status: 'FAILED', message: "Respon Server: " + text });
+      // Jika masih bukan JSON, kita paparkan respon pendek
+      return res.status(200).json({ status: 'FAILED', message: "Respon: " + text.substring(0, 100) });
     }
   } catch (error) {
-    return res.status(500).json({ status: 'ERROR', message: 'Ralat Connection: ' + error.message });
+    return res.status(500).json({ status: 'ERROR', message: 'Connection Error' });
   }
 }
