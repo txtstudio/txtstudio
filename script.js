@@ -1,6 +1,5 @@
-// ✅ TXT STUDIO - SCRIPT UTAMA (FULL AUTO-PAYMENT VERSION)
-// DIBINA UNTUK INTEGRASI TOYYIBPAY & VERCEL SERVERLESS
-// STATUS: SIAP UNTUK DEPLOYMENT
+// ✅ TXT STUDIO - SCRIPT UTAMA (MANUAL PAYMENT & AUTO-RECHARGE VERSION)
+// STATUS: 100% KOMISYEN MILIK ANDA (TANPA TOYYIBPAY)
 
 // 1. FUNGSI MENU MOBILE (NAVBAR)
 const menuBtn = document.getElementById('menuBtn');
@@ -18,63 +17,66 @@ if (menuBtn && mobileMenu) {
   });
 }
 
-// 2. LOGIK KOMISYEN & HARGA
-const settingHarga = {
-  modal_base: 0.95, 
-  target_komisyen: 0.50
-};
-
-function kiraUntung(jumlah) {
-  let modal = jumlah * settingHarga.modal_base;
-  let untung = jumlah - modal;
-  console.log(`Transaksi: RM${jumlah} | Modal: RM${modal} | Untung Anda: RM${untung}`);
-  return untung;
-}
-
-// 3. SISTEM SERVER KEY (API PROVIDER)
+// 2. SISTEM LOGIN & SERVER KEY
 const authorizedKeys = ["txtstudio", "TXT-VVIP-888", "PRO-SERVER-99"];
+
+function processLogin(username, password) {
+  const validUser = "txtstudio";
+  const validPass = "Rockerz6636";
+
+  if (username === validUser && password === validPass) {
+    localStorage.setItem('server_access', 'active');
+    localStorage.setItem('user_role', 'admin');
+    alert("Log masuk berjaya! Selamat kembali.");
+    window.location.href = "home.html"; 
+    return true;
+  } else {
+    alert("Username atau Password salah!");
+    return false;
+  }
+}
 
 function validateServerKey(inputKey) {
   if (authorizedKeys.includes(inputKey)) {
     localStorage.setItem('server_access', 'active');
     localStorage.setItem('current_key', inputKey);
+    alert("Server Key sah!");
+    window.location.href = "home.html";
     return true;
   }
   return false;
 }
 
-// ✅ 4. INTEGRASI TOYYIBPAY AUTOMATIK (SISTEM AUTO-GATEWAY)
-async function hantarPesanan(phone, telco, amount) {
-  console.log("Memulakan proses pembayaran ToyyibPay...");
+// ✅ 3. SISTEM CHECKOUT MANUAL (DIRECT TO CHECKOUT PAGE)
+// Fungsi ini menghantar data ke checkout.html tanpa melalui ToyyibPay
+function hantarPesanan(phone, telco, amount) {
+  console.log("Menghantar pelanggan ke halaman checkout manual...");
   
-  // Beri maklum balas kepada pengguna
-  alert("Anda akan dibawa ke portal pembayaran bank (FPX). Sila tunggu sebentar...");
+  // Memastikan minimum RM5
+  if (parseFloat(amount) < 5) {
+    alert("Minimum pembelian adalah RM5.00");
+    return;
+  }
 
+  // Redirect ke checkout.html dengan membawa data pesanan
+  window.location.href = `checkout.html?phone=${phone}&telco=${telco}&amount=${amount}`;
+}
+
+// 4. PAPAR BAKI REAL DARI OTA MY (JIKA ADA API)
+async function refreshOtaBalance() {
   try {
-    const response = await fetch('/api/create-bill', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        amount: amount,
-        phone: phone,
-        billName: telco
-      })
-    });
-
-    const data = await response.json();
+    const res = await fetch('/api/get-balance');
+    const data = await res.json();
     
-    // Jika ToyyibPay berjaya menjana kod bil
-    if (data[0] && data[0].BillCode) {
-      // Bawa pelanggan terus ke portal pembayaran ToyyibPay
-      window.location.href = `https://toyyibpay.com/${data[0].BillCode}`;
-    } else {
-      // Jika error (Contoh: Akaun belum disahkan/Active)
-      alert("Maaf, sistem pembayaran sedang diselenggara. Sila cuba sebentar lagi atau hubungi Admin.");
-      console.error("ToyyibPay Response:", data);
-    }
-  } catch (error) {
-    console.error("Network Error:", error);
-    alert("Gagal menyambung ke server pembayaran. Sila pastikan internet anda stabil.");
+    // Cari elemen baki 17,562.57 dan tukar jadi real
+    const allDivs = document.querySelectorAll('div, span, p, h3');
+    allDivs.forEach(el => {
+      if (el.innerText.includes('17,562.57')) {
+        el.innerText = `RM ${parseFloat(data.balance).toFixed(2)}`;
+      }
+    });
+  } catch (e) {
+    console.log("Baki dikemaskini secara manual.");
   }
 }
 
@@ -90,20 +92,10 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// 6. NOTIFIKASI LIVE JUALAN (SIMULASI SOCIAL PROOF)
-function showFakeNotification() {
-  const names = ["Ali", "Siti", "Chong", "Ramasamy", "Wan", "Bala", "Ridzwan"];
-  const amounts = [5, 10, 30, 50, 100];
-  
-  setInterval(() => {
-    const randomName = names[Math.floor(Math.random() * names.length)];
-    const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-    console.log(`[LIVE] ${randomName} baru saja membeli Topup RM${randomAmount}`);
-  }, 60000);
+// 6. JALANKAN FUNGSI AUTOMATIK
+if (window.location.pathname.includes('home.html')) {
+    refreshOtaBalance();
 }
 
-// Jalankan fungsi asas
-showFakeNotification();
 document.documentElement.style.scrollBehavior = 'smooth';
-
-// Kod Dikemaskini pada: 2026-05-20 21:35
+console.log("TXT Studio Script Ready - Mode: Manual Checkout");
