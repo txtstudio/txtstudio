@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran - TXT STUDIO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <div class="max-w-md mx-auto p-6">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-orange-500">PENGESAHAN BAYARAN</h1>
+            <p class="text-gray-400">Sila buat bayaran tepat untuk proses topup</p>
+        </div>
+
+        <!-- Ringkasan Order -->
+        <div class="bg-gray-800 p-4 rounded-xl mb-6 border border-gray-700">
+            <div class="flex justify-between mb-2">
+                <span>No. Telefon:</span>
+                <span id="displayPhone" class="font-bold"></span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span>Telco:</span>
+                <span id="displayTelco" class="font-bold text-orange-400"></span>
+            </div>
+            <div class="flex justify-between text-xl border-t border-gray-700 pt-2 mt-2">
+                <span>Jumlah:</span>
+                <span class="font-bold text-green-400">RM <span id="displayAmount"></span></span>
+            </div>
+        </div>
+
+        <!-- QR CODE SECTION -->
+        <div class="bg-white p-6 rounded-2xl text-center mb-6">
+            <p class="text-black font-bold mb-4 uppercase text-sm">Scan QR DuitNow Untuk Bayar</p>
+            <!-- Ganti URL di bawah dengan link gambar QR anda -->
+            <img src="https://placehold.co/400x400?text=QR+DUITNOW+ANDA" alt="QR DuitNow" class="mx-auto w-48 h-48 mb-4">
+            <p class="text-xs text-gray-500">Menerima: Maybank, CIMB, TNG, ShopeePay & Semua Bank</p>
+        </div>
+
+        <!-- Manual Bank Transfer -->
+        <div class="space-y-3 mb-8 text-sm">
+            <div class="bg-gray-800 p-3 rounded-lg flex items-center">
+                <i class="fa-solid fa-bank text-orange-500 mr-3"></i>
+                <div>
+                    <p class="text-gray-400">Maybank</p>
+                    <p class="font-bold text-white">123456789012 (TXT STUDIO)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg transition duration-300 flex items-center justify-center">
+            <i class="fa-brands fa-whatsapp text-2xl mr-2"></i>
+            SAYA DAH BAYAR (HANTAR RESIT)
+        </button>
+        
+        <p class="text-center text-xs text-gray-500 mt-4 italic">*Topup akan diproses segera selepas admin sahkan bayaran.</p>
+    </div>
+
+    <script>
+        // Ambil data dari URL
+        const params = new URLSearchParams(window.location.search);
+        const phone = params.get('phone');
+        const telco = params.get('telco');
+        const amount = params.get('amount');
+
+        document.getElementById('displayPhone').innerText = phone;
+        document.getElementById('displayTelco').innerText = telco;
+        document.getElementById('displayAmount').innerText = amount;
+
+        function sendToWhatsApp() {
+            const adminPhone = "6011xxxxxxxx"; // GANTI DENGAN NO ANDA
+            const message = `PENGESAHAN BAYARAN TOPUP%0A%0A` +
+                            `No. Pelanggan: ${phone}%0A` +
+                            `Telco: ${telco}%0A` +
+                            `Jumlah: RM ${amount}%0A%0A` +
+                            `SAYA SUDAH BAYAR. BERIKUT ADALAH RESITNYA:`;
+            
+            window.location.href = `https://wa.me/${adminPhone}?text=${message}`;
+        }
+    </script>
+</body>
+</html>
