@@ -1,4 +1,4 @@
-// ✅ TXT STUDIO - SCRIPT UTAMA (MANUAL PAYMENT & AUTO-RECHARGE VERSION)
+// ✅ TXT STUDIO - SCRIPT UTAMA (FINAL VERSION - NO POPUP BLOCK)
 // STATUS: 100% KOMISYEN MILIK ANDA (TANPA TOYYIBPAY)
 // NOMBOR ADMIN: 601123456636
 
@@ -48,19 +48,23 @@ function validateServerKey(inputKey) {
   return false;
 }
 
-// ✅ 3. SISTEM CHECKOUT MANUAL (DIRECT TO CHECKOUT PAGE)
-// Fungsi ini menghantar data ke checkout.html tanpa melalui ToyyibPay
+// ✅ 3. SISTEM CHECKOUT MANUAL (ELAK POP-UP BLOCK)
+// Fungsi ini menggunakan window.location.href untuk menukar halaman secara terus
 function hantarPesanan(phone, telco, amount) {
-  console.log("Menghantar pelanggan ke halaman checkout manual...");
+  console.log("Memproses pesanan ke checkout...");
   
-  // Memastikan minimum RM5
   if (parseFloat(amount) < 5) {
     alert("Minimum pembelian adalah RM5.00");
     return;
   }
 
-  // Redirect ke checkout.html dengan membawa data pesanan (Phone, Telco, Amount)
-  window.location.href = `checkout.html?phone=${phone}&telco=${telco}&amount=${amount}`;
+  // Menggunakan encodeURIComponent untuk keselamatan data dalam URL
+  const phone_enc = encodeURIComponent(phone);
+  const telco_enc = encodeURIComponent(telco);
+  const amount_enc = encodeURIComponent(amount);
+
+  // Redirect secara terus dalam tab yang sama (Browser tidak akan block)
+  window.location.href = `checkout.html?phone=${phone_enc}&telco=${telco_enc}&amount=${amount_enc}`;
 }
 
 // 4. PAPAR BAKI REAL DARI OTA MY
@@ -69,7 +73,6 @@ async function refreshOtaBalance() {
     const res = await fetch('/api/get-balance');
     const data = await res.json();
     
-    // Cari elemen baki RM 17,562.57 dan tukar jadi real
     const allDivs = document.querySelectorAll('div, span, p, h3');
     allDivs.forEach(el => {
       if (el.innerText.includes('17,562.57')) {
@@ -99,4 +102,4 @@ if (window.location.pathname.includes('home.html')) {
 }
 
 document.documentElement.style.scrollBehavior = 'smooth';
-console.log("TXT Studio Script Ready - Mode: Manual Checkout (No ToyyibPay)");
+console.log("TXT Studio Script Ready - Mode: Manual Checkout (Direct Redirect)");
