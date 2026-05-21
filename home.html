@@ -10,7 +10,7 @@
         body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 100px; }
         .glow-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; }
         .comm-row { display: flex; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px; }
-        .comm-header { font-size: 10px; font-weight: 900; color: #F77F00; padding: 15px 18px 5px; text-transform: uppercase; letter-spacing: 1px; border-top: 1px solid rgba(247, 127, 0, 0.1); }
+        .comm-header { font-size: 10px; font-weight: 900; color: #F77F00; padding: 15px 18px 5px; text-transform: uppercase; letter-spacing: 1px; }
         .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #0A0A0F; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 15px; z-index: 100; }
         .category-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 20px 5px; text-align: center; cursor: pointer; }
         .category-icon { width: 45px; height: 45px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 20px; background: rgba(247, 127, 0, 0.1); color: #F77F00; }
@@ -26,10 +26,9 @@
             <img src="images/txtstudio.png" class="w-8 h-8 rounded-full border border-orange-500">
             <h2 class="text-xs font-bold uppercase">TXT STUDIO</h2>
         </div>
-        <div class="bg-orange-500 text-black px-3 py-1 rounded-full text-[8px] font-black uppercase">OTA MY SYNC</div>
+        <div class="bg-orange-500 text-black px-3 py-1 rounded-full text-[8px] font-black uppercase">OTA MY CONNECTED</div>
     </div>
 
-    <!-- TAB HOME -->
     <div id="tab-home" class="px-6 block">
         <div class="glow-card p-6 mb-6 text-center border-orange-500/20">
             <p class="text-[9px] text-gray-400 uppercase tracking-widest mb-1">Untung Hari Ini</p>
@@ -45,11 +44,10 @@
         </div>
     </div>
 
-    <!-- TAB COMMISSION -->
     <div id="tab-comm" class="px-6 hidden">
         <h3 class="text-center font-black text-xs mb-5 uppercase text-[#F77F00]">KADAR KOMISYEN PRODUK</h3>
         <div class="glow-card mb-6">
-            <div class="comm-header">Prepaid Telco</div>
+            <div class="comm-header">PREPAID TELCO</div>
             <div class="comm-row"><span>UMOBILE</span><b class="text-green-400">7.30%</b></div>
             <div class="comm-row"><span>ONEXOX</span><b class="text-green-400">5.80%</b></div>
             <div class="comm-row"><span>TUNETALK</span><b class="text-green-400">5.10%</b></div>
@@ -58,27 +56,19 @@
             <div class="comm-row"><span>EASTEL</span><b class="text-green-400">4.80%</b></div>
             <div class="comm-row"><span>BEONE</span><b class="text-green-400">4.00%</b></div>
             <div class="comm-row"><span>CELCOM</span><b class="text-green-400">2.90%</b></div>
-            <div class="comm-row"><span>MAXIS / HOTLINK</span><b class="text-green-400">2.80%</b></div>
+            <div class="comm-row"><span>MAXIS</span><b class="text-green-400">2.80%</b></div>
             <div class="comm-row"><span>DIGI</span><b class="text-green-400">2.80%</b></div>
+            <div class="comm-row"><span>UNIFI MOBILE</span><b class="text-green-400">2.50%</b></div>
             <div class="comm-row"><span>YES 4G</span><b class="text-green-400">2.30%</b></div>
-            <div class="comm-header">Game Credits</div>
-            <div class="comm-row"><span>PUBG MOBILE</span><b class="text-green-400">4.80%</b></div>
-            <div class="comm-row"><span>FREE FIRE</span><b class="text-green-400">3.80%</b></div>
-            <div class="comm-row"><span>MOBILE LEGENDS</span><b class="text-green-400">2.80%</b></div>
-            <div class="comm-header">Bills</div>
-            <div class="comm-row"><span>TNB / AIR</span><b class="text-green-400">RM 0.15</b></div>
-            <div class="comm-row"><span>ASTRO / NJOI</span><b class="text-green-400">0.20%</b></div>
         </div>
     </div>
-        <!-- Modal -->
-    <div id="pM" class="modal-full" onclick="this.style.display='none'">
+        <div id="pM" class="modal-full" onclick="this.style.display='none'">
         <div class="modal-content" onclick="event.stopPropagation()">
             <h3 id="mT" class="font-bold text-xs text-[#F77F00] mb-6 uppercase">PILIH</h3>
             <div id="pG" class="grid grid-cols-3 gap-3"></div>
         </div>
     </div>
 
-    <!-- Navigation -->
     <div class="nav-bottom">
         <div onclick="tab('home')" id="n-h" class="text-[#F77F00] flex flex-col items-center cursor-pointer"><i class="fa fa-home"></i><span class="text-[8px] font-bold">HOME</span></div>
         <div onclick="tab('comm')" id="n-c" class="text-gray-600 flex flex-col items-center cursor-pointer"><i class="fa fa-list"></i><span class="text-[8px] font-bold">COMM</span></div>
@@ -90,7 +80,7 @@
                 {n:'Umobile',i:'umobile.png'},{n:'Celcom',i:'celcom.png'},{n:'Digi',i:'digi.png'},
                 {n:'Maxis',i:'hotlink.png'},{n:'OneXOX',i:'onexox.png'},{n:'TuneTalk',i:'tunetalk.png'},
                 {n:'Redone',i:'redone.png'},{n:'BeOne',i:'beone.png'},{n:'Yes',i:'yes.png'},
-                {n:'Eastel',i:'eastel.png'},{n:'HaloTelco',i:'halotelco.png'},{n:'XOX',i:'onexox.png'}
+                {n:'Eastel',i:'eastel.png'},{n:'HaloTelco',i:'halotelco.png'},{n:'Unifi',i:'unifi.png'}
             ],
             bill: [{n:'TNB',i:'txtstudio.png'},{n:'Air Selangor',i:'txtstudio.png'},{n:'Unifi Bil',i:'unifi.png'},{n:'Astro',i:'njoi.png'}],
             game: [{n:'MLBB',i:'txtstudio.png'},{n:'PUBG',i:'txtstudio.png'},{n:'Free Fire',i:'txtstudio.png'}],
@@ -116,9 +106,9 @@
         }
 
         function go(n) {
-            let ph = prompt(`Masukkan No Akaun/Tel untuk ${n}:`);
+            let ph = prompt(`No Akaun/Tel ${n}:`);
             if(ph) {
-                let am = prompt(`Masukkan Jumlah RM:`);
+                let am = prompt(`Jumlah RM:`);
                 if(am) window.open(`https://wa.me/601123456636?text=ORDER+${n}%0ANo:+${ph}%0AAmt:+RM${am}`);
             }
         }
