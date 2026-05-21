@@ -26,7 +26,7 @@
             <img src="images/txtstudio.png" class="w-8 h-8 rounded-full border border-orange-500">
             <h2 class="text-xs font-bold uppercase">TXT STUDIO</h2>
         </div>
-        <div class="bg-orange-500 text-black px-3 py-1 rounded-full text-[8px] font-black">OTA MY SYNC</div>
+        <div class="bg-orange-500 text-black px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-tighter">OTA MY CONNECTED</div>
     </div>
 
     <!-- TAB HOME -->
@@ -47,15 +47,14 @@
 
     <!-- TAB COMMISSION -->
     <div id="tab-comm" class="px-6 hidden">
-        <h3 class="text-center font-bold text-sm mb-4 uppercase color-[#F77F00]">KADAR KOMISYEN OTA MY</h3>
+        <h3 class="text-center font-bold text-sm mb-4 uppercase text-[#F77F00]">KADAR KOMISYEN OTA MY</h3>
         <div class="glow-card">
             <div class="comm-row"><span>UMOBILE</span><b class="text-green-400">7.30%</b></div>
-            <div class="comm-row"><span>ONEXOX</span><b class="text-green-400">5.80%</b></div>
+            <div class="comm-row"><span>ONEXOX / XOX</span><b class="text-green-400">5.80%</b></div>
             <div class="comm-row"><span>TUNETALK</span><b class="text-green-400">5.10%</b></div>
-            <div class="comm-row"><span>REDONE / HALO</span><b class="text-green-400">4.80%</b></div>
+            <div class="comm-row"><span>REDONE / HALO / EASTEL</span><b class="text-green-400">4.80%</b></div>
+            <div class="comm-row"><span>BEONE</span><b class="text-green-400">4.00%</b></div>
             <div class="comm-row"><span>CELCOM / MAXIS / DIGI</span><b class="text-green-400">2.80% - 2.90%</b></div>
-            <div class="comm-row"><span>MOBILE LEGENDS</span><b class="text-green-400">2.80%</b></div>
-            <div class="comm-row"><span>PUBG MOBILE</span><b class="text-green-400">4.80%</b></div>
         </div>
     </div>
 
@@ -69,34 +68,58 @@
 
     <!-- Nav -->
     <div class="nav-bottom">
-        <div onclick="tab('home')" id="n-h" class="text-[#F77F00] flex flex-col items-center"><i class="fa fa-home"></i><span class="text-[8px] font-bold">HOME</span></div>
-        <div onclick="tab('comm')" id="n-c" class="text-gray-600 flex flex-col items-center"><i class="fa fa-list"></i><span class="text-[8px] font-bold">COMM</span></div>
+        <div onclick="tab('home')" id="n-h" class="text-[#F77F00] flex flex-col items-center cursor-pointer"><i class="fa fa-home"></i><span class="text-[8px] font-bold">HOME</span></div>
+        <div onclick="tab('comm')" id="n-c" class="text-gray-600 flex flex-col items-center cursor-pointer"><i class="fa fa-list"></i><span class="text-[8px] font-bold">COMM</span></div>
     </div>
 
     <script>
         const p = {
-            topup: [{n:'Umobile',i:'umobile.png'},{n:'Celcom',i:'celcom.png'},{n:'Digi',i:'digi.png'},{n:'Maxis',i:'hotlink.png'},{n:'OneXOX',i:'onexox.png'},{n:'TuneTalk',i:'tunetalk.png'},{n:'Redone',i:'redone.png'},{n:'BeOne',i:'beone.png'},{n:'Yes',i:'yes.png'}],
-            bill: [{n:'TNB',i:'txtstudio.png'},{n:'Air Selangor',i:'txtstudio.png'},{n:'Unifi Bil',i:'unifi.png'},{n:'Astro',i:'njoi.png'}],
-            game: [{n:'MLBB',i:'txtstudio.png'},{n:'PUBG',i:'txtstudio.png'},{n:'Free Fire',i:'txtstudio.png'}]
+            topup: [
+                {n:'Umobile',i:'umobile.png'},{n:'Celcom',i:'celcom.png'},{n:'Digi',i:'digi.png'},
+                {n:'Maxis',i:'hotlink.png'},{n:'OneXOX',i:'onexox.png'},{n:'TuneTalk',i:'tunetalk.png'},
+                {n:'Redone',i:'redone.png'},{n:'BeOne',i:'beone.png'},{n:'Yes',i:'yes.png'},
+                {n:'Eastel',i:'eastel.png'},{n:'HaloTelco',i:'halotelco.png'},{n:'XOX',i:'onexox.png'}
+            ],
+            bill: [
+                {n:'TNB',i:'txtstudio.png'},{n:'Air Selangor',i:'txtstudio.png'},{n:'Unifi Bil',i:'unifi.png'},
+                {n:'Astro',i:'njoi.png'},{n:'MARA',i:'txtstudio.png'},{n:'PTPTN',i:'txtstudio.png'}
+            ],
+            game: [
+                {n:'MLBB',i:'txtstudio.png'},{n:'PUBG',i:'txtstudio.png'},{n:'Free Fire',i:'txtstudio.png'},
+                {n:'Garena',i:'txtstudio.png'},{n:'Roblox',i:'txtstudio.png'}
+            ],
+            pin: [
+                {n:'Celcom Pin',i:'celcom.png'},{n:'Digi Pin',i:'digi.png'},{n:'Maxis Pin',i:'hotlink.png'},
+                {n:'TNG Pin',i:'txtstudio.png'}
+            ],
+            data: [
+                {n:'Celcom Data',i:'celcom.png'},{n:'Digi Data',i:'digi.png'},{n:'Umobile Data',i:'umobile.png'}
+            ],
+            others: [
+                {n:'Maxis Home',i:'hotlink.png'},{n:'Unifi Home',i:'unifi.png'},{n:'Time Fiber',i:'txtstudio.png'}
+            ]
         };
+
         function openM(t) {
             const g = document.getElementById('pG'); g.innerHTML = '';
-            document.getElementById('mT').innerText = t.toUpperCase();
+            document.getElementById('mT').innerText = 'PILIH ' + t.toUpperCase();
             (p[t] || p.topup).forEach(x => {
-                g.innerHTML += `<div onclick="go('${x.n}')" class="item-box"><img src="images/${x.i}" onerror="this.src='images/txtstudio.png'"><span class="text-[8px] font-bold text-center">${x.n}</span></div>`;
+                g.innerHTML += `<div onclick="go('${x.n}')" class="item-box cursor-pointer"><img src="images/${x.i}" onerror="this.src='images/txtstudio.png'"><span class="text-[8px] font-bold text-center">${x.n}</span></div>`;
             });
             document.getElementById('pM').style.display = 'flex';
         }
+
         function tab(t) {
             document.getElementById('tab-home').style.display = t==='home'?'block':'none';
             document.getElementById('tab-comm').style.display = t==='comm'?'block':'none';
             document.getElementById('n-h').style.color = t==='home'?'#F77F00':'#4b5563';
             document.getElementById('n-c').style.color = t==='comm'?'#F77F00':'#4b5563';
         }
+
         function go(n) {
-            let ph = prompt(`No Akaun/Tel ${n}:`);
+            let ph = prompt(`Masukkan No Akaun/Tel untuk ${n}:`);
             if(ph) {
-                let am = prompt(`Jumlah RM:`);
+                let am = prompt(`Masukkan Jumlah RM:`);
                 if(am) window.open(`https://wa.me/601123456636?text=ORDER+${n}%0ANo:+${ph}%0AAmt:+RM${am}`);
             }
         }
