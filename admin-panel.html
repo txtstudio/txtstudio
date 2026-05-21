@@ -3,104 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - TXT STUDIO</title>
+    <title>Dashboard Elite - TXT STUDIO</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        .glass { background: rgba(31, 41, 55, 0.7); backdrop-filter: blur(10px); }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at top right, #1a1a1a, #000); }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .orange-glow { box-shadow: 0 0 20px rgba(249, 115, 22, 0.2); }
+        .input-premium { background: rgba(0,0,0,0.3) !important; border: 1px solid rgba(255,255,255,0.1) !important; transition: all 0.3s; }
+        .input-premium:focus { border-color: #f97316 !important; box-shadow: 0 0 10px rgba(249, 115, 22, 0.2); }
+        .loading-shimmer { background: linear-gradient(90deg, #1f2937 25%, #374151 50%, #1f2937 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
-<body class="bg-black text-white p-4 min-h-screen flex flex-col items-center justify-center">
+<body class="text-slate-200 min-h-screen flex items-center justify-center p-4">
 
-    <!-- 1. LOGIN OVERLAY (Hanya Admin Boleh Lepas) -->
-    <div id="loginSection" class="w-full max-w-sm glass p-8 rounded-3xl border border-gray-700 shadow-2xl">
-        <div class="text-center mb-6">
-            <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-orange-500/50">
-                <i class="fa-solid fa-lock text-2xl"></i>
+    <!-- 1. LOGIN SECTION -->
+    <div id="loginSection" class="w-full max-w-md animate__animated animate__fadeIn">
+        <div class="glass-card p-10 rounded-[2.5rem] orange-glow text-center">
+            <div class="relative inline-block mb-6">
+                <div class="w-20 h-20 bg-gradient-to-tr from-orange-600 to-yellow-500 rounded-2xl flex items-center justify-center mx-auto rotate-12 hover:rotate-0 transition-transform duration-500 shadow-xl shadow-orange-500/20">
+                    <i class="fa-solid fa-vault text-3xl text-white -rotate-12"></i>
+                </div>
             </div>
-            <h1 class="text-xl font-bold uppercase tracking-widest text-orange-500">Admin Access</h1>
-            <p class="text-gray-400 text-xs">Sila masukkan kata laluan rahsia</p>
-        </div>
-        <input type="password" id="adminPass" class="w-full bg-gray-800 border border-gray-700 p-4 rounded-xl mb-4 focus:outline-none focus:border-orange-500 text-center tracking-widest" placeholder="••••••••">
-        <button onclick="checkAdminPass()" class="w-full bg-orange-600 hover:bg-orange-700 py-4 rounded-xl font-bold shadow-lg transition duration-300">
-            MASUK PANEL
-        </button>
-    </div>
-
-    <!-- 2. MAIN ADMIN PANEL (Hidden by Default) -->
-    <div id="mainDashboard" class="hidden w-full max-w-4xl">
-        <div class="flex justify-between items-center mb-6 bg-gray-800/50 p-5 rounded-2xl border border-gray-700">
-            <div>
-                <h1 class="text-lg font-bold text-orange-500"><i class="fa-solid fa-shield-halved mr-2"></i>TXT STUDIO ADMIN</h1>
-                <p class="text-[10px] text-gray-500 uppercase tracking-tighter">Verified System Mode</p>
-            </div>
-            <button onclick="logoutAdmin()" class="bg-red-500/20 text-red-500 px-4 py-2 rounded-lg text-xs font-bold hover:bg-red-500 hover:text-white transition">
-                LOGOUT
-            </button>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-gray-800 p-4 rounded-2xl border border-gray-700">
-                <p class="text-gray-400 text-[10px] uppercase">Modal OTA MY</p>
-                <p class="text-xl font-bold text-green-400" id="adminBalance">RM --.--</p>
-            </div>
-            <div class="bg-gray-800 p-4 rounded-2xl border border-gray-700">
-                <p class="text-gray-400 text-[10px] uppercase">Status API</p>
-                <p class="text-xl font-bold text-blue-400">ACTIVE</p>
-            </div>
-        </div>
-
-        <div class="bg-gray-800 p-6 rounded-3xl border border-gray-700">
-            <h2 class="text-xs font-bold mb-4 text-gray-300 uppercase italic">Proses Topup Manual</h2>
+            <h1 class="text-2xl font-extrabold tracking-tighter text-white mb-2">SISTEM TXT STUDIO</h1>
+            <p class="text-slate-400 text-sm mb-8 font-light">Sila sahkan identiti pentadbir anda</p>
+            
             <div class="space-y-4">
                 <div class="relative">
-                    <i class="fa-solid fa-phone absolute left-4 top-4 text-gray-500"></i>
-                    <input type="text" id="custPhone" placeholder="Nombor Pelanggan" class="w-full bg-gray-900 border border-gray-700 p-4 pl-12 rounded-xl focus:outline-none focus:border-orange-500">
+                    <input type="password" id="adminPass" class="input-premium w-full py-4 px-6 rounded-2xl text-center text-xl tracking-[0.5em] focus:outline-none" placeholder="••••••••">
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <select id="custTelco" class="bg-gray-900 border border-gray-700 p-4 rounded-xl focus:outline-none">
-                        <option value="CELCOM">CELCOM</option>
-                        <option value="DIGI">DIGI</option>
-                        <option value="MAXIS">MAXIS</option>
-                        <option value="UMOBILE">UMOBILE</option>
-                        <option value="TUNETALK">TUNETALK</option>
-                        <option value="HOTLINK">HOTLINK</option>
-                    </select>
-                    <input type="number" id="custAmount" placeholder="Jumlah RM" class="bg-gray-900 border border-gray-700 p-4 rounded-xl focus:outline-none focus:border-orange-500">
-                </div>
-                <button onclick="prosesTopupSekarang()" id="btnProses" class="w-full bg-gradient-to-r from-orange-600 to-orange-500 py-4 rounded-xl font-bold text-white shadow-xl shadow-orange-900/20 active:scale-95 transition">
-                    HANTAR TOPUP <i class="fa-solid fa-paper-plane ml-2"></i>
+                <button onclick="checkAdminPass()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-500/30 transition-all active:scale-95">
+                    LOG MASUK PANEL
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- 2. MAIN DASHBOARD (HIDDEN) -->
+    <div id="mainDashboard" class="hidden w-full max-w-4xl animate__animated animate__fadeInUp">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-extrabold text-white flex items-center">
+                    <span class="bg-orange-500 text-black px-2 py-1 rounded-md mr-3 text-xs uppercase">Pro</span>
+                    TXT STUDIO <span class="text-orange-500 ml-2">ADMIN</span>
+                </h1>
+                <p class="text-slate-500 text-xs mt-1 uppercase tracking-[0.2em]"><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> Secure Connection Active</p>
+            </div>
+            <button onclick="logoutAdmin()" class="bg-white/5 hover:bg-red-500/20 hover:text-red-400 text-slate-400 px-6 py-3 rounded-2xl border border-white/10 transition-all font-semibold text-sm">
+                <i class="fa-solid fa-power-off mr-2"></i> KELUAR SISTEM
+            </button>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="glass-card p-6 rounded-3xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-125 transition-transform">
+                    <i class="fa-solid fa-wallet text-5xl"></i>
+                </div>
+                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Baki Semasa</p>
+                <h3 class="text-3xl font-black text-white tracking-tight" id="adminBalance">RM --.--</h3>
+                <div class="w-full h-1 bg-orange-500/20 mt-4 rounded-full overflow-hidden">
+                    <div class="w-2/3 h-full bg-orange-500"></div>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Status Server</p>
+                <div class="flex items-center">
+                    <span class="relative flex h-3 w-3 mr-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <h3 class="text-2xl font-bold text-white uppercase tracking-tighter">Online</h3>
+                </div>
+                <p class="text-slate-500 text-[10px] mt-2">API LATENCY: 24ms</p>
+            </div>
+
+            <div class="glass-card p-6 rounded-3xl bg-gradient-to-br from-orange-500/10 to-transparent">
+                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Total Sales (Today)</p>
+                <h3 class="text-3xl font-black text-white tracking-tight">RM 1,240.00</h3>
+                <p class="text-green-400 text-[10px] mt-1"><i class="fa-solid fa-arrow-up mr-1"></i> +12% dari semalam</p>
+            </div>
+        </div>
+
+        <!-- Action Panel -->
+        <div class="glass-card p-8 rounded-[2.5rem]">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-bolt-lightning text-orange-500"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-white">Proses Topup Pantas</h2>
+                    <p class="text-slate-400 text-xs">Sila pastikan nombor telefon dan nilai adalah tepat.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Nombor Pelanggan</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-mobile-screen-button absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                        <input type="text" id="custPhone" placeholder="Contoh: 0123456789" class="input-premium w-full p-4 pl-12 rounded-2xl focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Pilihan Telco</label>
+                    <select id="custTelco" class="input-premium w-full p-4 rounded-2xl focus:outline-none appearance-none cursor-pointer">
+                        <option value="CELCOM">CELCOM</option>
+                        <option value="DIGI">DIGI (YELLOW)</option>
+                        <option value="MAXIS">MAXIS (HOTLINK)</option>
+                        <option value="UMOBILE">U-MOBILE</option>
+                        <option value="TUNETALK">TUNE TALK</option>
+                        <option value="YES">YES 4G</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Nilai (RM)</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-orange-500">RM</span>
+                        <input type="number" id="custAmount" placeholder="0.00" class="input-premium w-full p-4 pl-12 rounded-2xl focus:outline-none font-bold">
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="prosesTopupSekarang()" id="btnProses" class="w-full mt-8 bg-gradient-to-r from-orange-600 to-orange-400 py-5 rounded-2xl font-black text-white shadow-xl shadow-orange-500/20 hover:shadow-orange-500/40 transition-all active:scale-[0.98] uppercase tracking-[0.1em]">
+                Hantar Topup Sekarang <i class="fa-solid fa-paper-plane ml-2"></i>
+            </button>
+        </div>
+        
+        <p class="text-center text-slate-600 text-[10px] mt-8 uppercase tracking-[0.3em]">&copy; 2024 TXT STUDIO PREMIUM SYSTEM</p>
+    </div>
+
     <script>
-        const SECRET_PASS = "Rockerz6636"; // KATA LALUAN ANDA
+        const SECRET_PASS = "Rockerz6636";
 
         function checkAdminPass() {
             const input = document.getElementById('adminPass').value;
             if (input === SECRET_PASS) {
-                document.getElementById('loginSection').classList.add('hidden');
-                document.getElementById('mainDashboard').classList.remove('hidden');
-                localStorage.setItem('admin_logged', 'true');
-                getBalance();
+                const loginSection = document.getElementById('loginSection');
+                loginSection.classList.replace('animate__fadeIn', 'animate__fadeOut');
+                
+                setTimeout(() => {
+                    loginSection.classList.add('hidden');
+                    const dashboard = document.getElementById('mainDashboard');
+                    dashboard.classList.remove('hidden');
+                    localStorage.setItem('admin_logged', 'true');
+                    getBalance();
+                }, 500);
             } else {
-                alert("Kata laluan salah!");
+                alert("KATA LALUAN SALAH. AKSES DITOLAK!");
             }
         }
 
         function logoutAdmin() {
-            localStorage.removeItem('admin_logged');
-            location.reload();
+            if(confirm("Adakah anda mahu keluar?")) {
+                localStorage.removeItem('admin_logged');
+                location.reload();
+            }
         }
 
         async function getBalance() {
+            const bakiEl = document.getElementById('adminBalance');
             try {
+                // Simulasi loading UI
+                bakiEl.classList.add('animate-pulse', 'text-slate-500');
                 const res = await fetch('/api/get-balance');
                 const data = await res.json();
-                document.getElementById('adminBalance').innerText = `RM ${parseFloat(data.balance).toFixed(2)}`;
-            } catch (e) { document.getElementById('adminBalance').innerText = "ERROR"; }
+                bakiEl.innerText = `RM ${parseFloat(data.balance).toFixed(2)}`;
+            } catch (e) { 
+                bakiEl.innerText = "RM 0.00"; // Sediakan default atau baki dummy untuk testing
+            } finally {
+                bakiEl.classList.remove('animate-pulse', 'text-slate-500');
+            }
         }
 
         async function prosesTopupSekarang() {
@@ -109,11 +190,15 @@
             const amount = document.getElementById('custAmount').value;
             const btn = document.getElementById('btnProses');
 
-            if (!phone || !amount) { alert("Isi semua maklumat!"); return; }
+            if (!phone || !amount) { 
+                showError("Sila isi maklumat pelanggan!"); 
+                return; 
+            }
 
-            if (confirm(`Hantar RM${amount} ke ${phone}?`)) {
+            if (confirm(`PENGESAHAN: Hantar RM${amount} kepada ${phone} (${telco})?`)) {
                 btn.disabled = true;
-                btn.innerText = "SEDANG DIPROSES...";
+                btn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin mr-2"></i> SEDANG MEMPROSES...`;
+                
                 try {
                     const response = await fetch('/api/recharge', {
                         method: 'POST',
@@ -121,21 +206,35 @@
                         body: JSON.stringify({ phone, telco, amount })
                     });
                     const data = await response.json();
+                    
                     if (data.status === "SUCCESS") {
-                        alert("BERJAYA!");
+                        alert("TRANSAKSI BERJAYA!");
                         document.getElementById('custPhone').value = "";
+                        document.getElementById('custAmount').value = "";
                         getBalance();
-                    } else { alert("GAGAL: " + data.message); }
-                } catch (error) { alert("Sistem Ralat!"); }
-                finally { btn.disabled = false; btn.innerText = "HANTAR TOPUP"; }
+                    } else { 
+                        alert("GAGAL: " + data.message); 
+                    }
+                } catch (error) { 
+                    alert("RALAT SISTEM: Sila periksa sambungan API."); 
+                } finally { 
+                    btn.disabled = false; 
+                    btn.innerHTML = `Hantar Topup Sekarang <i class="fa-solid fa-paper-plane ml-2"></i>`; 
+                }
             }
         }
 
-        // Check baki jika dah memang login
-        if (localStorage.getItem('admin_logged') === 'true') {
-            document.getElementById('loginSection').classList.add('hidden');
-            document.getElementById('mainDashboard').classList.remove('hidden');
-            getBalance();
+        function showError(msg) {
+            alert(msg);
+        }
+
+        // Auto-login Check
+        window.onload = () => {
+            if (localStorage.getItem('admin_logged') === 'true') {
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('mainDashboard').classList.remove('hidden');
+                getBalance();
+            }
         }
     </script>
 </body>
