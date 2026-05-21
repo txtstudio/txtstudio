@@ -3,238 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Elite - TXT STUDIO</title>
+    <title>Elite Admin - TXT STUDIO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-        
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at top right, #1a1a1a, #000); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #000; color: #e2e8f0; }
         .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .orange-glow { box-shadow: 0 0 20px rgba(249, 115, 22, 0.2); }
-        .input-premium { background: rgba(0,0,0,0.3) !important; border: 1px solid rgba(255,255,255,0.1) !important; transition: all 0.3s; }
-        .input-premium:focus { border-color: #f97316 !important; box-shadow: 0 0 10px rgba(249, 115, 22, 0.2); }
-        .loading-shimmer { background: linear-gradient(90deg, #1f2937 25%, #374151 50%, #1f2937 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .input-premium { background: rgba(0,0,0,0.3) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white; transition: all 0.3s; }
+        .input-premium:focus { border-color: #f97316 !important; outline: none; box-shadow: 0 0 10px rgba(249, 115, 22, 0.2); }
     </style>
 </head>
-<body class="text-slate-200 min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen p-4 flex flex-col items-center">
 
     <!-- 1. LOGIN SECTION -->
-    <div id="loginSection" class="w-full max-w-md animate__animated animate__fadeIn">
-        <div class="glass-card p-10 rounded-[2.5rem] orange-glow text-center">
-            <div class="relative inline-block mb-6">
-                <div class="w-20 h-20 bg-gradient-to-tr from-orange-600 to-yellow-500 rounded-2xl flex items-center justify-center mx-auto rotate-12 hover:rotate-0 transition-transform duration-500 shadow-xl shadow-orange-500/20">
-                    <i class="fa-solid fa-vault text-3xl text-white -rotate-12"></i>
-                </div>
-            </div>
-            <h1 class="text-2xl font-extrabold tracking-tighter text-white mb-2">SISTEM TXT STUDIO</h1>
-            <p class="text-slate-400 text-sm mb-8 font-light">Sila sahkan identiti pentadbir anda</p>
-            
-            <div class="space-y-4">
-                <div class="relative">
-                    <input type="password" id="adminPass" class="input-premium w-full py-4 px-6 rounded-2xl text-center text-xl tracking-[0.5em] focus:outline-none" placeholder="••••••••">
-                </div>
-                <button onclick="checkAdminPass()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-500/30 transition-all active:scale-95">
-                    LOG MASUK PANEL
-                </button>
-            </div>
+    <div id="loginSection" class="w-full max-w-md mt-20 animate__animated animate__fadeIn">
+        <div class="glass-card p-10 rounded-[2.5rem] text-center shadow-2xl shadow-orange-500/10">
+            <h1 class="text-2xl font-black text-white mb-6 uppercase tracking-widest">Admin Access</h1>
+            <input type="password" id="adminPass" class="input-premium w-full py-4 px-6 rounded-2xl text-center text-xl tracking-[0.5em] mb-4" placeholder="••••••••">
+            <button onclick="checkAdminPass()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 rounded-2xl transition-all active:scale-95">MASUK PANEL</button>
         </div>
     </div>
 
     <!-- 2. MAIN DASHBOARD (HIDDEN) -->
-    <div id="mainDashboard" class="hidden w-full max-w-4xl animate__animated animate__fadeInUp">
+    <div id="mainDashboard" class="hidden w-full max-w-5xl animate__animated animate__fadeInUp">
+        
         <!-- Header -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+        <div class="flex justify-between items-center mb-8 bg-white/5 p-6 rounded-3xl border border-white/10">
             <div>
-                <h1 class="text-3xl font-extrabold text-white flex items-center">
-                    <span class="bg-orange-500 text-black px-2 py-1 rounded-md mr-3 text-xs uppercase">Pro</span>
-                    TXT STUDIO <span class="text-orange-500 ml-2">ADMIN</span>
-                </h1>
-                <p class="text-slate-500 text-xs mt-1 uppercase tracking-[0.2em]"><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> Secure Connection Active</p>
+                <h1 class="text-2xl font-black text-white uppercase tracking-tighter">TXT STUDIO <span class="text-orange-500 underline">ADMIN</span></h1>
+                <p class="text-[10px] text-slate-500 tracking-[0.3em] font-bold">MODE: SECURE TRANSACTION</p>
             </div>
-            <button onclick="logoutAdmin()" class="bg-white/5 hover:bg-red-500/20 hover:text-red-400 text-slate-400 px-6 py-3 rounded-2xl border border-white/10 transition-all font-semibold text-sm">
-                <i class="fa-solid fa-power-off mr-2"></i> KELUAR SISTEM
-            </button>
+            <button onclick="logoutAdmin()" class="bg-red-500/20 text-red-500 px-5 py-2 rounded-xl text-xs font-bold hover:bg-red-500 hover:text-white transition">LOGOUT</button>
         </div>
 
         <!-- Stats Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="glass-card p-6 rounded-3xl relative overflow-hidden group">
-                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-125 transition-transform">
-                    <i class="fa-solid fa-wallet text-5xl"></i>
-                </div>
-                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Baki Semasa</p>
-                <h3 class="text-3xl font-black text-white tracking-tight" id="adminBalance">RM --.--</h3>
-                <div class="w-full h-1 bg-orange-500/20 mt-4 rounded-full overflow-hidden">
-                    <div class="w-2/3 h-full bg-orange-500"></div>
-                </div>
-            </div>
-
+            <!-- Modal OTA MY -->
             <div class="glass-card p-6 rounded-3xl">
-                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Status Server</p>
-                <div class="flex items-center">
-                    <span class="relative flex h-3 w-3 mr-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                    </span>
-                    <h3 class="text-2xl font-bold text-white uppercase tracking-tighter">Online</h3>
-                </div>
-                <p class="text-slate-500 text-[10px] mt-2">API LATENCY: 24ms</p>
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Baki Modal (OTA MY)</p>
+                <h3 class="text-3xl font-black text-white" id="adminBalance">RM --.--</h3>
             </div>
 
-            <div class="glass-card p-6 rounded-3xl bg-gradient-to-br from-orange-500/10 to-transparent">
-                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Total Sales (Today)</p>
-                <h3 class="text-3xl font-black text-white tracking-tight">RM 1,240.00</h3>
-                <p class="text-green-400 text-[10px] mt-1"><i class="fa-solid fa-arrow-up mr-1"></i> +12% dari semalam</p>
+            <!-- UNTUNG KASAR HARI INI (AUTOMATIC) -->
+            <div class="glass-card p-6 rounded-3xl bg-gradient-to-br from-green-500/10 to-transparent border-green-500/20">
+                <p class="text-green-500 text-[10px] font-bold uppercase tracking-widest mb-2">Untung Kasar Hari Ini</p>
+                <h3 class="text-4xl font-black text-green-400" id="todayProfit">+ RM 0.00</h3>
+                <p class="text-slate-500 text-[9px] mt-1 italic">* Dikira automatik dari setiap jualan</p>
+            </div>
+
+            <!-- API Status -->
+            <div class="glass-card p-6 rounded-3xl">
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Status Sistem</p>
+                <div class="flex items-center text-blue-400 font-bold">
+                    <span class="w-2 h-2 bg-blue-400 rounded-full animate-ping mr-2"></span> ACTIVE
+                </div>
             </div>
         </div>
 
-        <!-- Action Panel -->
+        <!-- Borang Jualan Premium -->
         <div class="glass-card p-8 rounded-[2.5rem]">
-            <div class="flex items-center mb-8">
-                <div class="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center mr-4">
-                    <i class="fa-solid fa-bolt-lightning text-orange-500"></i>
-                </div>
-                <div>
-                    <h2 class="text-xl font-bold text-white">Proses Topup Pantas</h2>
-                    <p class="text-slate-400 text-xs">Sila pastikan nombor telefon dan nilai adalah tepat.</p>
-                </div>
-            </div>
+            <h2 class="text-lg font-bold mb-6 text-white flex items-center">
+                <i class="fa-solid fa-cart-plus mr-3 text-orange-500"></i> PROSES TOPUP MANUAL
+            </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- No Pelanggan -->
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Nombor Pelanggan</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-mobile-screen-button absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
-                        <input type="text" id="custPhone" placeholder="Contoh: 0123456789" class="input-premium w-full p-4 pl-12 rounded-2xl focus:outline-none">
-                    </div>
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">No. Telefon</label>
+                    <input type="text" id="custPhone" placeholder="011xxxxxxx" class="input-premium w-full p-4 rounded-2xl">
                 </div>
 
+                <!-- Telco / Produk -->
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Pilihan Telco</label>
-                    <select id="custTelco" class="input-premium w-full p-4 rounded-2xl focus:outline-none appearance-none cursor-pointer">
-                        <option value="CELCOM">CELCOM</option>
-                        <option value="DIGI">DIGI (YELLOW)</option>
-                        <option value="MAXIS">MAXIS (HOTLINK)</option>
-                        <option value="UMOBILE">U-MOBILE</option>
-                        <option value="TUNETALK">TUNE TALK</option>
-                        <option value="YES">YES 4G</option>
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Produk (OTA MY Rate)</label>
+                    <select id="custTelco" onchange="kiraUntungLive()" class="input-premium w-full p-4 rounded-2xl cursor-pointer">
+                        <optgroup label="MOBILE TOPUP">
+                            <option value="CELCOM" data-rate="5.50">CELCOM (5.5%)</option>
+                            <option value="DIGI" data-rate="4.80">DIGI (4.8%)</option>
+                            <option value="HOTLINK" data-rate="4.20">HOTLINK (4.2%)</option>
+                            <option value="UMOBILE" data-rate="7.00">UMOBILE (7.0%)</option>
+                            <option value="UNIFI" data-rate="4.00">UNIFI (4.0%)</option>
+                            <option value="TUNETALK" data-rate="6.00">TUNE TALK (6.0%)</option>
+                        </optgroup>
+                        <optgroup label="UTILITY / BILL (FIXED)">
+                            <option value="TNB" data-rate="1.00">TNB (RM1.00)</option>
+                            <option value="AIR" data-rate="1.00">AIR (RM1.00)</option>
+                        </optgroup>
+                        <optgroup label="GAMES">
+                            <option value="MLBB" data-rate="10.00">MLBB (10%)</option>
+                            <option value="PUBG" data-rate="8.00">PUBG (8%)</option>
+                        </optgroup>
                     </select>
                 </div>
 
+                <!-- Jumlah -->
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Nilai (RM)</label>
-                    <div class="relative">
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-orange-500">RM</span>
-                        <input type="number" id="custAmount" placeholder="0.00" class="input-premium w-full p-4 pl-12 rounded-2xl focus:outline-none font-bold">
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Jumlah RM</label>
+                    <input type="number" id="custAmount" oninput="kiraUntungLive()" placeholder="0.00" class="input-premium w-full p-4 rounded-2xl font-bold">
+                </div>
+
+                <!-- Live Profit Hint -->
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Profit Transaksi Ini</label>
+                    <div class="bg-orange-500/10 border border-orange-500/20 p-4 rounded-2xl text-center">
+                        <span id="liveProfit" class="text-orange-500 font-black">RM 0.00</span>
                     </div>
                 </div>
             </div>
 
-            <button onclick="prosesTopupSekarang()" id="btnProses" class="w-full mt-8 bg-gradient-to-r from-orange-600 to-orange-400 py-5 rounded-2xl font-black text-white shadow-xl shadow-orange-500/20 hover:shadow-orange-500/40 transition-all active:scale-[0.98] uppercase tracking-[0.1em]">
-                Hantar Topup Sekarang <i class="fa-solid fa-paper-plane ml-2"></i>
+            <button onclick="prosesTransaksi()" id="btnProses" class="w-full mt-8 bg-gradient-to-r from-orange-600 to-orange-400 py-5 rounded-2xl font-black text-white shadow-xl active:scale-95 transition-all">
+                HANTAR TOPUP SEKARANG
             </button>
         </div>
-        
-        <p class="text-center text-slate-600 text-[10px] mt-8 uppercase tracking-[0.3em]">&copy; 2024 TXT STUDIO PREMIUM SYSTEM</p>
+
     </div>
 
     <script>
         const SECRET_PASS = "Rockerz6636";
 
         function checkAdminPass() {
-            const input = document.getElementById('adminPass').value;
-            if (input === SECRET_PASS) {
-                const loginSection = document.getElementById('loginSection');
-                loginSection.classList.replace('animate__fadeIn', 'animate__fadeOut');
-                
-                setTimeout(() => {
-                    loginSection.classList.add('hidden');
-                    const dashboard = document.getElementById('mainDashboard');
-                    dashboard.classList.remove('hidden');
-                    localStorage.setItem('admin_logged', 'true');
-                    getBalance();
-                }, 500);
-            } else {
-                alert("KATA LALUAN SALAH. AKSES DITOLAK!");
-            }
+            if (document.getElementById('adminPass').value === SECRET_PASS) {
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('mainDashboard').classList.remove('hidden');
+                localStorage.setItem('admin_logged', 'true');
+                initSystem();
+            } else { alert("Salah!"); }
         }
 
         function logoutAdmin() {
-            if(confirm("Adakah anda mahu keluar?")) {
-                localStorage.removeItem('admin_logged');
-                location.reload();
-            }
+            localStorage.removeItem('admin_logged');
+            location.reload();
         }
 
-        async function getBalance() {
-            const bakiEl = document.getElementById('adminBalance');
-            try {
-                // Simulasi loading UI
-                bakiEl.classList.add('animate-pulse', 'text-slate-500');
-                const res = await fetch('/api/get-balance');
-                const data = await res.json();
-                bakiEl.innerText = `RM ${parseFloat(data.balance).toFixed(2)}`;
-            } catch (e) { 
-                bakiEl.innerText = "RM 0.00"; // Sediakan default atau baki dummy untuk testing
-            } finally {
-                bakiEl.classList.remove('animate-pulse', 'text-slate-500');
-            }
+        // KIRA UNTUNG LIVE SAAT TAIP
+        function kiraUntungLive() {
+            const select = document.getElementById('custTelco');
+            const rate = parseFloat(select.options[select.selectedIndex].getAttribute('data-rate'));
+            const amount = parseFloat(document.getElementById('custAmount').value) || 0;
+            const telco = select.value;
+
+            let profit = (telco === "TNB" || telco === "AIR") ? (amount > 0 ? rate : 0) : (amount * rate) / 100;
+            document.getElementById('liveProfit').innerText = `RM ${profit.toFixed(2)}`;
+            return profit;
         }
 
-        async function prosesTopupSekarang() {
+        // PROSES TRANSAKSI & SIMPAN UNTUNG
+        async function prosesTransaksi() {
             const phone = document.getElementById('custPhone').value;
-            const telco = document.getElementById('custTelco').value;
             const amount = document.getElementById('custAmount').value;
+            const profitNow = kiraUntungLive();
             const btn = document.getElementById('btnProses');
 
-            if (!phone || !amount) { 
-                showError("Sila isi maklumat pelanggan!"); 
-                return; 
-            }
+            if (!phone || !amount) return alert("Lengkapkan maklumat!");
 
-            if (confirm(`PENGESAHAN: Hantar RM${amount} kepada ${phone} (${telco})?`)) {
+            if (confirm(`Hantar RM${amount} ke ${phone}?`)) {
                 btn.disabled = true;
-                btn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin mr-2"></i> SEDANG MEMPROSES...`;
-                
+                btn.innerText = "PROSESING...";
+
                 try {
-                    const response = await fetch('/api/recharge', {
+                    // API RECHARGE ANDA
+                    const res = await fetch('/api/recharge', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ phone, telco, amount })
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ phone, amount, telco: document.getElementById('custTelco').value })
                     });
-                    const data = await response.json();
                     
+                    const data = await res.json();
+
                     if (data.status === "SUCCESS") {
-                        alert("TRANSAKSI BERJAYA!");
+                        alert("BERJAYA!");
+                        simpanUntung(profitNow); // SIMPAN UNTUNG KE STORAGE
                         document.getElementById('custPhone').value = "";
                         document.getElementById('custAmount').value = "";
-                        getBalance();
-                    } else { 
-                        alert("GAGAL: " + data.message); 
+                        updateUI();
+                    } else {
+                        alert("GAGAL: " + data.message);
                     }
-                } catch (error) { 
-                    alert("RALAT SISTEM: Sila periksa sambungan API."); 
-                } finally { 
-                    btn.disabled = false; 
-                    btn.innerHTML = `Hantar Topup Sekarang <i class="fa-solid fa-paper-plane ml-2"></i>`; 
+                } catch (e) {
+                    alert("Ralat sambungan API!");
+                } finally {
+                    btn.disabled = false;
+                    btn.innerText = "HANTAR TOPUP SEKARANG";
                 }
             }
         }
 
-        function showError(msg) {
-            alert(msg);
+        // SIMPAN UNTUNG KE LOCALSTORAGE
+        function simpanUntung(nilai) {
+            const today = new Date().toDateString();
+            let data = JSON.parse(localStorage.getItem('txt_profit_data')) || { date: today, total: 0 };
+
+            // Jika hari bertukar, reset untung ke 0
+            if (data.date !== today) {
+                data = { date: today, total: nilai };
+            } else {
+                data.total += nilai;
+            }
+
+            localStorage.setItem('txt_profit_data', JSON.stringify(data));
         }
 
-        // Auto-login Check
-        window.onload = () => {
-            if (localStorage.getItem('admin_logged') === 'true') {
-                document.getElementById('loginSection').classList.add('hidden');
-                document.getElementById('mainDashboard').classList.remove('hidden');
-                getBalance();
-            }
+        function updateUI() {
+            // Update Baki (Fetch API)
+            fetch('/api/get-balance').then(r => r.json()).then(d => {
+                document.getElementById('adminBalance').innerText = `RM ${parseFloat(d.balance).toFixed(2)}`;
+            }).catch(() => document.getElementById('adminBalance').innerText = "RM ERROR");
+
+            // Update Untung Kasar dari Storage
+            const today = new Date().toDateString();
+            const data = JSON.parse(localStorage.getItem('txt_profit_data')) || { date: today, total: 0 };
+            document.getElementById('todayProfit').innerText = `+ RM ${data.total.toFixed(2)}`;
+        }
+
+        function initSystem() {
+            updateUI();
+            setInterval(updateUI, 30000); // Auto refresh baki setiap 30 saat
+        }
+
+        if (localStorage.getItem('admin_logged') === 'true') {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('mainDashboard').classList.remove('hidden');
+            initSystem();
         }
     </script>
 </body>
