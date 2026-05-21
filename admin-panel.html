@@ -3,97 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Admin - TXT STUDIO</title>
+    <title>TXT STUDIO - Elite Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #000; color: #e2e8f0; }
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .input-premium { background: rgba(0,0,0,0.3) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white; transition: all 0.3s; }
-        .input-premium:focus { border-color: #f97316 !important; outline: none; box-shadow: 0 0 10px rgba(249, 115, 22, 0.2); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #080808; color: #e2e8f0; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .input-premium { background: rgba(0,0,0,0.4) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white; transition: 0.3s; }
+        .input-premium:focus { border-color: #f97316 !important; outline: none; box-shadow: 0 0 15px rgba(249, 115, 22, 0.2); }
+        select optgroup { background: #151515; color: #f97316; }
+        .profit-box { background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.02)); border: 1px solid rgba(34, 197, 94, 0.2); }
     </style>
 </head>
 <body class="min-h-screen p-4 flex flex-col items-center">
 
     <!-- 1. LOGIN SECTION -->
-    <div id="loginSection" class="w-full max-w-md mt-20 animate__animated animate__fadeIn">
-        <div class="glass-card p-10 rounded-[2.5rem] text-center shadow-2xl shadow-orange-500/10">
-            <h1 class="text-2xl font-black text-white mb-6 uppercase tracking-widest">Admin Access</h1>
+    <div id="loginSection" class="w-full max-w-md mt-16">
+        <div class="glass-card p-10 rounded-[2.5rem] text-center shadow-2xl">
+            <div class="w-20 h-20 bg-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg rotate-3">
+                <i class="fa-solid fa-shield-halved text-3xl text-white -rotate-3"></i>
+            </div>
+            <h1 class="text-xl font-extrabold text-white mb-6 uppercase tracking-widest">TXT STUDIO ADMIN</h1>
             <input type="password" id="adminPass" class="input-premium w-full py-4 px-6 rounded-2xl text-center text-xl tracking-[0.5em] mb-4" placeholder="••••••••">
-            <button onclick="checkAdminPass()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 rounded-2xl transition-all active:scale-95">MASUK PANEL</button>
+            <button onclick="checkAdminPass()" class="w-full bg-orange-600 hover:bg-orange-700 py-4 rounded-2xl font-bold transition-all active:scale-95">MASUK PANEL</button>
         </div>
     </div>
 
     <!-- 2. MAIN DASHBOARD (HIDDEN) -->
-    <div id="mainDashboard" class="hidden w-full max-w-5xl animate__animated animate__fadeInUp">
+    <div id="mainDashboard" class="hidden w-full max-w-6xl">
         
         <!-- Header -->
         <div class="flex justify-between items-center mb-8 bg-white/5 p-6 rounded-3xl border border-white/10">
             <div>
-                <h1 class="text-2xl font-black text-white uppercase tracking-tighter">TXT STUDIO <span class="text-orange-500 underline">ADMIN</span></h1>
-                <p class="text-[10px] text-slate-500 tracking-[0.3em] font-bold">MODE: SECURE TRANSACTION</p>
+                <h1 class="text-2xl font-black text-white italic">TXT STUDIO <span class="text-orange-500">DASHBOARD</span></h1>
+                <p class="text-[10px] text-slate-500 tracking-[0.3em] font-bold">SYSTEM MODE: AUTHENTICATED</p>
             </div>
-            <button onclick="logoutAdmin()" class="bg-red-500/20 text-red-500 px-5 py-2 rounded-xl text-xs font-bold hover:bg-red-500 hover:text-white transition">LOGOUT</button>
+            <button onclick="logoutAdmin()" class="bg-red-500/10 text-red-500 px-5 py-2 rounded-xl text-xs font-bold hover:bg-red-500 hover:text-white transition">KELUAR</button>
         </div>
 
         <!-- Stats Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Modal OTA MY -->
             <div class="glass-card p-6 rounded-3xl">
-                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Baki Modal (OTA MY)</p>
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Modal (OTA MY)</p>
                 <h3 class="text-3xl font-black text-white" id="adminBalance">RM --.--</h3>
             </div>
-
-            <!-- UNTUNG KASAR HARI INI (AUTOMATIC) -->
-            <div class="glass-card p-6 rounded-3xl bg-gradient-to-br from-green-500/10 to-transparent border-green-500/20">
+            <div class="glass-card p-6 rounded-3xl profit-box">
                 <p class="text-green-500 text-[10px] font-bold uppercase tracking-widest mb-2">Untung Kasar Hari Ini</p>
                 <h3 class="text-4xl font-black text-green-400" id="todayProfit">+ RM 0.00</h3>
-                <p class="text-slate-500 text-[9px] mt-1 italic">* Dikira automatik dari setiap jualan</p>
+                <p class="text-slate-500 text-[9px] mt-1 font-semibold">* AUTO-RESET SETIAP 12AM</p>
             </div>
-
-            <!-- API Status -->
             <div class="glass-card p-6 rounded-3xl">
-                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Status Sistem</p>
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Status API</p>
                 <div class="flex items-center text-blue-400 font-bold">
-                    <span class="w-2 h-2 bg-blue-400 rounded-full animate-ping mr-2"></span> ACTIVE
+                    <span class="w-2 h-2 bg-blue-400 rounded-full animate-ping mr-2"></span> SISTEM ONLINE
                 </div>
             </div>
         </div>
 
-        <!-- Borang Jualan Premium -->
-        <div class="glass-card p-8 rounded-[2.5rem]">
-            <h2 class="text-lg font-bold mb-6 text-white flex items-center">
-                <i class="fa-solid fa-cart-plus mr-3 text-orange-500"></i> PROSES TOPUP MANUAL
+        <!-- Borang Jualan -->
+        <div class="glass-card p-8 rounded-[3rem]">
+            <h2 class="text-lg font-bold mb-8 text-white flex items-center">
+                <i class="fa-solid fa-cash-register mr-3 text-orange-500"></i> PROSES TRANSAKSI MANUAL
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- No Pelanggan -->
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">No. Telefon</label>
-                    <input type="text" id="custPhone" placeholder="011xxxxxxx" class="input-premium w-full p-4 rounded-2xl">
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">No. Akaun / Tel</label>
+                    <input type="text" id="custPhone" placeholder="011xxxxxxx" class="input-premium w-full p-4 rounded-2xl focus:outline-none">
                 </div>
 
-                <!-- Telco / Produk -->
+                <!-- Produk (Based on Screenshots) -->
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Produk (OTA MY Rate)</label>
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Produk</label>
                     <select id="custTelco" onchange="kiraUntungLive()" class="input-premium w-full p-4 rounded-2xl cursor-pointer">
-                        <optgroup label="MOBILE TOPUP">
-                            <option value="CELCOM" data-rate="5.50">CELCOM (5.5%)</option>
-                            <option value="DIGI" data-rate="4.80">DIGI (4.8%)</option>
-                            <option value="HOTLINK" data-rate="4.20">HOTLINK (4.2%)</option>
-                            <option value="UMOBILE" data-rate="7.00">UMOBILE (7.0%)</option>
-                            <option value="UNIFI" data-rate="4.00">UNIFI (4.0%)</option>
-                            <option value="TUNETALK" data-rate="6.00">TUNE TALK (6.0%)</option>
+                        <optgroup label="TOPUP PREPAID (%)">
+                            <option value="UMOBILE" data-rate="7.30" data-type="percent">UMobile (7.30%)</option>
+                            <option value="ONE XOX" data-rate="5.80" data-type="percent">OneXOX (5.80%)</option>
+                            <option value="XOX" data-rate="5.60" data-type="percent">Xox Prepaid (5.60%)</option>
+                            <option value="TUNETALK" data-rate="5.10" data-type="percent">TuneTalk (5.10%)</option>
+                            <option value="HALO/EASTEL/REDONE" data-rate="4.80" data-type="percent">Halo/Eastel/Redone (4.80%)</option>
+                            <option value="BEONE" data-rate="4.00" data-type="percent">BeOne (4.00%)</option>
+                            <option value="DIGI" data-rate="2.90" data-type="percent">Digi (2.90%)</option>
+                            <option value="CELCOM/MAXIS/TONEWOW" data-rate="2.80" data-type="percent">Celcom/Maxis (2.80%)</option>
+                            <option value="YES" data-rate="2.30" data-type="percent">Yes (2.30%)</option>
                         </optgroup>
-                        <optgroup label="UTILITY / BILL (FIXED)">
-                            <option value="TNB" data-rate="1.00">TNB (RM1.00)</option>
-                            <option value="AIR" data-rate="1.00">AIR (RM1.00)</option>
+                        <optgroup label="BILL / LOAN / LOCAL (RM)">
+                            <option value="TM" data-rate="0.20" data-type="flat">TM/Unifi (RM0.20)</option>
+                            <option value="TNB/AIR/MAJLIS" data-rate="0.10" data-type="flat">TNB/Air/Majlis (RM0.10)</option>
+                            <option value="MARA" data-rate="0.20" data-type="flat">MARA (RM0.20)</option>
+                            <option value="PTPTN" data-rate="0.10" data-type="flat">PTPTN (RM0.10)</option>
                         </optgroup>
-                        <optgroup label="GAMES">
-                            <option value="MLBB" data-rate="10.00">MLBB (10%)</option>
-                            <option value="PUBG" data-rate="8.00">PUBG (8%)</option>
+                        <optgroup label="GAMES / VOUCHER (%)">
+                            <option value="MLBB/PLAYSTATION/STEAM" data-rate="2.80" data-type="percent">MLBB/Steam/PSN (2.80%)</option>
+                            <option value="PUBG" data-rate="4.80" data-type="percent">PUBG (4.80%)</option>
+                            <option value="FREEFIRE/LIFEAFTER" data-rate="3.80" data-type="percent">FreeFire/LifeAfter (3.80%)</option>
+                            <option value="GRAB" data-rate="2.80" data-type="percent">Grab (2.80%)</option>
+                            <option value="STARBUCKS" data-rate="1.10" data-type="percent">Starbucks (1.10%)</option>
+                        </optgroup>
+                        <optgroup label="INTERNATIONAL (%)">
+                            <option value="RINGPLN" data-rate="5.80" data-type="percent">Indo PLN (5.80%)</option>
+                            <option value="FLEXI_INT" data-rate="1.50" data-type="percent">International Flexi (1.50%)</option>
                         </optgroup>
                     </select>
                 </div>
@@ -104,20 +115,19 @@
                     <input type="number" id="custAmount" oninput="kiraUntungLive()" placeholder="0.00" class="input-premium w-full p-4 rounded-2xl font-bold">
                 </div>
 
-                <!-- Live Profit Hint -->
+                <!-- Live Result -->
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Profit Transaksi Ini</label>
+                    <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Anggaran Profit</label>
                     <div class="bg-orange-500/10 border border-orange-500/20 p-4 rounded-2xl text-center">
                         <span id="liveProfit" class="text-orange-500 font-black">RM 0.00</span>
                     </div>
                 </div>
             </div>
 
-            <button onclick="prosesTransaksi()" id="btnProses" class="w-full mt-8 bg-gradient-to-r from-orange-600 to-orange-400 py-5 rounded-2xl font-black text-white shadow-xl active:scale-95 transition-all">
-                HANTAR TOPUP SEKARANG
+            <button onclick="prosesTransaksi()" id="btnProses" class="w-full mt-8 bg-gradient-to-r from-orange-600 to-orange-400 py-5 rounded-2xl font-black text-white shadow-xl shadow-orange-900/30 hover:scale-[1.01] active:scale-95 transition-all uppercase tracking-widest">
+                HANTAR PESANAN SEKARANG
             </button>
         </div>
-
     </div>
 
     <script>
@@ -129,89 +139,77 @@
                 document.getElementById('mainDashboard').classList.remove('hidden');
                 localStorage.setItem('admin_logged', 'true');
                 initSystem();
-            } else { alert("Salah!"); }
+            } else { alert("KATA LALUAN SALAH!"); }
         }
 
         function logoutAdmin() {
-            localStorage.removeItem('admin_logged');
-            location.reload();
+            if(confirm("Log keluar?")) {
+                localStorage.removeItem('admin_logged');
+                location.reload();
+            }
         }
 
-        // KIRA UNTUNG LIVE SAAT TAIP
         function kiraUntungLive() {
             const select = document.getElementById('custTelco');
-            const rate = parseFloat(select.options[select.selectedIndex].getAttribute('data-rate'));
+            const opt = select.options[select.selectedIndex];
+            const rate = parseFloat(opt.getAttribute('data-rate'));
+            const type = opt.getAttribute('data-type');
             const amount = parseFloat(document.getElementById('custAmount').value) || 0;
-            const telco = select.value;
 
-            let profit = (telco === "TNB" || telco === "AIR") ? (amount > 0 ? rate : 0) : (amount * rate) / 100;
+            let profit = (type === "flat") ? (amount > 0 ? rate : 0) : (amount * rate) / 100;
             document.getElementById('liveProfit').innerText = `RM ${profit.toFixed(2)}`;
             return profit;
         }
 
-        // PROSES TRANSAKSI & SIMPAN UNTUNG
         async function prosesTransaksi() {
             const phone = document.getElementById('custPhone').value;
             const amount = document.getElementById('custAmount').value;
             const profitNow = kiraUntungLive();
             const btn = document.getElementById('btnProses');
 
-            if (!phone || !amount) return alert("Lengkapkan maklumat!");
+            if (!phone || !amount) return alert("Sila isi no tel dan jumlah!");
 
-            if (confirm(`Hantar RM${amount} ke ${phone}?`)) {
+            if (confirm(`HANTAR RM${amount} KE ${phone}?`)) {
                 btn.disabled = true;
-                btn.innerText = "PROSESING...";
+                btn.innerText = "SEDANG DIHANTAR...";
 
                 try {
-                    // API RECHARGE ANDA
                     const res = await fetch('/api/recharge', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({ phone, amount, telco: document.getElementById('custTelco').value })
                     });
-                    
                     const data = await res.json();
 
                     if (data.status === "SUCCESS") {
                         alert("BERJAYA!");
-                        simpanUntung(profitNow); // SIMPAN UNTUNG KE STORAGE
+                        updateProfit(profitNow);
                         document.getElementById('custPhone').value = "";
                         document.getElementById('custAmount').value = "";
                         updateUI();
-                    } else {
-                        alert("GAGAL: " + data.message);
-                    }
-                } catch (e) {
-                    alert("Ralat sambungan API!");
-                } finally {
-                    btn.disabled = false;
-                    btn.innerText = "HANTAR TOPUP SEKARANG";
-                }
+                    } else { alert("GAGAL: " + data.message); }
+                } catch (e) { alert("Ralat API!"); }
+                finally { btn.disabled = false; btn.innerText = "HANTAR PESANAN SEKARANG"; }
             }
         }
 
-        // SIMPAN UNTUNG KE LOCALSTORAGE
-        function simpanUntung(nilai) {
+        function updateProfit(nilai) {
             const today = new Date().toDateString();
             let data = JSON.parse(localStorage.getItem('txt_profit_data')) || { date: today, total: 0 };
-
-            // Jika hari bertukar, reset untung ke 0
-            if (data.date !== today) {
-                data = { date: today, total: nilai };
-            } else {
-                data.total += nilai;
-            }
+            
+            if (data.date !== today) data = { date: today, total: nilai };
+            else data.total += nilai;
 
             localStorage.setItem('txt_profit_data', JSON.stringify(data));
         }
 
         function updateUI() {
-            // Update Baki (Fetch API)
+            // Get Balance
             fetch('/api/get-balance').then(r => r.json()).then(d => {
                 document.getElementById('adminBalance').innerText = `RM ${parseFloat(d.balance).toFixed(2)}`;
-            }).catch(() => document.getElementById('adminBalance').innerText = "RM ERROR");
+            }).catch(() => {});
 
-            // Update Untung Kasar dari Storage
+            // Get Profit
             const today = new Date().toDateString();
             const data = JSON.parse(localStorage.getItem('txt_profit_data')) || { date: today, total: 0 };
             document.getElementById('todayProfit').innerText = `+ RM ${data.total.toFixed(2)}`;
@@ -219,7 +217,7 @@
 
         function initSystem() {
             updateUI();
-            setInterval(updateUI, 30000); // Auto refresh baki setiap 30 saat
+            setInterval(updateUI, 20000);
         }
 
         if (localStorage.getItem('admin_logged') === 'true') {
