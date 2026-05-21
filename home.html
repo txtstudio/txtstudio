@@ -10,7 +10,7 @@
         body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 100px; }
         .glow-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; }
         .comm-row { display: flex; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px; }
-        .comm-header { font-size: 10px; font-weight: 900; color: #F77F00; padding: 15px 18px 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .comm-header { font-size: 10px; font-weight: 900; color: #F77F00; padding: 15px 18px 5px; text-transform: uppercase; letter-spacing: 1px; background: rgba(247, 127, 0, 0.05); }
         .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #0A0A0F; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 15px; z-index: 100; }
         .category-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 20px 5px; text-align: center; cursor: pointer; }
         .category-icon { width: 45px; height: 45px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 20px; background: rgba(247, 127, 0, 0.1); color: #F77F00; }
@@ -43,10 +43,9 @@
             <div onclick="openM('others')" class="category-card"><div class="category-icon" style="color:#ffcc33"><i class="fa fa-ellipsis-h"></i></div><span class="text-[8px] font-bold uppercase">Lain</span></div>
         </div>
     </div>
-
-    <div id="tab-comm" class="px-6 hidden">
-        <h3 class="text-center font-black text-xs mb-5 uppercase text-[#F77F00]">KADAR KOMISYEN PRODUK</h3>
-        <div class="glow-card mb-6">
+        <div id="tab-comm" class="px-6 hidden">
+        <h3 class="text-center font-black text-xs mb-5 uppercase text-[#F77F00]">KADAR KOMISYEN OTA MY</h3>
+        <div class="glow-card mb-10 pb-5">
             <div class="comm-header">PREPAID TELCO</div>
             <div class="comm-row"><span>UMOBILE</span><b class="text-green-400">7.30%</b></div>
             <div class="comm-row"><span>ONEXOX</span><b class="text-green-400">5.80%</b></div>
@@ -60,9 +59,24 @@
             <div class="comm-row"><span>DIGI</span><b class="text-green-400">2.80%</b></div>
             <div class="comm-row"><span>UNIFI MOBILE</span><b class="text-green-400">2.50%</b></div>
             <div class="comm-row"><span>YES 4G</span><b class="text-green-400">2.30%</b></div>
+
+            <div class="comm-header">BIL & UTILITY</div>
+            <div class="comm-row"><span>TNB / AIR SELANGOR</span><b class="text-green-400">RM 0.15</b></div>
+            <div class="comm-row"><span>UNIFI BIL / ASTRO</span><b class="text-green-400">0.20%</b></div>
+            <div class="comm-row"><span>NJOI</span><b class="text-green-400">0.20%</b></div>
+
+            <div class="comm-header">GAME CREDITS</div>
+            <div class="comm-row"><span>PUBG MOBILE</span><b class="text-green-400">4.80%</b></div>
+            <div class="comm-row"><span>FREE FIRE</span><b class="text-green-400">3.80%</b></div>
+            <div class="comm-row"><span>MOBILE LEGENDS</span><b class="text-green-400">2.80%</b></div>
+
+            <div class="comm-header">RELOAD PIN</div>
+            <div class="comm-row"><span>CELCOM / DIGI / MAXIS PIN</span><b class="text-green-400">2.00%</b></div>
+            <div class="comm-row"><span>TNG PIN</span><b class="text-green-400">RM 0.00</b></div>
         </div>
     </div>
-        <div id="pM" class="modal-full" onclick="this.style.display='none'">
+
+    <div id="pM" class="modal-full" onclick="this.style.display='none'">
         <div class="modal-content" onclick="event.stopPropagation()">
             <h3 id="mT" class="font-bold text-xs text-[#F77F00] mb-6 uppercase">PILIH</h3>
             <div id="pG" class="grid grid-cols-3 gap-3"></div>
@@ -76,40 +90,32 @@
 
     <script>
         const p = {
-            topup: [
-                {n:'Umobile',i:'umobile.png'},{n:'Celcom',i:'celcom.png'},{n:'Digi',i:'digi.png'},
-                {n:'Maxis',i:'hotlink.png'},{n:'OneXOX',i:'onexox.png'},{n:'TuneTalk',i:'tunetalk.png'},
-                {n:'Redone',i:'redone.png'},{n:'BeOne',i:'beone.png'},{n:'Yes',i:'yes.png'},
-                {n:'Eastel',i:'eastel.png'},{n:'HaloTelco',i:'halotelco.png'},{n:'Unifi',i:'unifi.png'}
-            ],
-            bill: [{n:'TNB',i:'txtstudio.png'},{n:'Air Selangor',i:'txtstudio.png'},{n:'Unifi Bil',i:'unifi.png'},{n:'Astro',i:'njoi.png'}],
+            topup: [{n:'Umobile',i:'umobile.png'},{n:'Celcom',i:'celcom.png'},{n:'Digi',i:'digi.png'},{n:'Maxis',i:'hotlink.png'},{n:'OneXOX',i:'onexox.png'},{n:'TuneTalk',i:'tunetalk.png'},{n:'Redone',i:'redone.png'},{n:'BeOne',i:'beone.png'},{n:'Yes',i:'yes.png'},{n:'Eastel',i:'eastel.png'},{n:'HaloTelco',i:'halotelco.png'},{n:'Unifi',i:'unifi.png'}],
+            bill: [{n:'TNB',i:'txtstudio.png'},{n:'Air Selangor',i:'txtstudio.png'},{n:'Unifi Bil',i:'unifi.png'},{n:'Astro',i:'njoi.png'},{n:'Njoi',i:'njoi.png'}],
             game: [{n:'MLBB',i:'txtstudio.png'},{n:'PUBG',i:'txtstudio.png'},{n:'Free Fire',i:'txtstudio.png'}],
             pin: [{n:'Celcom Pin',i:'celcom.png'},{n:'Digi Pin',i:'digi.png'},{n:'Maxis Pin',i:'hotlink.png'},{n:'TNG Pin',i:'txtstudio.png'}],
             data: [{n:'Celcom Data',i:'celcom.png'},{n:'Digi Data',i:'digi.png'},{n:'Umobile Data',i:'umobile.png'}],
             others: [{n:'Maxis Home',i:'hotlink.png'},{n:'Unifi Home',i:'unifi.png'}]
         };
-
-        function openM(t) {
-            const g = document.getElementById('pG'); g.innerHTML = '';
-            document.getElementById('mT').innerText = 'PILIH ' + t.toUpperCase();
-            (p[t] || p.topup).forEach(x => {
-                g.innerHTML += `<div onclick="go('${x.n}')" class="item-box cursor-pointer"><img src="images/${x.i}" onerror="this.src='images/txtstudio.png'"><span class="text-[8px] font-bold text-center">${x.n}</span></div>`;
+        function openM(t){
+            const g=document.getElementById('pG');g.innerHTML='';
+            document.getElementById('mT').innerText='PILIH '+t.toUpperCase();
+            (p[t]||p.topup).forEach(x=>{
+                g.innerHTML+=`<div onclick="go('${x.n}')" class="item-box cursor-pointer"><img src="images/${x.i}" onerror="this.src='images/txtstudio.png'"><span class="text-[8px] font-bold text-center">${x.n}</span></div>`;
             });
-            document.getElementById('pM').style.display = 'flex';
+            document.getElementById('pM').style.display='flex';
         }
-
-        function tab(t) {
-            document.getElementById('tab-home').style.display = t==='home'?'block':'none';
-            document.getElementById('tab-comm').style.display = t==='comm'?'block':'none';
-            document.getElementById('n-h').style.color = t==='home'?'#F77F00':'#4b5563';
-            document.getElementById('n-c').style.color = t==='comm'?'#F77F00':'#4b5563';
+        function tab(t){
+            document.getElementById('tab-home').style.display=t==='home'?'block':'none';
+            document.getElementById('tab-comm').style.display=t==='comm'?'block':'none';
+            document.getElementById('n-h').style.color=t==='home'?'#F77F00':'#4b5563';
+            document.getElementById('n-c').style.color=t==='comm'?'#F77F00':'#4b5563';
         }
-
-        function go(n) {
-            let ph = prompt(`No Akaun/Tel ${n}:`);
-            if(ph) {
-                let am = prompt(`Jumlah RM:`);
-                if(am) window.open(`https://wa.me/601123456636?text=ORDER+${n}%0ANo:+${ph}%0AAmt:+RM${am}`);
+        function go(n){
+            let ph=prompt(`No Akaun/Tel ${n}:`);
+            if(ph){
+                let am=prompt(`Jumlah RM:`);
+                if(am)window.open(`https://wa.me/601123456636?text=ORDER+${n}%0ANo:+${ph}%0AAmt:+RM${am}`);
             }
         }
     </script>
