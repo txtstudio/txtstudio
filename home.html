@@ -7,116 +7,99 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 120px; }
-        .glow-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; overflow: hidden; }
-        .comm-section-title { font-size: 10px; font-weight: 900; color: #F77F00; letter-spacing: 2px; margin: 25px 0 10px 5px; text-transform: uppercase; border-left: 3px solid #F77F00; padding-left: 10px; }
-        .comm-row { display: flex; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.01); }
-        .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #0A0A0F; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 18px; z-index: 100; }
-        .category-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 25px 10px; text-align: center; cursor: pointer; transition: 0.3s; }
-        .category-icon { width: 50px; height: 50px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; border-radius: 15px; font-size: 22px; background: rgba(247, 127, 0, 0.1); color: #F77F00; }
+        body { background-color: #0A0A0F; color: white; font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 100px; }
+        .glow-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; }
+        .comm-row { display: flex; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #0A0A0F; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; padding: 15px; z-index: 100; }
+        .category-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 20px 5px; text-align: center; cursor: pointer; }
+        .category-icon { width: 45px; height: 45px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 20px; background: rgba(247, 127, 0, 0.1); color: #F77F00; }
         .modal-full { position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); display: none; align-items: flex-end; z-index: 1000; }
-        .modal-content { background: #121218; width: 100%; border-radius: 35px 35px 0 0; padding: 30px; max-height: 85vh; overflow-y: auto; border-top: 2px solid #F77F00; }
-        .item-box { display: flex; flex-direction: column; align-items: center; padding: 15px; border-radius: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); cursor: pointer; }
-        .item-box img { width: 50px; height: 50px; border-radius: 12px; margin-bottom: 10px; object-fit: cover; background: #fff; }
-        .item-box span { font-size: 10px; font-weight: bold; }
-        .active-tab { display: block; }
-        .hidden-tab { display: none; }
+        .modal-content { background: #121218; width: 100%; border-radius: 30px 30px 0 0; padding: 25px; max-height: 80vh; overflow-y: auto; border-top: 2px solid #F77F00; }
+        .item-box { display: flex; flex-direction: column; align-items: center; padding: 12px; border-radius: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+        .item-box img { width: 45px; height: 45px; border-radius: 10px; margin-bottom: 8px; object-fit: cover; background: #fff; }
     </style>
 </head>
 <body>
-    <div class="p-6">
-        <div class="flex justify-between items-center mb-6">
-            <div class="flex items-center gap-3">
-                <img src="images/txtstudio.png" class="w-10 h-10 rounded-full border border-orange-500/30">
-                <h2 class="text-sm font-black tracking-tighter uppercase">TXT STUDIO</h2>
-            </div>
-            <div class="bg-orange-500 text-black px-4 py-1 rounded-full text-[9px] font-black uppercase">OTA MY CONNECTED</div>
+
+    <div class="p-6 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <img src="images/txtstudio.png" class="w-8 h-8 rounded-full border border-orange-500">
+            <h2 class="text-xs font-bold uppercase">TXT STUDIO</h2>
+        </div>
+        <div class="bg-orange-500 text-black px-3 py-1 rounded-full text-[8px] font-black">OTA MY SYNC</div>
+    </div>
+
+    <!-- TAB HOME -->
+    <div id="tab-home" class="px-6 block">
+        <div class="glow-card p-6 mb-6 text-center border-orange-500/20">
+            <p class="text-[9px] text-gray-400 uppercase tracking-widest mb-1">Untung Hari Ini</p>
+            <h1 class="text-2xl font-black text-green-400">+ RM 50.00</h1>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+            <div onclick="openM('topup')" class="category-card"><div class="category-icon"><i class="fa fa-mobile"></i></div><span class="text-[8px] font-bold uppercase">Telco</span></div>
+            <div onclick="openM('bill')" class="category-card"><div class="category-icon" style="color:#ff4d4d"><i class="fa fa-file-text-o"></i></div><span class="text-[8px] font-bold uppercase">Bil</span></div>
+            <div onclick="openM('game')" class="category-card"><div class="category-icon" style="color:#cc66ff"><i class="fa fa-gamepad"></i></div><span class="text-[8px] font-bold uppercase">Game</span></div>
+            <div onclick="openM('pin')" class="category-card"><div class="category-icon" style="color:#33ccff"><i class="fa fa-ticket"></i></div><span class="text-[8px] font-bold uppercase">Pin</span></div>
+            <div onclick="openM('data')" class="category-card"><div class="category-icon" style="color:#33ff77"><i class="fa fa-globe"></i></div><span class="text-[8px] font-bold uppercase">Data</span></div>
+            <div onclick="openM('others')" class="category-card"><div class="category-icon" style="color:#ffcc33"><i class="fa fa-ellipsis-h"></i></div><span class="text-[8px] font-bold uppercase">Lain</span></div>
         </div>
     </div>
 
-    <div id="tab-home" class="active-tab px-6">
-        <div class="glow-card p-6 mb-8 text-center border-orange-500/20">
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Untung Kasar Hari Ini</p>
-            <h1 class="text-3xl font-black text-green-400 italic">+ RM 50.00</h1>
-        </div>
-        <div class="grid grid-cols-3 gap-3 mb-10">
-            <div onclick="openModal('topup')" class="category-card"><div class="category-icon"><i class="fa fa-mobile"></i></div><span class="text-[9px] font-bold uppercase">Topup Telco</span></div>
-            <div onclick="openModal('bill')" class="category-card"><div class="category-icon" style="color:#ff4d4d"><i class="fa fa-file-text-o"></i></div><span class="text-[9px] font-bold uppercase">Topup Bil</span></div>
-            <div onclick="openModal('game')" class="category-card"><div class="category-icon" style="color:#cc66ff"><i class="fa fa-gamepad"></i></div><span class="text-[9px] font-bold uppercase">Topup Game</span></div>
-            <div onclick="openModal('pin')" class="category-card"><div class="category-icon" style="color:#33ccff"><i class="fa fa-ticket"></i></div><span class="text-[9px] font-bold uppercase">Topup Pin</span></div>
-            <div onclick="openModal('data')" class="category-card"><div class="category-icon" style="color:#33ff77"><i class="fa fa-globe"></i></div><span class="text-[9px] font-bold uppercase">Topup Data</span></div>
-            <div onclick="openModal('others')" class="category-card"><div class="category-icon" style="color:#ffcc33"><i class="fa fa-ellipsis-h"></i></div><span class="text-[9px] font-bold uppercase">Lain-Lain</span></div>
-        </div>
-    </    <div id="tab-comm" class="hidden-tab px-6">
-        <h3 class="text-white font-black text-center text-lg mb-6 uppercase">KOMISYEN OTA MY</h3>
-        <div class="glow-card mb-4">
+    <!-- TAB COMMISSION -->
+    <div id="tab-comm" class="px-6 hidden">
+        <h3 class="text-center font-bold text-sm mb-4 uppercase color-[#F77F00]">KADAR KOMISYEN OTA MY</h3>
+        <div class="glow-card">
             <div class="comm-row"><span>UMOBILE</span><b class="text-green-400">7.30%</b></div>
             <div class="comm-row"><span>ONEXOX</span><b class="text-green-400">5.80%</b></div>
             <div class="comm-row"><span>TUNETALK</span><b class="text-green-400">5.10%</b></div>
             <div class="comm-row"><span>REDONE / HALO</span><b class="text-green-400">4.80%</b></div>
-            <div class="comm-row"><span>DIGI / CELCOM</span><b class="text-green-400">2.90%</b></div>
+            <div class="comm-row"><span>CELCOM / MAXIS / DIGI</span><b class="text-green-400">2.80% - 2.90%</b></div>
+            <div class="comm-row"><span>MOBILE LEGENDS</span><b class="text-green-400">2.80%</b></div>
+            <div class="comm-row"><span>PUBG MOBILE</span><b class="text-green-400">4.80%</b></div>
         </div>
     </div>
 
-    <div id="productModal" class="modal-full" onclick="closeModal()">
+    <!-- Modal -->
+    <div id="pM" class="modal-full" onclick="this.style.display='none'">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-8">
-                <h3 id="modalTitle" class="font-black text-sm text-[#F77F00] uppercase">PILIH</h3>
-                <button onclick="closeModal()" class="text-gray-500 text-xl"><i class="fa fa-times"></i></button>
-            </div>
-            <div id="productGrid" class="grid grid-cols-3 gap-4 pb-10"></div>
+            <h3 id="mT" class="font-bold text-xs text-[#F77F00] mb-6 uppercase">PILIH</h3>
+            <div id="pG" class="grid grid-cols-3 gap-3"></div>
         </div>
     </div>
 
+    <!-- Nav -->
     <div class="nav-bottom">
-        <div onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-[#F77F00] cursor-pointer"><i class="fa fa-home text-xl"></i><span class="text-[9px] mt-1 font-bold">HOME</span></div>
-        <div onclick="switchTab('comm')" id="nav-comm" class="flex flex-col items-center text-gray-600 cursor-pointer"><i class="fa fa-list-alt text-xl"></i><span class="text-[9px] mt-1 font-bold">COMMISSION</span></div>
-        <div class="flex flex-col items-center text-gray-600 cursor-pointer"><i class="fa fa-history text-xl"></i><span class="text-[9px] mt-1 font-bold">HISTORY</span></div>
+        <div onclick="tab('home')" id="n-h" class="text-[#F77F00] flex flex-col items-center"><i class="fa fa-home"></i><span class="text-[8px] font-bold">HOME</span></div>
+        <div onclick="tab('comm')" id="n-c" class="text-gray-600 flex flex-col items-center"><i class="fa fa-list"></i><span class="text-[8px] font-bold">COMM</span></div>
     </div>
 
     <script>
-        const products = {
-            topup: [
-                {n:'Umobile', i:'umobile.png'}, {n:'OneXOX', i:'onexox.png'}, {n:'TuneTalk', i:'tunetalk.png'}, 
-                {n:'Redone', i:'redone.png'}, {n:'BeOne', i:'beone.png'}, {n:'Digi', i:'digi.png'},
-                {n:'Celcom', i:'celcom.png'}, {n:'Maxis', i:'hotlink.png'}, {n:'Yes', i:'yes.png'},
-                {n:'HaloTelco', i:'halotelco.png'}, {n:'Eastel', i:'eastel.png'}, {n:'XOX', i:'onexox.png'}
-            ],
-            bill: [ {n:'TNB', i:'txtstudio.png'}, {n:'Air Selangor', i:'txtstudio.png'}, {n:'Unifi Bil', i:'unifi.png'}, {n:'Astro', i:'njoi.png'} ],
-            game: [ {n:'MLBB', i:'txtstudio.png'}, {n:'PUBG', i:'txtstudio.png'}, {n:'Free Fire', i:'txtstudio.png'} ],
-            pin: [ {n:'Celcom Pin', i:'celcom.png'}, {n:'Digi Pin', i:'digi.png'}, {n:'Maxis Pin', i:'hotlink.png'} ],
-            data: [ {n:'Celcom Data', i:'celcom.png'}, {n:'Digi Data', i:'digi.png'}, {n:'Umobile Data', i:'umobile.png'} ],
-            others: [ {n:'Maxis Home', i:'hotlink.png'}, {n:'Unifi Home', i:'unifi.png'} ]
+        const p = {
+            topup: [{n:'Umobile',i:'umobile.png'},{n:'Celcom',i:'celcom.png'},{n:'Digi',i:'digi.png'},{n:'Maxis',i:'hotlink.png'},{n:'OneXOX',i:'onexox.png'},{n:'TuneTalk',i:'tunetalk.png'},{n:'Redone',i:'redone.png'},{n:'BeOne',i:'beone.png'},{n:'Yes',i:'yes.png'}],
+            bill: [{n:'TNB',i:'txtstudio.png'},{n:'Air Selangor',i:'txtstudio.png'},{n:'Unifi Bil',i:'unifi.png'},{n:'Astro',i:'njoi.png'}],
+            game: [{n:'MLBB',i:'txtstudio.png'},{n:'PUBG',i:'txtstudio.png'},{n:'Free Fire',i:'txtstudio.png'}]
         };
-
-        function openModal(type) {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = '';
-            document.getElementById('modalTitle').innerText = 'PILIH ' + type.toUpperCase();
-            products[type].forEach(p => {
-                grid.innerHTML += `<div onclick="proses('${p.n}')" class="item-box"><img src="images/${p.i}" onerror="this.src='images/txtstudio.png'"><span>${p.n}</span></div>`;
+        function openM(t) {
+            const g = document.getElementById('pG'); g.innerHTML = '';
+            document.getElementById('mT').innerText = t.toUpperCase();
+            (p[t] || p.topup).forEach(x => {
+                g.innerHTML += `<div onclick="go('${x.n}')" class="item-box"><img src="images/${x.i}" onerror="this.src='images/txtstudio.png'"><span class="text-[8px] font-bold text-center">${x.n}</span></div>`;
             });
-            document.getElementById('productModal').style.display = 'flex';
+            document.getElementById('pM').style.display = 'flex';
         }
-
-        function closeModal() { document.getElementById('productModal').style.display = 'none'; }
-        
-        function switchTab(t) {
-            document.getElementById('tab-home').style.display = (t==='home') ? 'block' : 'none';
-            document.getElementById('tab-comm').style.display = (t==='comm') ? 'block' : 'none';
-            document.getElementById('nav-home').style.color = (t==='home') ? '#F77F00' : '#4b5563';
-            document.getElementById('nav-comm').style.color = (t==='comm') ? '#F77F00' : '#4b5563';
+        function tab(t) {
+            document.getElementById('tab-home').style.display = t==='home'?'block':'none';
+            document.getElementById('tab-comm').style.display = t==='comm'?'block':'none';
+            document.getElementById('n-h').style.color = t==='home'?'#F77F00':'#4b5563';
+            document.getElementById('n-c').style.color = t==='comm'?'#F77F00':'#4b5563';
         }
-
-        function proses(nama) {
-            let phone = prompt(`No Akaun/Tel ${nama}:`);
-            if(phone) {
-                let amount = prompt(`Jumlah RM:`);
-                if(amount) window.open(`https://wa.me/601123456636?text=ORDER+${nama}%0ANo:+${phone}%0AAmt:+RM${amount}`, '_blank');
+        function go(n) {
+            let ph = prompt(`No Akaun/Tel ${n}:`);
+            if(ph) {
+                let am = prompt(`Jumlah RM:`);
+                if(am) window.open(`https://wa.me/601123456636?text=ORDER+${n}%0ANo:+${ph}%0AAmt:+RM${am}`);
             }
         }
     </script>
 </body>
 </html>
-div>
-    
